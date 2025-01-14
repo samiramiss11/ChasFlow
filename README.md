@@ -49,7 +49,7 @@ Just a recommendation based on what worked for this developer:
 
 ## Installation
 
-
+0. npm run install:all
 1.  client-only: cd client && npm run dev
 2. webservice: cd server && npm run dev
 3. webservice + backend: npm run dev
