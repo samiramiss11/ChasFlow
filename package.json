@@ -1,0 +1,22 @@
+{
+  "name": "monoscript",
+  "version": "1.0.0",
+  "description": "Monorepo with Typescript, Express, Vite, Tailwind, Shadcn",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "install:all": "npm install && cd shared && npm install && cd ../client && npm install && cd ../server && npm install",
+    "install": "cd shared && npm install && cd ../client && npm install && cd ../server && npm install",
+    "dev": "cd server && npm run dev:basic"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^9.0.1",
+    "react-router-dom": "^6.28.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.8.7"
+  }
+}
