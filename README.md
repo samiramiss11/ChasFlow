@@ -17,6 +17,12 @@ bum bokning / Web app for chass visual
 
 ## Getting started
 
+[grund-struktur] : (https://docs.google.com/document/d/175eBUopTFss0rKPcnWyrKEccDixU0MiUzEYPstilNrM/edit?tab=t.0)
+[möten] : https://docs.google.com/document/d/1_QPT6IKF8PvSFWIK5IBQuLzjxf65mP-8ufsGyjoUH4o/edit?tab=t.0
+[projekt-plan] : (https://docs.google.com/document/d/1pMfx4SKie764hjY2a9ovZ65U6SRK4euMNl1WIY3W0PE/edit?tab=t.0)
+[sprint-planering] : (https://docs.google.com/document/d/1oAKdben7gyTybpjjpKuBIuBe-quR5Uoplz_SwA1_zGs/edit?tab=t.0
+)
+[arcitectur] (https://docs.google.com/document/d/1lrKwF2uhv7y-nr5Tz8Fsvr8abSsfi2B6H9sRukVbTxc/edit?tab=t.29wkvt28vutw#heading=h.vlmy880rgay)
 
 ### Requirements
 
