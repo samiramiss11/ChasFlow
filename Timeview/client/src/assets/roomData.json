@@ -1,0 +1,15 @@
+[
+    {
+      "id": 1,
+      "roomName": "Susan Kare",
+      "capacity": 25,
+      "resources": ["Video Projector", "Whiteboard"]
+    },
+    {
+      "id": 2,
+      "roomName": "Alan Turing",
+      "capacity": 40,
+      "resources": ["Microphone", "Sound System"]
+    }
+  ]
+  
