@@ -1,4 +1,4 @@
-const Room = require('../models/Room.model.js');
+/*const Room = require('../models/Room.model.js');
 
 exports.findAllRooms = async (req, res) => {
   try {
@@ -9,6 +9,6 @@ exports.findAllRooms = async (req, res) => {
       message: "Error retrieving rooms"
     });
   }
-};
+};*/
 
 // i will add other CRUD operations similarly

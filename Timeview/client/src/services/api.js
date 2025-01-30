@@ -1,16 +1,12 @@
-/* eslint-disable no-console */
-import axios from "axios";
+import axios from 'axios';
 
-const api = axios.create({
-  baseURL: process.env.REACT_APP_API_BASE_URL, // Access the environment variable
-});
+const API_URL = process.env.REACT_APP_API_BASE_URL;
 
-export default async function fetchEvents() {
+export const fetchRooms = async () => {
   try {
-    const response = await api.get("/events");
+    const response = await axios.get(`${API_URL}/rooms`);
     return response.data;
   } catch (error) {
-    console.error("Error fetching events:", error);
     throw error;
   }
-}
+};

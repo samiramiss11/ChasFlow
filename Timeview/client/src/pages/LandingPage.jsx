@@ -1,4 +1,4 @@
-import React from 'react';
+/* import React from 'react';
 import Navbar from '../components/Shared/Navbar';
 import Footer from '../components/Shared/Footer';
 
@@ -22,4 +22,4 @@ const LandingPage = () => {
   );
 };
 
-export default LandingPage;
+export default LandingPage;*/

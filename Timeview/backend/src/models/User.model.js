@@ -1,4 +1,4 @@
-const { Model, DataTypes } = require('sequelize');
+const { Model, DataTypes, Sequelize } = require('sequelize');
 const sequelize = require('../config/dbConfig');
 
 const User = sequelize.define('User', {
@@ -9,8 +9,11 @@ const User = sequelize.define('User', {
     email: { type: DataTypes.STRING, unique: true },
     passwordHash: { type: DataTypes.STRING },
     isAdmin: { type: DataTypes.BOOLEAN, defaultValue: false },
-    created_at: { type: DataTypes.DATE, defaultValue: Sequelize.NOW }
-  }, {
-    timestamps: false
-  });
+    companyName: DataTypes.STRING,
+    mobile: DataTypes.STRING,
+    created_at: { type: DataTypes.DATE, defaultValue: DataTypes.NOW }
+}, {
+    timestamps: false  // Disable Sequelize automatic timestamping if you are manually defining created_at
+});
+
 module.exports = User;
