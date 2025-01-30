@@ -1,4 +1,4 @@
-exports.getConsultantReport = async (req, res) => {
+/*exports.getConsultantReport = async (req, res) => {
     const reports = await Event.findAll({
       include: [{
         model: User,
@@ -8,5 +8,5 @@ exports.getConsultantReport = async (req, res) => {
       attributes: ['startTime', 'endTime'],
     });
     res.json(reports);
-  };
+  };*/
   

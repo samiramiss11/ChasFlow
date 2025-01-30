@@ -39,6 +39,6 @@ exports.findAllRooms = async (req, res) => {
       message: "Error retrieving rooms"
     });
   }
-};
+};*/
 
 // i will add other CRUD operations similarly */
