@@ -1,8 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
+// this interface defines structure of each booked room.
+interface BookedRoom {
+  id: number;
+  roomName: string;
+  courseName: string;
+  consultantFirstName: string;
+  consultantLastName: string;
+  startTime: string;
+  endTime: string;
+  totalHours: number;
+}
+
+
 const timeReport = () => {
-  const [bookedRooms, setBookedRooms] = useState([]);
+  const [bookedRooms, setBookedRooms] = useState<BookedRoom[]>([]);
 
   useEffect(() => {
     // Fetch booked rooms from the API
@@ -32,18 +45,19 @@ const timeReport = () => {
               <th>Consultant</th>
               <th>Start Time</th>
               <th>End Time</th>
+              <th>Total Hours</th>
             </tr>
           </thead>
           <tbody>
             {bookedRooms.map((room) => (
               <tr key={room.id}>
-                <td>{room.roomName}</td>
-                <td>{room.courseName}</td>
+                 <td>{room.courseName}</td>
                 <td>
                   {room.consultantFirstName} {room.consultantLastName}
                 </td>
                 <td>{room.startTime}</td>
                 <td>{room.endTime}</td>
+                <td>{room.totalHours}</td>
               </tr>
             ))}
           </tbody>
@@ -52,5 +66,4 @@ const timeReport = () => {
     </div>
   );
 };
-
 export default timeReport;

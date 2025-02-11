@@ -1,9 +1,9 @@
-
+//This file sets up the routes for the authentication functionalities.
 const express = require('express');
-const { login, forgotPassword, resetPassword } = require('../controllers/authController');
+const { loginUser, forgotPassword, resetPassword } = require('../controllers/authController');
 const router = express.Router();
 
-router.post('/login', login);
+router.post('/login-page', loginUser);
 router.post('/forgot-password', forgotPassword);
 router.post('/reset-password', resetPassword);
 

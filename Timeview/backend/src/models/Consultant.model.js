@@ -1,27 +1,21 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/dbConfig');
 
-class User extends Model {}
+class Consultant extends Model {}
 
-User.init({
-    userID: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+Consultant.init({
+    consultantID: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     firstName: { type: DataTypes.STRING, allowNull: false },
     lastName: { type: DataTypes.STRING, allowNull: false },
+    username: { type: DataTypes.STRING, allowNull: false, unique: true },
     email: { type: DataTypes.STRING, allowNull: false, unique: true },
-    password: { type: DataTypes.STRING, allowNull: false },
-    isAdmin: { type: DataTypes.BOOLEAN, defaultValue: false },
-<<<<<<< Updated upstream
-    created_at: { type: DataTypes.DATE, defaultValue: Sequelize.NOW }
-  }, {
-    timestamps: false
-  });
-=======
+    companyName: { type: DataTypes.STRING },
+    mobile: { type: DataTypes.STRING },
     status: { type: DataTypes.STRING, defaultValue: 'active' },
     created_at: { type: DataTypes.DATE, defaultValue: DataTypes.NOW }
 }, {
     sequelize,
-    modelName: 'User'
+    modelName: 'Consultant'
 });
 
->>>>>>> Stashed changes
-module.exports = User;
+module.exports = Consultant;
