@@ -1,18 +1,29 @@
 const User = require('./User.model');
+const Consultant = require('./Consultant.model');
 const Room = require('./Room.model');
 const Course = require('./Course.model');
-const Event = require('./Event.model');
+const Booking = require('./Booking.model');
+const TimeSlot = require('./TimeSlot.model');
 
-// Define relationships between all models
-Event.belongsTo(Room, {foreignKey: 'roomId'});
-Room.hasMany(Event, {foreignKey: 'roomId'});
+// Define model associations
+Consultant.hasMany(Booking, { foreignKey: 'consultantID' });
+Booking.belongsTo(Consultant, { foreignKey: 'consultantID' });
 
-Event.belongsTo(Course, {foreignKey: 'courseId'});
-Course.hasMany(Event, {foreignKey: 'courseId'});
+Room.hasMany(Booking, { foreignKey: 'roomID' });
+Booking.belongsTo(Room, { foreignKey: 'roomID' });
 
+Course.hasMany(Booking, { foreignKey: 'courseID' });
+Booking.belongsTo(Course, { foreignKey: 'courseID' });
+
+TimeSlot.hasMany(Booking, { foreignKey: 'timeSlotID' });
+Booking.belongsTo(TimeSlot, { foreignKey: 'timeSlotID' });
+
+// Export all models
 module.exports = {
     User,
+    Consultant,
     Room,
     Course,
-    Event
+    Booking,
+    TimeSlot
 };
