@@ -1,6 +1,3 @@
-<<<<<<< Updated upstream:Timeview/client/src/pages/LoginPage.jsx
-import React, { useState } from 'react';
-=======
 import React, { useState, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
@@ -17,7 +14,7 @@ const LoginPage = () => {
     e.preventDefault();
     if ('login' in authContext) {  // Type check to avoid TypeScript error
         await authContext.login(credentials.email, credentials.password);
-        navigate('/ProfileSetting'); // Updated method to navigate
+        navigate('/booking-consult'); // Updated method to navigate
     }
 };
 
@@ -34,60 +31,11 @@ const LoginPage = () => {
 export default LoginPage;
 /* import React, { useState, FormEvent  } from 'react';
 import { useNavigate } from 'react-router-dom';
->>>>>>> Stashed changes:Timeview/client/src/pages/LoginPage.tsx
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
 
-function LoginPage({ history }) {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [errorMessage, setErrorMessage] = useState('');
+const API_URL = import.meta.env.VITE_API_BASE_URL; // Ensure this is logged to verify
 
-<<<<<<< Updated upstream:Timeview/client/src/pages/LoginPage.jsx
-    const handleLogin = async (event) => {
-        event.preventDefault();
-        try {
-            const response = await axios.post('http://localhost:3000/api/auth/login', { email, password });
-            if (response.data.auth) {
-                localStorage.setItem('token', response.data.token);
-                history.push('/landingpage');
-            }
-        } catch (error) {
-            setErrorMessage('Invalid email or password');
-        }
-    };
-
-    return (
-        <div>
-            <form onSubmit={handleLogin}>
-                <div>
-                    <label htmlFor="email">Email:</label>
-                    <input
-                        type="email"
-                        id="email"
-                        value={email}
-                        onChange={e => setEmail(e.target.value)}
-                        required
-                    />
-                </div>
-                <div>
-                    <label htmlFor="password">Password:</label>
-                    <input
-                        type="password"
-                        id="password"
-                        value={password}
-                        onChange={e => setPassword(e.target.value)}
-                        required
-                    />
-                </div>
-                <button type="submit">Login</button>
-                {errorMessage && <p>{errorMessage}</p>}
-            </form>
-            <button onClick={() => history.push('/forgot-password')}>Forgot Password?</button>
-        </div>
-    );
-}
-=======
 const LoginPage = (): JSX.Element => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -154,6 +102,5 @@ const LoginPage = (): JSX.Element => {
     </div>
   );
 };
->>>>>>> Stashed changes:Timeview/client/src/pages/LoginPage.tsx
 
 export default LoginPage; */

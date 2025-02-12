@@ -1,22 +1,13 @@
-<<<<<<< Updated upstream
-=======
 // Main entry point for server
 require('dotenv').config();
 const app = require('./app.js'); 
 const db = require('./config/dbConfig'); 
->>>>>>> Stashed changes
+//const express = require('express');
+//const router = express.Router();
 
-const express = require('express');
-const router = express.Router();
 
-<<<<<<< Updated upstream
-// Example route
-router.get('/', (req, res) => {
-  res.send('Welcome to SchemaApp API!');
-});
+const PORT = process.env.PORT || 3000;
 
-module.exports = router;
-=======
 // this ensures the database is connected before starting the server
 db.authenticate()
   .then(() => {
@@ -28,5 +19,4 @@ db.authenticate()
   .catch(err => {
     console.error('Unable to connect to the database:', err);
   });
-  
->>>>>>> Stashed changes
+

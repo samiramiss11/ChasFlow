@@ -1,4 +1,4 @@
-//This file sets up the routes for the authentication functionalities.
+//This file sets up the routes for the authentication functionalities for Admin.
 const express = require('express');
 const { loginUser, forgotPassword, resetPassword } = require('../controllers/authController');
 const router = express.Router();

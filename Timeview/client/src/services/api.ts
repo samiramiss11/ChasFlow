@@ -63,7 +63,18 @@ export const fetchCourses = async () => {
 export const fetchConsultants = async () => {
   try {
     const response = await api.get('/consultants');
-    return response.data;
+    return response.data;  // Return the consultants data
+  } catch (error) {
+    console.error('Error fetching consultants:', error);
+    throw error;
+  }
+};
+
+// Fetch consultant by ID
+export const fetchConsultantById = async (consultantID: string) => {
+  try {
+    const response = await axios.get('/consultants');
+    return response.data; // { id, username, email, ... }
   } catch (error) {
     throw error;
   }
@@ -99,9 +110,9 @@ export const deleteBooking = async (bookingID: string) => {
 };
 
 // Change Consultant for a Booking
-export const changeConsultant = async (bookingID: string, newConsultantID: string) => {
+export const handlechangeConsultant = async (bookingID: string, newConsultantID: string) => {
   try {
-    const response = await api.post(`/booking/changeConsultant`, { bookingID, newConsultantID });
+    const response = await api.post(`/booking/handlechangeConsultant`, { bookingID, newConsultantID });
     return response.data;
   } catch (error) {
     throw error;

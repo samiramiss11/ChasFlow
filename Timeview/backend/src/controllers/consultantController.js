@@ -3,14 +3,18 @@ const { Consultant } = require('../models');
 
 exports.getAllConsultants = async (req, res) => {
     try {
-        const consultants = await Consultant.findAll({
-            where: { status: 'active' } // Fetching only active consultants
-        });
-        res.json(consultants);
+      console.log("Fetching active consultants...");
+      const consultants = await Consultant.findAll({
+        where: { status: 'active' },  // Ensure we only get active consultants
+        attributes: ['consultantID', 'username'], // Ensure 'consultantID' and 'username' are being returned
+      });
+      console.log('Consultants fetched:', consultants);
+      res.json(consultants);
     } catch (error) {
-        res.status(500).send('Error retrieving consultants: ' + error.message);
+      console.error('Error fetching consultants:', error);
+      res.status(500).send('Error retrieving consultants: ' + error.message);
     }
-};
+  };
 
 exports.createConsultant = async (req, res) => {
     const { firstName, lastName, username, email, companyName, mobile } = req.body;

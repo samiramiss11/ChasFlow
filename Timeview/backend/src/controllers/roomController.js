@@ -1,6 +1,3 @@
-<<<<<<< Updated upstream
-const Room = require('../models/Room.model.js');
-=======
 //check if a specific room is available for a specific time slot on a given day.
 const { Event, Op } = require('../models');
 
@@ -44,4 +41,4 @@ exports.findAllRooms = async (req, res) => {
   }
 };
 
-// i will add other CRUD operations similarly
+// i will add other CRUD operations similarly */

@@ -15,7 +15,8 @@ Consultant.init({
     created_at: { type: DataTypes.DATE, defaultValue: DataTypes.NOW }
 }, {
     sequelize,
-    modelName: 'Consultant'
+    modelName: 'Consultant',
+    tableName: 'consultants',
 });
 
 module.exports = Consultant;

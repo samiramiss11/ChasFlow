@@ -10,12 +10,6 @@ User.init({
     email: { type: DataTypes.STRING, allowNull: false, unique: true },
     password: { type: DataTypes.STRING, allowNull: false },
     isAdmin: { type: DataTypes.BOOLEAN, defaultValue: false },
-<<<<<<< Updated upstream
-    created_at: { type: DataTypes.DATE, defaultValue: Sequelize.NOW }
-  }, {
-    timestamps: false
-  });
-=======
     status: { type: DataTypes.STRING, defaultValue: 'active' },
     created_at: { type: DataTypes.DATE, defaultValue: DataTypes.NOW }
 }, {
@@ -23,5 +17,4 @@ User.init({
     modelName: 'User'
 });
 
->>>>>>> Stashed changes
 module.exports = User;

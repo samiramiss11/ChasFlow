@@ -28,7 +28,7 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
     const loadProfile = async () => {
         try {
           const token = localStorage.getItem('token');
-          const response = await axios.get(`${API_URL}/users/profile`, {
+          const response = await axios.get(`/users/profile`, {
             headers: { Authorization: `Bearer ${token}` }
           });
           setProfile(response.data);

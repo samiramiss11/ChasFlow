@@ -3,19 +3,19 @@ import React, { createContext, useContext, useState, ReactNode } from 'react';
 
 // Define the types for the context data
 interface BookingContextType {
+  bookings: any[];
   consultantID: string | null;
   courseID: string | null;
   week: number | null;
   day: string | null;
   roomID: string | null;
   timeSlotID: string | null;
-  setConsultantID: (id: string) => void;
+  setConsultantID: (id: string| null) => void;
   setCourseID: (id: string) => void;
   setWeek: (week: number) => void;
   setDay: (day: string) => void;
   setRoomID: (id: string) => void;
   setTimeSlotID: (id: string) => void;
-  bookings: any[];  // Array of bookings (or specific booking type)
   addBooking: (booking: any) => void;
   setBookings: (bookings: any[]) => void;
 }
@@ -54,6 +54,7 @@ export const BookingProvider: React.FC<BookingProviderProps> = ({ children }) =>
   return (
     <BookingContext.Provider
       value={{
+        bookings,
         consultantID,
         courseID,
         week,
@@ -66,7 +67,6 @@ export const BookingProvider: React.FC<BookingProviderProps> = ({ children }) =>
         setDay,
         setRoomID,
         setTimeSlotID,
-        bookings,
         addBooking,
         setBookings,
       }}

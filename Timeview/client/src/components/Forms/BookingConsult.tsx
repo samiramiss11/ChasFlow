@@ -1,16 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { useBooking } from '../../context/BookingContext';
 import { fetchConsultants, fetchCourses } from '../../services/api';
+import { useNavigate } from 'react-router-dom';
 
 const BookingConsult: React.FC = () => {
   const { setConsultantID, setCourseID } = useBooking();
-  const [consultants, setConsultants] = useState([]);
-  const [courses, setCourses] = useState([]);
-  
+  const [consultants, setConsultants] = useState<any[]>([]);
+  const [courses, setCourses] = useState<any[]>([]);
+  const navigate = useNavigate();
+
   useEffect(() => {
     fetchConsultants().then(setConsultants);
     fetchCourses().then(setCourses);
   }, []);
+
+  const handleVerify = () => {
+    navigate('/booking-action');  // Navigate to the booking-action page
+  };
 
   return (
     <div>
@@ -18,18 +24,18 @@ const BookingConsult: React.FC = () => {
       <select onChange={(e) => setConsultantID(e.target.value)}>
         <option value="">Select Consultant</option>
         {consultants.map((consultant: any) => (
-          <option key={consultant.id} value={consultant.id}>{consultant.name}</option>
+          <option key={consultant.id} value={consultant.id}>{consultant.username}</option>
         ))}
       </select>
 
       <select onChange={(e) => setCourseID(e.target.value)}>
         <option value="">Select Course</option>
         {courses.map((course: any) => (
-          <option key={course.id} value={course.id}>{course.name}</option>
+          <option key={course.id} value={course.id}>{course.courseCode}</option>
         ))}
       </select>
 
-      <button onClick={() => window.location.href = '/booking-action'}>Verify</button>
+      <button onClick={handleVerify}>Verify</button>  {/* Use handleVerify for navigation */}
     </div>
   );
 };
