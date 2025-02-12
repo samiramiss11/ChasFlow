@@ -40,5 +40,6 @@ exports.findAllRooms = async (req, res) => {
     });
   }
 };*/
+};*/
 
 // i will add other CRUD operations similarly */

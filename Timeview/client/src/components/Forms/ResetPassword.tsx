@@ -31,42 +31,13 @@ const ResetPassword: React.FC<ResetPasswordProps> = () => {
 
     return (
         <div>
-            <form onSubmit={handleResetPassword}>
-                <div>
-                    <label htmlFor="email">Email:</label>
-                    <input
-                        type="email"
-                        id="email"
-                        value={email}
-                        onChange={e => setEmail(e.target.value)}
-                        required
-                    />
-                </div>
-                <div>
-                    <label htmlFor="token">Token:</label>
-                    <input
-                        type="text"
-                        id="token"
-                        value={token}
-                        onChange={e => setToken(e.target.value)}
-                        required
-                    />
-                </div>
-                <div>
-                    <label htmlFor="newPassword">New Password:</label>
-                    <input
-                        type="password"
-                        id="newPassword"
-                        value={newPassword}
-                        onChange={e => setNewPassword(e.target.value)}
-                        required
-                    />
-                </div>
-                <button type="submit">Reset Password</button>
+            <form onSubmit={handleForgotPassword}>
+                <input type="email" value={email} onChange={e => setEmail(e.target.value)} required />
+                <button type="submit">Send Reset Email</button>
                 {message && <p>{message}</p>}
             </form>
         </div>
     );
 }
 
-export default ResetPassword;
+export default ForgotPassword;
