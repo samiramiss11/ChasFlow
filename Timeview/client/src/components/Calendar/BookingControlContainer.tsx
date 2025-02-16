@@ -16,7 +16,7 @@ const BookingControlContainer = () => {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
     fetcher.submit(e.target as HTMLFormElement)
-    window.location.reload()
+    //window.location.reload()
   }
   return (
     <div className='pt-7'>
