@@ -1,6 +1,0 @@
-export { default as FeatureHome } from './FeatureHome'
-export { default as Landing } from './Landing'
-export { default as ConsernedUserSetting } from './ConsernedUserSetting'
-export { default as RoleTaskOnboarding } from './RoleTaskOnboarding'
-export { default as UserJourneyLayout } from './UserJourneyLayout'
-export { default as AddUserSettings } from './AddUserSettings'

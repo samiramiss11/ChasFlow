@@ -137,7 +137,8 @@
     "src/features/multiStepForm/FormSlice.ts",
     "integration/*.ts",
     "support/*.ts",
-    "../node_modules/cypress"
+    "../node_modules/cypress",
+    "src/utils/transaction/checkbox.ts"
   ],
   "exclude": ["node_modules"],
   "references": [{ "path": "./tsconfig.node.json" }]
