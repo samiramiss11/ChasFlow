@@ -1,0 +1,96 @@
+// import * as React from 'react'
+// import { useSelector, useDispatch } from 'react-redux'
+// import { RootState, AppDispatch } from './store'
+// import { toggleInterval, setIntervals } from './timeIntervalSlice'
+// import OutlinedInput from '@mui/material/OutlinedInput'
+// import InputLabel from '@mui/material/InputLabel'
+// import MenuItem from '@mui/material/MenuItem'
+// import FormControl from '@mui/material/FormControl'
+// import ListItemText from '@mui/material/ListItemText'
+// import Select, { SelectChangeEvent } from '@mui/material/Select'
+// import Checkbox from '@mui/material/Checkbox'
+
+// // Props for dynamic roomId
+// interface MultipleSelectCheckmarksProps {
+//   roomId: string
+// }
+
+// const ITEM_HEIGHT = 48
+// const ITEM_PADDING_TOP = 8
+// const MenuProps = {
+//   PaperProps: {
+//     style: {
+//       maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+//       width: 250,
+//     },
+//   },
+// }
+
+// const names = [
+//   '8.00-8.55',
+//   '9.00-9.55',
+//   '10.00-10.55',
+//   '11.00-11.55',
+//   '12.00-12.55',
+//   '13.00-13.55',
+//   '14.00-14.55',
+//   '15.00-15.55',
+//   '16.00-16.55',
+//   '17.00-17.55',
+//   '18.00-18.55',
+//   '19.00-20.00',
+// ]
+
+// export default function MultipleSelectCheckmarks({
+//   roomId,
+// }: MultipleSelectCheckmarksProps) {
+//   const dispatch = useDispatch<AppDispatch>()
+//   const selectedIntervals = useSelector(
+//     (state: RootState) =>
+//       state.timeInterval.rooms[roomId]?.selectedIntervals || []
+//   )
+
+//   const handleChange = (event: SelectChangeEvent<string[]>) => {
+//     const { value } = event.target
+//     dispatch(
+//       setIntervals({
+//         roomId,
+//         intervals: typeof value === 'string' ? value.split(',') : value,
+//       })
+//     )
+//   }
+
+//   const handleToggle = (interval: string) => {
+//     dispatch(toggleInterval({ roomId, interval }))
+//   }
+
+//   return (
+//     <FormControl sx={{ m: 1, width: 300 }}>
+//       <InputLabel sx={{ color: '#FAFAFA' }}>Lediga tider</InputLabel>
+//       <Select
+//         multiple
+//         value={selectedIntervals}
+//         onChange={handleChange}
+//         input={<OutlinedInput label='Tag' />}
+//         renderValue={(selected) => selected.join(', ')}
+//         MenuProps={MenuProps}
+//         sx={{
+//           borderRadius: '16px',
+//           backgroundColor: '#156079',
+//           color: '#FAFAFA',
+//         }}
+//       >
+//         {names.map((name) => (
+//           <MenuItem
+//             key={name}
+//             value={name}
+//             onClick={() => handleToggle(name)}
+//           >
+//             <Checkbox checked={selectedIntervals.includes(name)} />
+//             <ListItemText primary={name} />
+//           </MenuItem>
+//         ))}
+//       </Select>
+//     </FormControl>
+//   )
+// }
