@@ -1,10 +1,20 @@
 import axios from 'axios';
 
 // Create an Axios instance with the base URL from environment variables
-const API_URL = import.meta.env.VITE_API_BASE_URL;
+const API_URL = '/api/v1'//import.meta.env.VITE_API_BASE_URL;
 const api = axios.create({
   baseURL: API_URL,  // Set the base URL for all requests
 });
+
+export const fetchData = async () => {
+  try {
+const response = await axios.post(`${API_URL}/test`, { message: 'Hello from client' }); 
+   console.log(response.data); // Log response from backend
+   return response.data; // Return the data.
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+};
 
 // Add the Authorization header globally if token exists in localStorage
 api.interceptors.request.use(
@@ -53,6 +63,8 @@ export const fetchRooms = async () => {
 export const fetchCourses = async () => {
   try {
     const response = await api.get('/courses');
+        console.log(response.data)
+
     return response.data;
   } catch (error) {
     throw error;
@@ -63,6 +75,8 @@ export const fetchCourses = async () => {
 export const fetchConsultants = async () => {
   try {
     const response = await api.get('/consultants');
+    console.log("consultants",response.data)
+
     return response.data;  // Return the consultants data
   } catch (error) {
     console.error('Error fetching consultants:', error);
