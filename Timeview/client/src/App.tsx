@@ -14,8 +14,11 @@ import Consultant from './components/Dashboard/Consultant';
 import { BookingProvider } from './context/BookingContext';
 import { ProfileProvider } from './context/ProfileContext';
 import { AuthProvider } from './context/AuthContext';
+import { useAuth } from './context/AuthContext';
+
 
 const App = (): JSX.Element => {
+  const { isAuthenticated, login, logout } = useAuth();
   return (
     <Router>
       <AuthProvider>
@@ -23,11 +26,12 @@ const App = (): JSX.Element => {
           <ProfileProvider>
             <Navbar />
             <Routes>
-              <Route path="/" element={<LoginPage />} />
-              <Route path="/admin" element={<AdminPage />} />
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/admin/*" element={<AdminPage />} />
               <Route path="*" element={<NotFoundPage />} />
               <Route path="/booking-consult" element={<BookingConsult />} />
               <Route path="/booking-action" element={<BookingAction />} />
+              <Route path="/booking-form" element={<BookingForm />} />
               <Route path="/booking-form" element={<BookingForm />} />
               <Route path="/booking-confirmation" element={<BookingConfirmation />} />
               <Route path="/profile-setting" element={<ProfileSetting />} />

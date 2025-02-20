@@ -10,7 +10,8 @@ Course.init({
     created_at: { type: DataTypes.DATE, defaultValue: DataTypes.NOW }
 }, {
     sequelize,
-    modelName: 'Course'
+    modelName: 'Course',
+    tableName: 'courses'
 });
 
 module.exports = Course;

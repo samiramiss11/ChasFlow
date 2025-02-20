@@ -1,10 +1,7 @@
+//AdminPage.tsx  keep this
 import React from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 
-import LoginPage from '../../pages/LoginPage';
-import ProfileSetting from './ProfileSetting';
-import Consultant from './Consultant';
-import TimeReport from './TimeReport';
 
 const AdminPage = () => {
   const navigate = useNavigate();

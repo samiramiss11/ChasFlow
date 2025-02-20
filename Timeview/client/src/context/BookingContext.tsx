@@ -1,52 +1,55 @@
-// This context will manage the booking data, including selections of consultants, courses, and time slots.
+//BookingContext.tsx keep this
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
-// Define the types for the context data
+
 interface BookingContextType {
   bookings: any[];
   consultantID: string | null;
   courseID: string | null;
-  week: number | null;
-  day: string | null;
-  roomID: string | null;
-  timeSlotID: string | null;
-  setConsultantID: (id: string| null) => void;
+  selectedYear: number | null;
+  selectedWeek: number | null;
+  selectedDay: string | null;
+  selectedRoom: string | null;
+  selectedTimeSlots: string[];
+  setConsultantID: (id: string) => void;
   setCourseID: (id: string) => void;
-  setWeek: (week: number) => void;
-  setDay: (day: string) => void;
-  setRoomID: (id: string) => void;
-  setTimeSlotID: (id: string) => void;
+  setSelectedYear: (year: number) => void;
+  setSelectedWeek: (week: number) => void;
+  setSelectedDay: (day: string) => void;
+  setSelectedRoom: (room: string) => void;
+  setSelectedTimeSlots: (slots: string[]) => void;
   addBooking: (booking: any) => void;
   setBookings: (bookings: any[]) => void;
 }
 
-// Create the context with the appropriate typing
+const defaultYear = new Date().getFullYear(); // Current year
+const defaultWeek = Math.ceil(new Date().getDate() / 7);
+
 const BookingContext = createContext<BookingContextType | undefined>(undefined);
 
-// Custom hook to use the context
-export const useBooking = (): BookingContextType => {
+export const useBooking = () => {
   const context = useContext(BookingContext);
   if (!context) {
     throw new Error('useBooking must be used within a BookingProvider');
   }
   return context;
 };
-
 // Define the props for the BookingProvider, explicitly typing the `children` prop
 interface BookingProviderProps {
   children: ReactNode;
 }
 
-// BookingProvider component using the 3rd method (with `React.FC` and typed `children`)
+
 export const BookingProvider: React.FC<BookingProviderProps> = ({ children }) => {
   const [consultantID, setConsultantID] = useState<string | null>(null);
   const [courseID, setCourseID] = useState<string | null>(null);
-  const [week, setWeek] = useState<number | null>(null);
-  const [day, setDay] = useState<string | null>(null);
-  const [roomID, setRoomID] = useState<string | null>(null);
-  const [timeSlotID, setTimeSlotID] = useState<string | null>(null);
+  const [selectedYear, setSelectedYear] = useState<number | null>(new Date().getFullYear());
+  const [selectedWeek, setSelectedWeek] = useState<number | null>(null);
+  const [selectedDay, setSelectedDay] = useState<string | null>(null);
+  const [selectedRoom, setSelectedRoom] = useState<string | null>(null);
+  const [selectedTimeSlots, setSelectedTimeSlots] = useState<string[]>([]);
   const [bookings, setBookings] = useState<any[]>([]);
-  
+
   const addBooking = (booking: any) => {
     setBookings([...bookings, booking]);
   };
@@ -57,16 +60,18 @@ export const BookingProvider: React.FC<BookingProviderProps> = ({ children }) =>
         bookings,
         consultantID,
         courseID,
-        week,
-        day,
-        roomID,
-        timeSlotID,
+        selectedYear,
+        selectedWeek,
+        selectedDay,
+        selectedRoom,
+        selectedTimeSlots,
         setConsultantID,
         setCourseID,
-        setWeek,
-        setDay,
-        setRoomID,
-        setTimeSlotID,
+        setSelectedYear,
+        setSelectedWeek,
+        setSelectedDay,
+        setSelectedRoom,
+        setSelectedTimeSlots,
         addBooking,
         setBookings,
       }}

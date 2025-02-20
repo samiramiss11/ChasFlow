@@ -19,7 +19,7 @@ const BookingAction: React.FC = () => {
 
   // Function to handle "Change Consultant" action
   const handleChangeConsultant = () => {
-    setConsultantID(null);  // Reset consultant ID in the context
+    setConsultantID('');  // Reset consultant ID in the context
     navigate('/booking-consult');  // Navigate back to BookingConsult.tsx
   };
 

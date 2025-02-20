@@ -1,3 +1,4 @@
+//BookingConsult.tsx keep this
 import React, { useEffect, useState } from 'react';
 import { useBooking } from '../../context/BookingContext';
 import { fetchConsultants, fetchCourses } from '../../services/api';
@@ -24,14 +25,14 @@ const BookingConsult: React.FC = () => {
       <select onChange={(e) => setConsultantID(e.target.value)}>
         <option value="">Select Consultant</option>
         {consultants.map((consultant: any) => (
-          <option key={consultant.id} value={consultant.id}>{consultant.username}</option>
+          <option key={consultant.consultantID} value={consultant.consultantID}>{consultant.username}</option>
         ))}
       </select>
 
       <select onChange={(e) => setCourseID(e.target.value)}>
         <option value="">Select Course</option>
         {courses.map((course: any) => (
-          <option key={course.id} value={course.id}>{course.courseCode}</option>
+          <option key={course.courseID} value={course.courseID}>{course.courseCode}</option>
         ))}
       </select>
 

@@ -1,45 +1,189 @@
-//check if a specific room is available for a specific time slot on a given day.
-const { Event, Op } = require('../models');
+//roomController.js
+const { Room, TimeSlot, Booking } = require('../models');
+const getISOWeekDate = require('../utils/weekUtils');
 
-exports.checkRoomAvailability = async (req, res) => {
-  const { roomId, date, startTime, endTime } = req.body;
-
+// This function fetches rooms with available time slots for a given day of the week.
+// Controller for fetching rooms based on day
+exports.getRoomsForDay = async (req, res) => {
+  const { week, day } = req.params;
+ 
+    const date = getISOWeekDate(new Date().getFullYear(), parseInt(week), day);
+    try {
+      const rooms = await Room.findAll({ // Modify according to your DB structure
+        attributes: ['roomID', 'roomName'], // 'courseCode' field to the response
+        });
+        console.log('Consultants fetched:', rooms);
+       
+      res.json(rooms);
+    } catch (error) {
+      console.error('Error fetching rooms for day:', error);
+      res.status(500).send('Failed to fetch rooms');
+    }
+  };
+// Controller for fetching available time slots for a room
+exports.getAvailableTimeSlots = async (req, res) => {
+  const { week, day } = req.params;
+  const year = new Date().getFullYear();
+  const date = getISOWeekDate(year, parseInt(week), day);
   try {
-    const bookings = await Event.findAll({
-      where: {
-        roomId,
-        date,
-        [Op.or]: [
-          { startTime: { [Op.between]: [startTime, endTime] } }, // Check if the startTime overlaps
-          { endTime: { [Op.between]: [startTime, endTime] } }
-        ]
-      }
+
+    // Add logic to filter time slots based on bookings
+    const timeSlots = await TimeSlot.findAll({
+      where: { roomID: 1 },
+      include: [{
+        model: Booking,
+        as: 'bookings', 
+        where: {
+          date: date
+        },
+        required: false,
+      }]
     });
 
-    if (bookings.length) {
-      return res.status(400).json({ message: 'Room not available for the selected time slot' });
-    }
-
-    // If no bookings are found, proceed with the next steps (not shown here for brevity)
-    res.json({ message: 'Room is available for booking', available: true });
+    const availableTimeSlots = timeSlots.filter(slot => 
+      !slot.bookings || slot.bookings.length === 0  // Check if no bookings exist
+    );
+    
+    console.log("Available Time Slots:", availableTimeSlots); // Debug to see filtered slots
+    
+    res.json(availableTimeSlots);
+  }
+  catch (error) {
+    console.error('Failed to fetch available time slots:', error);
+    res.status(500).send('Error fetching available time slots');
+  }
+};
+/*exports.getAvailableTimeSlots = async (req, res) => {
+  const { week, day, roomID } = req.params;
+  const date = getISOWeekDate(new Date().getFullYear(), parseInt(week), day);
+  try {
+    const timeSlots = await TimeSlot.findAll({
+      include: [{
+        model: Booking,
+        attributes: ['bookingID'],
+        required: false,
+        where: {
+          date,
+          roomID
+        }
+      }],
+      where: {
+        roomID
+      }
+    });
+    res.json({ availableTimeSlots: timeSlots });
   } catch (error) {
-    res.status(500).send('Error checking room availability: ' + error.message);
+    console.error('Failed to fetch available time slots:', error);
+    res.status(500).send('Error fetching available time slots');
+  }
+};
+*/
+
+///////////////////////////////////////////77
+/*const { Room, TimeSlot, Booking } = require('../models');
+const getISOWeekDate = require('../utils/weekUtils');
+exports.getRoomsForDay = async (req, res) => {
+  const { week, day } = req.params;
+  try {
+    // Assuming you have a function to convert week and day to a date
+    const date = getISOWeekDate(new Date().getFullYear(), parseInt(week), day);
+    const rooms = await Room.findAll({
+      // Include logic to find available rooms based on the date
+    });
+    res.json({ rooms });
+  } catch (error) {
+    console.error('Error fetching rooms for day:', error);
+    res.status(500).send('Failed to fetch rooms');
+  }
+};
+exports.getAvailableTimeSlots = async (req, res) => {
+  const { week, day } = req.query; // Assume roomID comes from req.query or req.params if specific room needed
+  const year = new Date().getFullYear(); // or take it as a parameter
+  const date = getISOWeekDate(year, parseInt(week), day);
+
+  try {
+    const rooms = await Room.findAll({
+      include: [{
+        model: TimeSlot,
+        as: 'TimeSlots',
+        attributes: ['timeSlotID', 'startTime', 'endTime'],
+        include: [{
+          model: Booking,
+          required: false,
+          attributes: ['bookingID']
+        }]
+      }]
+    });
+
+    // Filter out booked time slots and only send available ones
+    const availableTimeSlots = rooms.map(room => ({
+      roomID: room.roomID,
+      roomName: room.roomName,
+      timeSlots: room.timeSlots.filter(ts => 
+        !ts.Bookings.length // Assuming Booking is associated within TimeSlot and checks if there are no bookings
+      ).map(ts => ({
+        timeSlotID: ts.timeSlotID,
+        startTime: ts.startTime,
+        endTime: ts.endTime
+      }))
+    }));
+
+    res.json(availableTimeSlots);
+  } catch (error) {
+    console.error('Failed to fetch available time slots:', error);
+    res.status(500).send('Error fetching available time slots');
   }
 };
 
-/*const Room = require('../models/Room.model.js');
->>>>>>> Stashed changes
 
-exports.findAllRooms = async (req, res) => {
+// Controller function to get available time slots for a room, day, and week
+exports.getAvailableTimeSlots = async (req, res) => {
+  const { week, day, roomID } = req.params; // Get week, day, room from params
+  const year = new Date().getFullYear(); // Get the current year
+
   try {
-    const rooms = await Room.findAll();
-    res.json(rooms);
-  } catch (error) {
-    res.status(500).send({
-      message: "Error retrieving rooms"
+    // Calculate the Monday of the selected week
+    const date = getISOWeekDate(year, parseInt(week), day);
+    const bookings = await Booking.findAll({
+      where: { roomID, date },
+      include: [{
+        model: TimeSlot,
+        as: 'timeSlots',  // Ensure this matches the alias defined in the model association
+        attributes: ['timeSlotID', 'startTime', 'endTime']
+    }]
     });
-  }
-};*/
-};*/
+         // Assuming `timeSlots` is correctly populated within each booking:
+        let availableTimeSlots = [];
+        bookings.forEach(booking => {
+            booking.timeSlots.forEach(slot => {
+                availableTimeSlots.push({
+                    timeSlotID: slot.timeSlotID,
+                    startTime: slot.startTime,
+                    endTime: slot.endTime
+                });
+            });
+        });
 
-// i will add other CRUD operations similarly */
+        res.json({ availableTimeSlots });
+    } catch (error) {
+        console.error('Error fetching time slots:', error);
+        res.status(500).send('Failed to fetch time slots');
+    }
+};
+*/
+
+
+  /*  const timeSlots = await TimeSlot.findAll({
+      where: { roomID }
+    });
+
+    const availableTimeSlots = timeSlots.filter(slot => 
+      !bookings.find(booking => booking.timeSlotID === slot.id)
+    );
+
+    res.json({ availableTimeSlots });
+  } catch (error) {
+    console.error('Error fetching time slots:', error);
+    res.status(500).send('Failed to fetch time slots');
+  }
+}; */

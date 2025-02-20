@@ -1,5 +1,4 @@
-const { Model, DataTypes, Sequelize } = require('sequelize');
-const { Model, DataTypes, Sequelize } = require('sequelize');
+const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/dbConfig');
 
 class User extends Model {}
@@ -11,11 +10,11 @@ User.init({
     email: { type: DataTypes.STRING, allowNull: false, unique: true },
     password: { type: DataTypes.STRING, allowNull: false },
     isAdmin: { type: DataTypes.BOOLEAN, defaultValue: false },
-    status: { type: DataTypes.STRING, defaultValue: 'active' },
-    created_at: { type: DataTypes.DATE, defaultValue: DataTypes.NOW }
+    status: { type: DataTypes.STRING, defaultValue: 'active' }
 }, {
     sequelize,
-    modelName: 'User'
+    modelName: 'User',
+    timestamps: false
 });
 
 module.exports = User;

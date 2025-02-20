@@ -5,7 +5,7 @@ function ForgotPassword() {
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
 
-    const handleForgotPassword = async (event) => {
+    const handleForgotPassword = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         try {
             const response = await axios.post('http://localhost:3000/api/auth/forgot-password', { email });

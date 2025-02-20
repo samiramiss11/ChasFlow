@@ -1,99 +1,155 @@
-import React, { useEffect, useState } from 'react';
-import { useBooking } from '../../context/BookingContext';
-import { fetchAvailableTimeSlots, createBooking } from '../../services/api'; 
+//BookingForm.tsx keep this
+    import React, { useEffect, useState } from 'react';
+    import { useBooking } from '../../context/BookingContext';
+    import { fetchAvailableTimeSlots, fetchRoomsForDay } from '../../services/api';
+    import { useNavigate } from 'react-router-dom';
+    
+    
+    const BookingForm = () => {
+      const { selectedWeek, setSelectedWeek, selectedDay, setSelectedDay, selectedRoom, setSelectedRoom, selectedTimeSlots, setSelectedTimeSlots } = useBooking();
+      const [rooms, setRooms] = useState<any[]>([]);
+      const [availableTimeSlots, setAvailableTimeSlots] = useState<any[]>([]);
+      const [dropdownOpen, setDropdownOpen] = useState(false);
+      const [weekOffset, setWeekOffset] = useState(0);
+      const navigate = useNavigate();
+      
+    
+      useEffect(() => {
+        if (selectedWeek && selectedDay) {
+          fetchRoomsForDay(selectedWeek, selectedDay)
+            .then(data => {
+              console.log('Rooms fetched:', data);
+              setRooms(data);
+            })
+            .catch(err => console.error('Error fetching rooms:', err));
+        }
+      }, [selectedWeek, selectedDay]);
+    
+      const handleVerify = () => {
+        navigate('/booking-confirmation');  // Navigate to the booking-action page
+      };
 
-// Importing the fetch function
+      const handleWeekChange = (week: number) => {
+        setSelectedWeek(week);
+        setSelectedRoom;
+        setAvailableTimeSlots([]);
+        setDropdownOpen(false);
+      };
+    
+      const handleDayChange = (day: string) => {
+        setSelectedDay(day);
+        setDropdownOpen(false);
+        if (selectedWeek && day) {
+          fetchRoomsForDay(selectedWeek, day)
+            .then((data) => {
+              console.log('API Response:', data);  
+              if (Array.isArray(data)) {   
+                setRooms(data);
+                console.log('Rooms fetched for the day:', data);
+              } else {
+                console.error('Data fetched is not an array:', data);
+                setRooms([]);  // Set rooms to an empty array if data is not array
+              }
+            })
+            .catch((err) => {
+              console.error('Error fetching rooms:', err);
+              setRooms([]);  // Ensure rooms is always an array even on error
+            });
+        }
+      };
+    
+      const handleRoomSelect = (roomID: string) => {
+        setSelectedRoom(roomID);
+        fetchAvailableTimeSlots(selectedWeek, selectedDay, roomID)
+          .then(data => {
+            console.log('Time slots fetched:', data);
+            setAvailableTimeSlots(data);
+            setDropdownOpen(!dropdownOpen); // Toggle dropdown
+          })
+          .catch(err => console.error('Error fetching time slots:', err));
+      };
+    
+    const handleTimeSlotSelect = (timeSlotID: string) => {
+    const updatedTimeSlots = selectedTimeSlots.includes(timeSlotID) ? selectedTimeSlots.filter(id => id !== timeSlotID) : [...selectedTimeSlots, timeSlotID];
+     setSelectedTimeSlots(updatedTimeSlots);
+    };
+    
 
-const BookingForm: React.FC = () => {
-  const { consultantID, courseID, roomID, timeSlotID, week, day, setRoomID, setTimeSlotID, setWeek, setDay } = useBooking();
-  const [timeSlots, setTimeSlots] = useState<any[]>([]);
-
-  useEffect(() => {
-    if (roomID && day && week) {
-      // Fetch available time slots for the selected room, day, and week
-      fetchAvailableTimeSlots(roomID, day, week)
-        .then((data) => setTimeSlots(data))
-        .catch((error) => console.error('Error fetching time slots:', error));
-    }
-  }, [roomID, day, week]); // Re-run when any of these values change
-
-  const handleBooking = () => {
-    if (!consultantID || !courseID || !roomID || !timeSlotID || !week || !day) {
-      console.log('Missing booking information.');
-      return;
-    }
-    //const newBooking = { consultantID, courseID, roomID, timeSlotID, week, day };
-        // Add booking to the context (temporary state)
-        //addBooking(newBooking);
-
-    // Create the booking with the selected information
-    createBooking({ consultantID, courseID, roomID, timeSlotID, week, day })
-      .then((response) => {
-        console.log('Booking confirmed:', response);
-        // Redirect to confirmation page or handle success
-      })
-      .catch((error) => console.error('Error confirming booking:', error));
-  };
-
+    const nextWeeks = () => {
+      if (weekOffset < 42) { // Ensure we don't exceed the limit
+        setWeekOffset(weekOffset + 10);
+      }
+    };
   
+    const prevWeeks = () => {
+      if (weekOffset > 0) { // Ensure we don't go below 0
+        setWeekOffset(weekOffset - 10);
+      }
+    };
   return (
     <div>
       <h1>Booking Form</h1>
 
-      {/* Week and Day Selection */}
+      {/* Week Selection */}
       <div>
         <h2>Select Week:</h2>
-        <button onClick={() => setWeek(week ? week - 1 : 1)}>Previous Week</button>
-        <span>{week}</span>
-        <button onClick={() => setWeek(week ? week + 1 : 1)}>Next Week</button>
+        <button style={{ background: 'lightblue' }} onClick={prevWeeks}>Previous</button>
+        {[...Array(10)].map((_, index) => {
+          const weekNumber = weekOffset + index + 1;
+          if (weekNumber <= 52) {
+            return (
+              <button key={weekNumber} onClick={() => handleWeekChange(weekNumber)}>
+                V {weekNumber}
+              </button>
+            );
+          }
+          return null;
+        })}
+        <button style={{ background: 'lightblue' }} onClick={nextWeeks}>Next</button>
       </div>
 
-      {/* Day Tabs (Monday - Friday) */}
+      {/* Day Tabs */}
       <div>
-        <button onClick={() => setDay('Monday')}>Monday</button>
-        <button onClick={() => setDay('Tuesday')}>Tuesday</button>
-        <button onClick={() => setDay('Wednesday')}>Wednesday</button>
-        <button onClick={() => setDay('Thursday')}>Thursday</button>
-        <button onClick={() => setDay('Friday')}>Friday</button>
+        {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'].map(day => (
+          <button key={day} onClick={() => handleDayChange(day)}>
+            {day}
+          </button>
+        ))}
       </div>
 
       {/* Room Selection */}
       <div>
-        <h2>Select Room:</h2>
-        <button onClick={() => setRoomID('Room 001')}>Room 001</button>
-        <button onClick={() => setRoomID('Room 002')}>Room 002</button>
-        <button onClick={() => setRoomID('Room 003')}>Room 003</button>
-        <button onClick={() => setRoomID('Room 004')}>Room 004</button>
-        <button onClick={() => setRoomID('Room 005')}>Room 005</button>
-        <button onClick={() => setRoomID('Room 006')}>Room 006</button>
-        <button onClick={() => setRoomID('Room 007')}>Room 007</button>
+      {rooms && rooms.map(room => (
+        <div key={room.roomID}>
+          <button  onClick={() => handleRoomSelect(room.roomID)} >Select time</button>
+          {room.roomName}
+          
+          {selectedRoom === room.roomID && dropdownOpen &&(
+            <div style={{ position: 'absolute', background: 'white', border: '1px solid black' }}>
+              {availableTimeSlots.length > 0 ? (
+              availableTimeSlots.map(slot => (
+<label key={slot.timeSlotID}>
+                  <input
+                        type="checkbox"
+                        checked={selectedTimeSlots.includes(slot.timeSlotID)}
+                        onChange={() => handleTimeSlotSelect(slot.timeSlotID)}
+                      />
+                      {slot.startTime} - {slot.endTime}
+                    </label>
+            ))
+          ) : (
+            <option>No available time slots</option>
+          )}
+        </div>
+          )}
+          </div>
+        ))}
       </div>
 
-      {/* Time Slot Selection */}
-      <div>
-        <h2>Select Time Slot for {roomID}:</h2>
-        <select onChange={(e) => setTimeSlotID(e.target.value)} value={timeSlotID || ""}>
-          {timeSlots.map((slot) => (
-            <option key={slot.timeSlotID} value={slot.timeSlotID}>
-              {slot.startTime} - {slot.endTime}
-            </option>
-          ))}
-        </select>
-      </div>
 
-      {/* Booking Confirmation */}
-      <button onClick={handleBooking}>Confirm Booking</button>
-    </div>
+      {/* Next Button */}
+      <button style={{ background: 'lightblue' }} onClick={handleVerify}>Nästa Sidan</button>  {/* Use handleVerify for navigation */}    </div>
   );
-
-  //function handleBooking() {
-    // Make the API request to create the booking
-    // Pass consultantID, courseID, room, date, timeSlot
-  //}
-  
-
-//};
-
 };
 
 export default BookingForm;

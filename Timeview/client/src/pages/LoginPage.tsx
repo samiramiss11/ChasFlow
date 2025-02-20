@@ -1,34 +1,39 @@
-import React, { useState, useContext } from 'react';
-import { AuthContext } from '../context/AuthContext';
+// LoginPage.tsx keep this
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 const LoginPage = () => {
-    const [credentials, setCredentials] = useState({ email: '', password: '' });
-    const authContext =  useContext(AuthContext);
-    const navigate = useNavigate();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const { login } = useAuth();
+  const navigate = useNavigate();
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      setCredentials({ ...credentials, [e.target.name]: e.target.value });
-  };
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if ('login' in authContext) {  // Type check to avoid TypeScript error
-        await authContext.login(credentials.email, credentials.password);
-        navigate('/booking-consult'); // Updated method to navigate
+    try {
+      await login(email, password); // Call login from AuthContext
+      navigate('/booking-consult'); // Redirect to AdminPage on successful login
+    } catch (error) {
+      console.error('Login failed', error);
     }
-};
+  };
 
-    return (
-        <form onSubmit={handleSubmit}>
-            <input type="email" name="email" value={credentials.email} onChange={handleChange} required />
-            <input type="password" name="password" value={credentials.password} onChange={handleChange} required />
-            <button type="submit">Login</button>
-            <a href="/ForgotPassword">Forgot Password?</a>
-        </form>
-    );
+  return (
+    <div>
+      <h1>Admin Login</h1>
+      <form onSubmit={handleSubmit}>
+        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" required />
+        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" required />
+        <button type="submit">Login</button>
+      </form>
+      <a href="/forgot-password">Forgot Password?</a>
+    </div>
+  );
 };
 
 export default LoginPage;
+
 /* import React, { useState, FormEvent  } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
