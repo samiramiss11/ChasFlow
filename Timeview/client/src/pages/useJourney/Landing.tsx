@@ -14,21 +14,56 @@ import { PRIVILAGED_USERS } from '@/features/onboarding/users/usersSlice'
  * @param store create a default user
  * @returns
  */
+import { USER_ROLE } from '@/utils/types'
 export const clientLoader =
   (store: ReduxStore, queryClient: any) => async () => {
-    store.dispatch(loginUser({ user: USER, jwt: '...', token: '...' }))
+    const randomIndex = false
+      ? Math.floor(Math.random() * PRIVILAGED_USERS.length)
+      : 0
+    const randomUser = PRIVILAGED_USERS[randomIndex]
+
+    store.dispatch(loginUser({ user: randomUser, jwt: '...', token: '...' }))
     store.dispatch(populateKonsultants(PRIVILAGED_USERS))
     store.dispatch(selectedUser(PRIVILAGED_USERS[1])) //employe
-    // Perform any meta or auth check
-    const shouldRedirect = true
 
-    if (shouldRedirect) {
-      return redirect(
-        `/${JOURNY_LINSK_CONSTANTS.ONBOARDING_STEP1}/${JOURNY_LINSK_CONSTANTS.ONBOARDING_STEP2}`
-      )
+    const user = store.getState().userState.user
+    // Perform any meta or auth check
+
+    if (!user) {
+      return redirect('/login') // Redirect if user is not found
     }
 
-    return { meta: { public: true } } // Example return for loader data
+    switch (user.role) {
+      case USER_ROLE.Employee:
+        console.log(USER_ROLE.Employee)
+
+        return redirect(
+          `/${JOURNY_LINSK_CONSTANTS.TRANSACTION_STEP1}/${JOURNY_LINSK_CONSTANTS.TRANSACTION_STEP1}`
+        )
+      case USER_ROLE.Manager:
+        console.log(USER_ROLE.Manager)
+
+        return redirect(
+          `/${JOURNY_LINSK_CONSTANTS.ADMIN_STEP0}/${JOURNY_LINSK_CONSTANTS.ADMIN_STEP2}`
+        )
+      case USER_ROLE.Employee2:
+        console.log(USER_ROLE.Employee2)
+
+        return redirect(
+          `/${JOURNY_LINSK_CONSTANTS.ONBOARDING_STEP1}/${JOURNY_LINSK_CONSTANTS.ONBOARDING_STEP1}`
+        )
+      case USER_ROLE.Student:
+        console.log(USER_ROLE.Student)
+
+        return redirect(
+          `/${JOURNY_LINSK_CONSTANTS.ONBOARDING_STEP1}/${JOURNY_LINSK_CONSTANTS.TRANSACTION_STEP1}`
+        )
+      default:
+        console.log('default')
+        return redirect(
+          `/${JOURNY_LINSK_CONSTANTS.TRANSACTION_STEP1}/${JOURNY_LINSK_CONSTANTS.TRANSACTION_STEP1}`
+        )
+    }
   }
 
 /**

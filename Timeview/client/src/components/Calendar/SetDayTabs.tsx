@@ -18,7 +18,7 @@ const SetDayTabs = () => {
       />
       <div
         role='tablist'
-        className='tabs tabs-lifted md:flex gap-1 flex-auto sm:center justify-center items-center'
+        className=' tabs tabs-lifted md:flex flex-auto sm:center justify-center items-center '
       >
         {dayOfWeek.map((item, index) => {
           return (
@@ -28,8 +28,8 @@ const SetDayTabs = () => {
               onClick={() => setCurrentItem(index)}
               className={
                 index === currentItem
-                  ? 'tab flex-grow'
-                  : 'tab tab-active text-primary flex-grow'
+                  ? 'tab flex-grow bg-white '
+                  : 'tab tab-active text-primary text-white flex-grow [--tab-bg:black]  [--tab-border-color:white]'
               }
             >
               {item}

@@ -26,11 +26,10 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     loginUser: (state, action: PayloadAction<User>) => {
-
-        if (!action.payload) {
-    console.error("Payload is null");
-    return; // Exit early to prevent errors
-  }
+      if (!action.payload) {
+        console.error('Payload is null')
+        return // Exit early to prevent errors
+      }
 
       const user = {
         ...(action.payload.user as any),
@@ -59,8 +58,8 @@ export const { loginUser, logoutUser, toggleTheme } = userSlice.actions
 export default userSlice.reducer
 import { Manager } from '../users/usersSlice'
 export const USER: Manager = {
-  id: "1", // Add a valid id
-  name: "Erik Manager", // Add a valid name
-  role: "admin",
+  id: '1', // Add a valid id
+  name: 'Erik Manager', // Add a valid name
+  role: 'admin',
   employees: [], // Ensure it's an array of Employee[]
-};
+}

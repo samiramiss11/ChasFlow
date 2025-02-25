@@ -10,9 +10,10 @@ import {
   ROOMS,
   type GroupedRoomResponse,
 } from '@/features/transaction/rooms/roomSlice'
-export const clientLoader = (): GroupedRoomResponse => {
-  return { contextWithStaticData: ROOMS }
-}
+export const clientLoader =
+  (store: ReduxStore) => async (): Promise<GroupedRoomResponse> => {
+    return { contextWithStaticData: ROOMS }
+  }
 
 /**
  * checkbox for multiple id.
@@ -58,7 +59,8 @@ export const clientAction =
     console.log('all bookings', store.getState().allBookingState)
     return null
   }
-
+import OnlineBooking from '@/components/transaction/OnlineBooking'
+import { Form } from 'react-router-dom'
 const Bookings = () => {
   const { contextWithStaticData } = useLoaderData() as GroupedRoomResponse
   console.log(contextWithStaticData)
@@ -79,13 +81,15 @@ const Bookings = () => {
       <BookingControlContainer />
 
       <GroupedBookings contextWithStaticData={contextWithStaticData} />
-      <div className='flex flex-end'>
-        <button>Tillbaka</button>
-        <p>
-          Du önska Boka {toDo.antalTimmar} för {toDo.konsult}
-        </p>
-        <button>Bekräfta</button>
-        <Confirm />
+      <div className='p-4 flex justify-center'>
+        <div className=' border-t  border-chasBlue'>
+          <OnlineBooking />
+        </div>
+      </div>
+      <div className='px-20'>
+        <Form method='POST'>
+          <Confirm />
+        </Form>
       </div>
     </div>
   )

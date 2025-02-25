@@ -11,8 +11,8 @@ const RoundBallPositioningWrapper = ({
   children: React.ReactNode
 }) => {
   return (
-    <div className='bg-slate-500'>
-      <div className='pl-11  w-[70vw] '>{children}</div>
+    <div className=''>
+      <div className=' pl-12'>{children}</div>
     </div>
   )
 }

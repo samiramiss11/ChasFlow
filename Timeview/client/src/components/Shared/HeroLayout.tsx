@@ -2,6 +2,7 @@ import React from 'react'
 
 import HeroFactory from '@/utils/factories/HeroFactory'
 import { useLocation } from 'react-router'
+import ResponsiveForm from './ResponsiveBallContent'
 type HeroLayoutProps = {
   children: React.ReactNode
   confirm_success?: boolean
@@ -29,12 +30,19 @@ const HeroLayout = ({ children, confirm_success }: HeroLayoutProps) => {
 
   return (
     <div className='px-8'>
-      <h1 className='text-center'>{PageSectionToRender.header}</h1>
-      <div className='px-8 text-center'>
-        {PageSectionToRender.paragraphs.map((paragraph, index) => (
-          <p key={index}>{paragraph}</p>
-        ))}
-      </div>
+      <ResponsiveForm nrFr={1}>
+        <div>
+          <h3 className='text-start py-4  max-w-[65ch] mx-auto break-words '>
+            {PageSectionToRender.header}
+          </h3>
+          <div className=' text-start gap-4  max-w-[50ch] break-words '>
+            {Array.isArray(PageSectionToRender?.paragraphs) &&
+              PageSectionToRender?.paragraphs.map((paragraph, index) => (
+                <p key={index}>{paragraph}</p>
+              ))}
+          </div>
+        </div>
+      </ResponsiveForm>
       <div>{children}</div>
     </div>
   )

@@ -41,6 +41,7 @@ import { clientAction as sendCombinedBatch } from './pages/Transaction/Checkout'
 import { clientLoader as populateLoader } from './pages/useJourney/Landing'
 import { clientAction as LoginAction } from './pages/useJourney/RoleTaskOnboarding'
 import { clientLoader as viewBatchLoader } from './pages/Transaction/Checkout'
+import { clientAction as userBatch } from './pages/useJourney/ConsernedUserSetting'
 /**
  * -2025-01-28
  * the landing page navigate or redirect to 2 optional prefixes (onboarding, transaction),
@@ -57,7 +58,7 @@ import { clientLoader as viewBatchLoader } from './pages/Transaction/Checkout'
 const onboardingPrefix = {
   path: JOURNY_LINSK_CONSTANTS.ONBOARDING_STEP1,
   element: <UserJourneyLayout />,
-  loader: featureLoader(store, queryClient),
+  loader: featureLoader(),
   children: [
     {
       index: true,
@@ -82,7 +83,8 @@ const onboardingPrefix = {
     {
       path: JOURNY_LINSK_CONSTANTS.ONBOARDING_STEP3,
       element: <ConsernedUserSetting />,
-      loader: ConsernedUserLoader(store),
+      loader: ConsernedUserLoader(store, queryClient),
+      action: userBatch(store),
     },
   ],
 }
@@ -93,7 +95,7 @@ const transactionPrefix = {
     {
       index: true,
       element: <Bookings />,
-      loader: staticRoomLoader,
+      loader: staticRoomLoader(store),
       action: batchAction(store),
     },
     {
@@ -109,13 +111,49 @@ const transactionPrefix = {
     },
   ],
 }
+import {
+  AdminIndex,
+  AdminLayout,
+  Settings,
+  TimeReports,
+  Educators,
+} from '@/pages/Admin'
+const adminPrefix = {
+  path: JOURNY_LINSK_CONSTANTS.ADMIN_STEP0,
+  element: <AdminLayout />,
+  children: [
+    {
+      index: true,
+      element: <AdminIndex />,
+    },
+    {
+      path: JOURNY_LINSK_CONSTANTS.ADMIN_STEP1,
+      element: <Bookings />,
+      loader: staticRoomLoader(store),
+      action: batchAction(store),
+    },
+    {
+      path: JOURNY_LINSK_CONSTANTS.ADMIN_STEP2,
+      element: <Settings />,
+    },
+    {
+      path: JOURNY_LINSK_CONSTANTS.ADMIN_STEP3,
+      element: <TimeReports />,
+    },
+    {
+      path: JOURNY_LINSK_CONSTANTS.ADMIN_STEP4,
+      element: <Educators />,
+      loader: ConsernedUserLoader(store, queryClient),
+    },
+  ],
+}
 const router = createBrowserRouter(
   [
     {
       path: '/',
       element: <DashboardLayout />,
       errorElement: <Error />,
-      loader: dashboardLoader(store),
+      loader: dashboardLoader(),
       children: [
         {
           index: true,
@@ -124,6 +162,7 @@ const router = createBrowserRouter(
         },
         onboardingPrefix,
         transactionPrefix,
+        adminPrefix,
       ],
     },
     {
@@ -134,7 +173,7 @@ const router = createBrowserRouter(
   {
     future: {
       v7_relativeSplatPath: true,
-      v7_startTransition: true,
+      //v7_startTransition: true,
       v7_fetcherPersist: true,
       v7_normalizeFormMethod: true,
     },

@@ -22,7 +22,8 @@ const Header = () => {
   }
 
   return (
-    <header className=' bg-neutral py-2 text-neutral-content '>
+    <header className='sticky   w-full bg-neutral py-2 text-neutral-content z-[50]'>
+      {/**fixed top-0 w-full  */}
       <nav className='flex flex-col sm:flex-row justify-around'>
         <div className='align-element flex justify-center sm:justify-start '>
           {/* CART LINK*/}

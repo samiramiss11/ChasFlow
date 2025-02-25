@@ -12,16 +12,20 @@ export default {
       //   accent: '#0e7c86', // Example accent color definition
       //   // Other color definitions...
       // },
-         colors: {
-            primary: {
+      colors: {
+        primary: {
           400: '#1D4ED8', // This is a custom blue shade (you can choose any color)
         },
         chasBlue: '#156079', //chasBlue
-        chasCerise: '#FF6FB6',//chasCerise
-        chasGreen: '#3AC856',//chasGreen
-        chasOrange: '#F6B55F',//chasOrange
+        chasCerise: '#FF6FB6', //chasCerise
+        chasGreen: '#3AC856', //chasGreen
+        chasOrange: '#F6B55F', //chasOrange
         chasGray: '#2B2F2F', //chasGray
         chasLightGray: '#FAFAFA', //chasLightGray
+        banner: '#156079A1',
+        bannerShade: '#7693A34D',
+        input: '#156079',
+        viewBookingButton: '#7693A340',
       },
       fontFamily: {
         sans: ['Roboto', 'sans-serif'],

@@ -1,11 +1,14 @@
-//entry point of the application.
+// Main entry point for server
 require('dotenv').config();
-const app = require('./app.js'); // Import Express application
-const db = require('./config/dbConfig'); // Database configuration
+const app = require('./app.js'); 
+const db = require('./config/dbConfig'); 
+//const express = require('express');
+//const router = express.Router();
+
 
 const PORT = process.env.PORT || 3000;
 
-// Ensures the database is connected before starting the server
+// this ensures the database is connected before starting the server
 db.authenticate()
   .then(() => {
     console.log('Database connection has been established successfully.');
@@ -16,4 +19,4 @@ db.authenticate()
   .catch(err => {
     console.error('Unable to connect to the database:', err);
   });
-  
+

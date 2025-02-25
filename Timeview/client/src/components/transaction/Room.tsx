@@ -8,19 +8,26 @@ import CheckboxMenu from './CheckboxMenu'
  */
 const Room = ({ roomDetails }: { roomDetails: RoomType }) => {
   return (
-    <div className='flex gap-4 justify-around  min-h-fit py-6 items-center'>
-      <img
-        src={roomDetails.image}
-        alt='room i '
-        className='w-[8vw] max-w-sm'
-      />
+    <div className='flex gap-4 justify-around  min-h-fit p-6 items-center'>
+      {/**1st box */}
+      <div>
+        <img
+          src={roomDetails.image}
+          alt='room i '
+          className='w-[8vw] max-w-sm'
+        />
+      </div>
+      {/**2nd box */}
       <div className='space-y-2'>
-        <h6>
+        <h6 className=''>
           {' '}
           <b>{roomDetails.title}</b>
         </h6>
-        <p>{roomDetails.capacity}</p>
+        <p className='min-w-[20ch] max-w-[20ch] break-words '>
+          {roomDetails.capacity}
+        </p>
       </div>
+      {/**3rd box */}
       <div>
         <CheckboxMenu roomId={roomDetails.id} />
       </div>

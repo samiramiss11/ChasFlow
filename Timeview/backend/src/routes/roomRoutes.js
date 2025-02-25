@@ -1,12 +1,11 @@
-//const express = require('express');
-//const { body, validationResult } = require('express-validator');
-//const router = express.Router();
-//const roomController = require('../controllers/roomController');
+//roomRoutes.js
+const express = require('express');
+const { getRoomsForDay, getAvailableTimeSlots } = require('../controllers/roomController');
+const router = express.Router();
 
-//router.get('/', roomController.findAllRooms);
-//router.post('/create', [
-   // body('roomName').not().isEmpty().withMessage('Room name is required'),
-  // ], roomController.createRoom);
-  // Define other routes like POST, DELETE, PUT here
+//Room availability check route
+//router.get('/rooms', getAllRooms);
+router.get('/rooms/:week/:day', getRoomsForDay);
+router.get('/timeslots/:week/:day/:roomID', getAvailableTimeSlots);
 
-//module.exports = router;
+module.exports = router;

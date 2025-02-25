@@ -1,5 +1,10 @@
 import React, { useState } from 'react'
-import { HeroLayout, RoundedHeroWrapper } from '@/components/Shared'
+import {
+  HeroLayout,
+  RoundedHeroWrapper,
+  ResponsiveBallContent,
+  ConfirmDialog,
+} from '@/components/Shared'
 import { JOURNY_LINSK_CONSTANTS } from '@/utils/links'
 import { Button } from '@/components/ui/button'
 import { Link, Form, redirect } from 'react-router-dom'
@@ -28,7 +33,6 @@ export const clientAction =
 // export const clientAction = ()=>{
 //     return redirect(JOURNY_LINSK_CONSTANTS.ONBOARDING_STEP3)
 // }
-import { LuPencil, LuCalendar } from 'react-icons/lu'
 import { useNavigate } from 'react-router'
 const RoleTaskOnboarding = () => {
   const { userExistInStore } = useLoaderData() as {
@@ -43,15 +47,17 @@ const RoleTaskOnboarding = () => {
 
   const columnOne = () => {
     return (
-      <div>
-        <Label htmlFor='namn'>Namn</Label>
-        <Input
-          id='search'
-          name='name'
-          type='text'
-        />
+      <div className=''>
+        <div className='flex flex-col w-full gap-2'>
+          <Label htmlFor='lösenord'>Lösenord</Label>
+          <Input
+            id='search'
+            name='password'
+            type='text'
+          />
+        </div>
 
-        <div className='pt-4'>
+        <div className='mt-8'>
           <Button
             type='button' // Changed from "submit" since it's handling navigation
             size='sm'
@@ -74,28 +80,79 @@ const RoleTaskOnboarding = () => {
       </div>
     )
   }
+  const forgotPassword = ({ linkChild }: { linkChild: JSX.Element }) => {
+    const textValues = {
+      trigger: (
+        <button>
+          {/* <Link
+          to={`/user-journey/${JOURNY_LINSK_CONSTANTS.ONBOARDING_ALTERNATIV_STEP2}`}
+          className=''
+        > */}
+          <b>
+            <u>Glömt lösenord?</u>
+          </b>{' '}
+          Klicka här för att ange din e-post och få en återställningslänk
+          skickad till dig
+        </button>
+      ),
+      title: 'Har du glömt ditt lösenord?',
+      description: (
+        <div>
+          <div>
+            <p>Ingen fara vi hjälper dig!</p>
+          </div>
+          <div>
+            <p>
+              Vänligen skriv in din mejladress så skickar vi ett mejl till dig
+              med mer information om hur vi går tillväga för att lösa problemet
+            </p>
+          </div>
+        </div>
+      ),
+    }
+    const confirmButton = (
+      <Link
+        to={
+          '../' +
+          JOURNY_LINSK_CONSTANTS.ONBOARDING_STEP1 +
+          '/' +
+          JOURNY_LINSK_CONSTANTS.ONBOARDING_STEP3
+        }
+      >
+        <Button
+          size='sm'
+          variant='outline'
+          className='mb-2 rounded-full chasBlue w-40 text-center whitespace-nowrap'
+        >
+          Byt utbildare
+        </Button>
+      </Link>
+    )
+
+    return (
+      <>
+        <ConfirmDialog
+          textValues={textValues}
+          confirmButton={confirmButton}
+        >
+          {linkChild}
+        </ConfirmDialog>
+      </>
+    )
+  }
   return (
     <RoundedHeroWrapper>
       <HeroLayout>
         <Form
-          className=''
+          className=' pt-8'
           method='POST'
         >
-          <div className='flex align-items pt-3 justify-center gap-4'>
-            <div className='flex align-items pt-3 justify-center gap-4'>
-              {/** column 1*/}
-              <div className='flex flex-col'>
-                {columnOne()}
-
-                <Link
-                  to={`/user-journey/${JOURNY_LINSK_CONSTANTS.ONBOARDING_ALTERNATIV_STEP2}`}
-                  className='underline'
-                >
-                  Lägg till konsult
-                </Link>
-              </div>
-              {/**column 2 */}
-              <div className='flex flex-col'>
+          <ResponsiveBallContent>
+            {/** column 1:  grid-cols-1 md:grid-cols-2 : did not take equal width*/}
+            <div className='flex flex-col w-full'>{columnOne()}</div>
+            {/**column 2 */}
+            <div className=''>
+              <div className='flex flex-col w-full gap-2'>
                 <Label htmlFor='lösenord'>Lösenord</Label>
                 <Input
                   id='search'
@@ -104,7 +161,22 @@ const RoleTaskOnboarding = () => {
                 />
               </div>
             </div>
-          </div>
+            {/* Wrap the "Glömt lösenord?" text */}
+            <div className='pt-4 col-span-2  max-w-[72ch] mx-auto break-words'>
+              {forgotPassword({
+                linkChild: (
+                  <div className='flex flex-col w-40 gap-2'>
+                    <Label htmlFor='lösenord'>Lösenord</Label>
+                    <Input
+                      id='search'
+                      name='password'
+                      type='text'
+                    />
+                  </div>
+                ),
+              })}
+            </div>
+          </ResponsiveBallContent>
         </Form>
       </HeroLayout>
     </RoundedHeroWrapper>

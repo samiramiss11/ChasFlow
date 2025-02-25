@@ -5,8 +5,8 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 // }
 //  support multiple rooms, each having its own set of selected intervals
 export interface TimeIntervalState {
-  day: string
-  week: string
+  day: number
+  week: number
   rooms: Record<string, { selectedInterval: string[] }> //nicer syntax, keep room seperate form global properties
   // [roomId: string]: {
   //   selectedInterval: string[]                     //This conflict causes the TS2411 error.----
@@ -16,8 +16,8 @@ export interface TimeIntervalState {
 //Independent selection management for each room.
 
 const defaultState: TimeIntervalState = {
-  day: '1',
-  week: '1',
+  day: 1,
+  week: 1,
   rooms: {},
 }
 
@@ -70,9 +70,9 @@ const timeIntervalSlice = createSlice({
     },
     setGlobalProp: (state, action: PayloadAction<globalPropPayload>) => {
       if (action.payload.day !== undefined) {
-        state.day = action.payload.day
+        state.day = Number(action.payload.day)
       } else if (action.payload.week !== undefined) {
-        state.week = action.payload.week
+        state.week = Number(action.payload.week)
       }
     },
     // toggleFeature: (state, action: PayloadAction<Feature>) => {
@@ -114,8 +114,8 @@ const timeIntervalSlice = createSlice({
       // }
     },
 
-    clearIntervals: (state) => {
-      localStorage.setItem('cart', JSON.stringify(defaultState))
+    clearIntervals: () => {
+      localStorage.setItem('batch', JSON.stringify(defaultState))
       return defaultState
     },
   },

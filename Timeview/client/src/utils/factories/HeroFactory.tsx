@@ -11,30 +11,55 @@ const HeroFeatureHome_StaticContent = {
 }
 
 const RoleTaskOnBoarding = {
-  header: 'Vänligen logga in för att kunna redigera',
+  header: 'Vänligen logga in för att kunna admistrera',
   paragraphs: [
-    'Här kan du söka utifrån vilket rum du önskar eller utifrån vilket datum du önskar',
+    'Ange ditt användarnamn och lösenord för att välja en utbildare och därefter boka ett rum eller radera en befintlig bokning',
   ],
 }
 
 const BadDeveloper = {
   header: 'See HeroFactory.tsx',
   paragraphs: [
-    'Här kan du söka utifrån vilket rum du önskar eller utifrån vilket datum du önskar',
+    'Välj utbildare namn och kurskod för att boka ett rum eller radera en befintlig bokning',
   ],
 }
+//  paragraphs: [
+//     'Här kan du söka utifrån vilket rum du önskar eller utifrån vilket datum du önskar',
+//   ],
 
 const pickConsultant = {
-  header: 'Välj konsult och kurskod för din bokning',
+  header: 'Välj utbildare och kurskod för din bokning',
   paragraphs: [
-    "Välj konsultens namn och kurskod för att boka ett rum. Om konsulten inte finns med i listan kan du klicka på länken 'Lägg till ny konsult' för att skapa en ny",
+    'Välj utbildare namn och kurskod för att boka ett rum eller radera en befintlig bokning',
   ],
 }
 
-const TransactionPage = {
-  header: 'Planera enkelt din bokning här',
-  paragraphs: ['import redux store to extract the targeted consultant'],
-}
+const TransactionPage = ({
+  selectedUser,
+  kurskod = 'behöver specifiera kurskod',
+  includeParagraph = false,
+}: {
+  selectedUser?: string
+  kurskod?: string
+  includeParagraph?: boolean
+}) => ({
+  header: includeParagraph
+    ? 'Planera enkelt din bokning här'
+    : 'Kontrollera och bekräfta din bokning',
+  paragraphs: [
+    selectedUser ? (
+      <span>
+        <b>{` ${selectedUser}`} </b> och <b>{` ${kurskod}`}</b>
+      </span>
+    ) : (
+      'Välj utbildare namn och kurskod för att boka ett rum eller radera en befintlig bokning'
+    ),
+    includeParagraph &&
+      'Börja med att välja vilken vecka du vill boka ett rum för och fyll sedan i önskade tiderna för respektive dag. Du kan boka flera dagar och rum samtidigt.',
+    includeParagraph &&
+      'Alla rum är utrustade med projektor och whiteboard. Vissa rum erbjuder soffor och bord istället för traditionella bänkar.',
+  ],
+})
 
 const confirmed_Identity = {
   header: 'Hantera alla dina bokningar här',
@@ -66,16 +91,22 @@ type HeroStateInformation = {
   confirm_success?: boolean
 }
 
+import { useAppSelector } from '@/lib/hooks'
+import { RootState } from '@/lib/store'
+
 const HeroFactory = ({ location, confirm_success }: HeroStateInformation) => {
+  const userSelection = useAppSelector(
+    (state: RootState) => state.konsultantState
+  )
   if (confirm_success) {
     return confirmed_Identity
   }
-  console.log(
-    'hero determine step location:',
-    location,
-    'is a confirm step',
-    confirm_success
-  )
+  // console.log(
+  //   'hero determine step location:',
+  //   location,
+  //   'is a confirm step',
+  //   confirm_success
+  // )
   switch (location) {
     case '/' + JOURNY_LINSK_CONSTANTS.ONBOARDING_STEP1:
       return HeroFeatureHome_StaticContent
@@ -89,13 +120,27 @@ const HeroFactory = ({ location, confirm_success }: HeroStateInformation) => {
       JOURNY_LINSK_CONSTANTS.ONBOARDING_STEP3:
       return pickConsultant
     case '/' + JOURNY_LINSK_CONSTANTS.TRANSACTION_STEP1:
-      return TransactionPage
+      return TransactionPage({
+        selectedUser: userSelection.selectedUser?.name ?? 'select user',
+        kurskod: userSelection.selectedCourseCode
+          ? userSelection.selectedCourseCode.toString()
+          : 'behöver specifiera kurskod',
+        includeParagraph: true,
+      })
     case `/${JOURNY_LINSK_CONSTANTS.TRANSACTION_STEP1}/` +
       JOURNY_LINSK_CONSTANTS.TRANSACTION_STEP2:
-      return TransactionPage
+      return TransactionPage({
+        selectedUser: userSelection.selectedUser?.name ?? 'select user',
+        kurskod: userSelection.selectedCourseCode
+          ? userSelection.selectedCourseCode.toString()
+          : 'behöver specifiera kurskod',
+      })
     case `/${JOURNY_LINSK_CONSTANTS.TRANSACTION_STEP1}/` +
       JOURNY_LINSK_CONSTANTS.TRANSACTION_STEP3:
-      return TransactionPage
+      return TransactionPage({
+        selectedUser: userSelection.selectedUser?.name ?? 'select user',
+        kurskod: undefined,
+      })
     case '/' + CONFIRMATION_BLOCK_OR_PASS.CONFIRMED_ADMIN:
       return confirmed_Identity
 

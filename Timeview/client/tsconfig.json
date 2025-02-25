@@ -133,12 +133,14 @@
     "src/components/courses/handparts/mappedItems/SignInfo.jsx",
     "src/components/courses/handparts/HandButtonContainer.tsx",
     "src/components/courses/handparts/HandButtonContainer.tsx",
-    "src/App.jsx",
+    "src/App.tsx",
     "src/features/multiStepForm/FormSlice.ts",
     "integration/*.ts",
     "support/*.ts",
     "../node_modules/cypress",
-    "src/utils/transaction/checkbox.ts"
+    "src/utils/transaction/checkbox.ts",
+    "src/features/transaction/requests/GetRooms.ts",
+    "src/features/transaction/requests/GetRooms.ts"
   ],
   "exclude": ["node_modules"],
   "references": [{ "path": "./tsconfig.node.json" }]

@@ -1,22 +1,17 @@
+// authMiddleware.js  keep this
 const jwt = require('jsonwebtoken');
 
 const authenticateJWT = (req, res, next) => {
-  const authHeader = req.headers.authorization;
-  if (authHeader) {
-    const token = authHeader.split(' ')[1];
+  const token = req.header('Authorization');
+  if (!token) return res.status(401).send('Access Denied');
 
-    jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
-      if (err) {
-        return res.sendStatus(403);
-      }
-      req.user = user;
-      next();
-    });
-  } else {
-    res.sendStatus(401);
+  try {
+    const verified = jwt.verify(token.split(' ')[1], process.env.JWT_SECRET);
+    req.user = verified;
+    next();
+  } catch (err) {
+    res.status(400).send('Invalid Token');
   }
 };
 
-module.exports = {
-  authenticateJWT,
-};
+module.exports = authenticateJWT;

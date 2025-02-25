@@ -1,24 +1,10 @@
-const jwt = require('jsonwebtoken');
+// Handles the core logic for authentication, such as password verification and JWT creation.
 const bcrypt = require('bcryptjs');
-const db = require('../config/dbConfig');
-const User = require('../models/user.model');
+const jwt = require('jsonwebtoken');
+const { User } = require('../models');
 
+const verifyPassword = (inputPassword, userPassword) => bcrypt.compareSync(inputPassword, userPassword);
 
-const generateToken = user => {
-  return jwt.sign({ id: user.id, isAdmin: user.isAdmin }, process.env.JWT_SECRET, {
-    expiresIn: '1h',
-  });
-};
+const createToken = (user) => jwt.sign({ userID: user.userID }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
-const authenticateLogin = async (email, password) => {
-  const user = await User.findOne({ where: { email } });
-  if (!user || !await bcrypt.compare(password, user.passwordHash)) {
-    throw new Error('Invalid credentials');
-  }
-  return generateToken(user);
-};
-
-module.exports = {
-  authenticateLogin,
-  generateToken,
-};
+module.exports = { verifyPassword, createToken };

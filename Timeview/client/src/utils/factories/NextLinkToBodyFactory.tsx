@@ -20,8 +20,8 @@ const NextLinkToBodyFactory = ({
 
   const batchToOrder = {
     buttons: [
-      { text: 'BEKRÄFTA', icon: null },
-      { text: 'TILLBAKA', icon: null },
+      { text: 'BEKRÄFTA BOKNING', icon: null },
+      { text: 'TILLBAKA TILL VÄLJA RUM', icon: null },
     ],
     linkDestination: JOURNY_LINSK_CONSTANTS.TRANSACTION_STEP3,
   }

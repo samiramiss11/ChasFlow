@@ -2,22 +2,33 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { TimeIntervalState } from './booking'
 interface SetTimeIntervalState {
   sets: TimeIntervalState[] // Array of TimeIntervalState
+  timeInTotal: number
 }
 
 // Default state
 const defaultState: SetTimeIntervalState = {
-  sets: [], // Default empty array for sets
+  sets: [], // Default empty array for sets,
+  timeInTotal: 0,
+}
+import {
+  SetComplexUserPrivilages,
+  UserState,
+} from '@/features/onboarding/users/usersSlice'
+export interface OwnedBatch {
+  allbooking: SetTimeIntervalState
+  relatedUser?: UserState
 }
 
 // Retrieve the set data from localStorage and ensure it matches SetTimeIntervalState
 const getSetFromLocalStorage = (): SetTimeIntervalState => {
   const batch = localStorage.getItem('setOfbatches')
-  const parsedBatch = batch ? JSON.parse(batch) : null
+  console.log(batch, 'this is a batch')
+  const parsedBatch = batch ? JSON.parse(batch) : defaultState
 
-  // Check if parsedBatch is valid
-  if (!parsedBatch || !Array.isArray(parsedBatch.sets)) {
-    return defaultState // Return defaultState if the structure is invalid
-  }
+  // // Check if parsedBatch is valid
+  // if (!parsedBatch || !Array.isArray(parsedBatch.sets)) {
+  //   return defaultState // Return defaultState if the structure is invalid
+  // }
 
   return parsedBatch // Return valid data
 }
@@ -63,27 +74,26 @@ const timeIntervalSlice = createSlice({
           if (!existingEntry.rooms[roomId]) {
             existingEntry.rooms[roomId] = { selectedInterval: [] }
           }
-
           existingEntry.rooms[roomId].selectedInterval = Array.from(
             new Set([
               ...existingEntry.rooms[roomId].selectedInterval,
               ...newState.rooms[roomId].selectedInterval,
             ])
           )
+
+          state.timeInTotal += newState.rooms[roomId].selectedInterval.length
         })
       }
-      console.log(state.sets)
-      localStorage.setItem('setOfbatches', JSON.stringify(state.sets))
+
+      localStorage.setItem('setOfbatches', JSON.stringify(state))
     },
-    removeLastState: (state) => {
-      if (state.sets.length > 0) {
-        state.sets.pop() // Remove the last saved state
-      }
+    removeLastTimeIntervall: () => {
+      localStorage.setItem('setOfbatches', JSON.stringify(defaultState))
     },
   },
 })
 
-export const { addTimeIntervalState, removeLastState } =
+export const { addTimeIntervalState, removeLastTimeIntervall } =
   timeIntervalSlice.actions
 
 export default timeIntervalSlice.reducer

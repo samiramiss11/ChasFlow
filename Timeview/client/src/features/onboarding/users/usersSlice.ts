@@ -16,6 +16,11 @@ type Staff = Employee | Manager
 
 export const PRIVILAGED_USERS = [
   {
+    id: '0',
+    name: 'Erik',
+    role: USER_ROLE.Manager,
+  },
+  {
     id: '1',
     name: 'Alice',
     role: USER_ROLE.Employee,
@@ -23,26 +28,23 @@ export const PRIVILAGED_USERS = [
   {
     id: ' 2',
     name: 'Bob',
-    role: USER_ROLE.Employee,
+    role: USER_ROLE.Employee2,
   },
   {
     id: '3',
     name: 'Charlie',
     role: USER_ROLE.Student,
-    employees: [
-      { id: ' 1', name: 'Alice', role: USER_ROLE.Employee },
-      { id: '2', name: 'Bob', role: USER_ROLE.Employee },
-    ],
   },
 ]
 
 export type ComplexUserPrivilage = Staff | ReadOnly
 export type SetComplexUserPrivilages = ComplexUserPrivilage[] | null
 
-type UserState = {
+export type UserState = {
   readonly users: SetComplexUserPrivilages
-  selectedUser: Staff
-  participants: ReadOnly[]
+  selectedUser: Staff | null | Manager
+  selectedCourseCode: String | null
+  //participants: ReadOnly[]
 }
 
 /**
@@ -55,16 +57,17 @@ const getUserFromLocalStorage = (): SetComplexUserPrivilages => {
   return JSON.parse(user) as SetComplexUserPrivilages
 }
 
-const getParticipantsFromLocalStorage = (): ReadOnly[] | null => {
-  const user = localStorage.getItem('participants') || null
-  if (!user) return null
-  return JSON.parse(user) as ReadOnly[]
-}
+// const getParticipantsFromLocalStorage = (): ReadOnly[] | null => {
+//   const user = localStorage.getItem('participants') || null
+//   if (!user) return null
+//   return JSON.parse(user) as ReadOnly[]
+// }
 
 const initialState: UserState = {
   users: getUserFromLocalStorage(),
-  selectedUser: PRIVILAGED_USERS[1],
-  participants: getParticipantsFromLocalStorage() || [PRIVILAGED_USERS[2]],
+  selectedUser: null,
+  selectedCourseCode: null,
+  //participants: getParticipantsFromLocalStorage() || [PRIVILAGED_USERS[2]],
 }
 
 const userSlice = createSlice({
@@ -74,16 +77,39 @@ const userSlice = createSlice({
     populateKonsultants: (state, action: PayloadAction<Staff[]>) => {
       state.users = action.payload
     },
-    selectedUser: (state, action: PayloadAction<Staff>) => {
-      let newKonsultant = action.payload
-      state.selectedUser = newKonsultant //.push
+    selectedUser: (state, action: PayloadAction<Staff | string | null>) => {
+      let newKonsultantId = action.payload
+
+      if (typeof newKonsultantId === 'string' && state.users) {
+        const foundKonsultant = state.users.find(
+          (user) => user.name === newKonsultantId
+        )
+
+        if (foundKonsultant) {
+          state.selectedUser = foundKonsultant ?? null
+        } else {
+          console.warn('User not found, keeping existing selectedUser')
+        }
+      } else if (newKonsultantId) {
+        state.selectedUser = null //newKonsultantId // If payload is already a valid user object
+        //mb ill look intoo it more later
+      }
+
+      // }
+      localStorage.setItem('users', JSON.stringify(state))
+    },
+    setSelectedCourseCode: (state, action: PayloadAction<string | null>) => {
+      let newCourseCode = action.payload ?? ''
+      console.log(newCourseCode)
+      state.selectedCourseCode = newCourseCode //.push
       // }
       localStorage.setItem('users', JSON.stringify(state))
     },
   },
 })
 
-export const { populateKonsultants, selectedUser } = userSlice.actions
+export const { populateKonsultants, selectedUser, setSelectedCourseCode } =
+  userSlice.actions
 
 export default userSlice.reducer
 

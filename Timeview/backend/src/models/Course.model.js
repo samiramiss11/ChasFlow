@@ -4,33 +4,14 @@ const sequelize = require('../config/dbConfig');
 class Course extends Model {}
 
 Course.init({
-    id: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true
-    },
-    courseName: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    courseCode: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    description: {
-        type: DataTypes.TEXT,
-        allowNull: false
-    },
-    createdAt: {
-        type: DataTypes.DATE,
-        defaultValue: DataTypes.NOW,
-        field: 'created_at'
-    }
+    courseID: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+    courseCode: { type: DataTypes.STRING, allowNull: false, unique: true },
+    courseName: { type: DataTypes.STRING, allowNull: false },
+    created_at: { type: DataTypes.DATE, defaultValue: DataTypes.NOW }
 }, {
     sequelize,
     modelName: 'Course',
-    tableName: 'course',
-    timestamps: false
+    tableName: 'courses'
 });
 
 module.exports = Course;
