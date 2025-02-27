@@ -54,6 +54,7 @@ export const fetchAdminProfile = async () => {
   return response.data;
 };
 
+// admin login
 export const loginUser = async (email: string, password: string) => {
   const response = await api.post('/auth/login-page', { email, password });
   const { token } = response.data;
