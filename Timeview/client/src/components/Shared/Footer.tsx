@@ -20,16 +20,16 @@ const Footer = () => {
     <footer className=' bg-neutral py-2 text-neutral-content  min-h-[463px] flex flex-col justify-between vertical-align pt-9'>
       {/*colums*/}
 
-      <div className='flex flex-col sm:flex-row justify-between pt-12'>
+      <div className='flex flex-col sm:flex-row  pt-12'>
         <div className='w-[10vw]'></div>
         <div className='align-element flex justify-center sm:justify-start '>
           {/* address*/}
-          <div className='justify-center items-center flex gap-3'>
+          <div className='justify-center items-center flex'>
             <Address />
           </div>
         </div>
         {/*Logo*/}
-        <div className='align-element flex justify-items-end sm:justify-center '>
+        <div className='ml-24' >
           <Logo />
         </div>
         {/*Logo*/}
@@ -40,9 +40,9 @@ const Footer = () => {
         </div>
       </div>
       {/** */}
-      <div className='flex  gap-8 justify-center'>
-        <p>@ 2025 Chas Vissual Managment.se</p>
-        <p>Läs mer om vår Tillgänglighetsåtgärder</p>
+      <div className='flex items-center  gap-8 justify-center pb-7'>
+    <div>    <p>@ 2025 Chas Vissual Managment.se</p></div>
+       <div> <p>Läs mer om vår Tillgänglighetsåtgärder</p></div>
       </div>
     </footer>
   )
