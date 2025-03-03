@@ -13,8 +13,8 @@ import ProfileSetting from './components/Dashboard/ProfileSetting'
 import Consultant from './components/Dashboard/Consultant'
 import { BookingProvider } from './context/BookingContext'
 import { ProfileProvider } from './context/ProfileContext'
-import { AuthProvider } from './context/AuthContext'
-import { useAuth } from './context/AuthContext'
+// import { AuthProvider } from './context/AuthContext'
+// import { useAuth } from './context/AuthContext'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
@@ -208,7 +208,7 @@ const router = createBrowserRouter(
 )
 
 const App = (): JSX.Element => {
-  const { isAuthenticated, login, logout } = useAuth()
+  // const { isAuthenticated, login, logout } = useAuth()
   /* <AuthProvider>
       <Provider store={store}>
         <BookingProvider>

@@ -2,11 +2,11 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useProfile } from '../../context/ProfileContext';
-import { useAuth } from '../../context/AuthContext';
+// import { useAuth } from '../../context/AuthContext';
 
 const ProfileSetting = () => {
   const { profile, loadProfile } = useProfile();
-  const { logout } = useAuth();
+  // const { logout } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -14,7 +14,7 @@ const ProfileSetting = () => {
   }, [loadProfile]);
 
   const handleLogout = () => {
-    logout();
+    // logout();
     navigate('/login'); // Redirect to login after logout
   };
 
