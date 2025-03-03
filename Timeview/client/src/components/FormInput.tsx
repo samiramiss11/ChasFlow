@@ -1,14 +1,15 @@
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-
+import { cn } from '@/lib/utils';
 type FormInputProps = {
   name: string
   type: string
   label?: string
   defaultValue?: string
+  className?:string
 }
 
-function FormInput({ label, name, type, defaultValue }: FormInputProps) {
+function FormInput({ label, name, type, defaultValue,className='' }: FormInputProps) {
   return (
     <div className='mb-2'>
       <Label
@@ -22,6 +23,7 @@ function FormInput({ label, name, type, defaultValue }: FormInputProps) {
         name={name}
         type={type}
         defaultValue={defaultValue}
+       className={cn('bg-[#ECE9E9]', className)} 
       />
     </div>
   )

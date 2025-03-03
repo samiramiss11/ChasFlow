@@ -9,7 +9,6 @@ export const clientLoader = (store: ReduxStore) => async () => {
 }
 import { Button } from '@/components/ui/button'
 import FormInput from '@/components/FormInput'
-import { Label } from '@/components/ui/label'
 
 /**
  * kan enbart admin byta lösenord eller ska andra personer också ha ingång till admin sidebar? + denna sida?
@@ -25,16 +24,15 @@ const Settings = () => {
 
   const columnOne = () => {
     return <div>  <div className='flex flex-col '>
-          <Label htmlFor='namn'>Namn</Label>
           <FormInput
             type='search'
             label='search course'
             name='search'
-            defaultValue={name}
+        defaultValue={name}
+        className=''
           />
         </div>
         <div className='flex flex-col '>
-          <Label htmlFor='namn'>Namn</Label>
           <FormInput
             type='search'
             label='search course'
@@ -45,7 +43,6 @@ const Settings = () => {
       { }
      <div>
           <div className='flex flex-col'>
-          <Label htmlFor='namn'>Namn</Label>
           <FormInput
             type='search'
             label='search course'
@@ -55,7 +52,7 @@ const Settings = () => {
           />
         </div>
         <div className='flex flex-col'>
-          <Label htmlFor='namn'>Namn</Label>
+          
           <FormInput
             type='search'
             label='search course'
@@ -75,12 +72,10 @@ const Settings = () => {
 
     <div className="flex flex-col">
       <div className="flex flex-col">
-        <Label htmlFor="namn">Namn</Label>
         <FormInput type="search" label="search course" name="search" defaultValue={name} />
       </div>
 
       <div className="flex flex-col">
-        <Label htmlFor="namn">Namn</Label>
         <FormInput type="search" label="search course" name="search" defaultValue={name} />
           </div>
            {/** ✅ Button pushed to bottom */}
