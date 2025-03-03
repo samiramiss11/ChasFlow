@@ -83,8 +83,8 @@ const TimeReports = () => {
   ]
   const rowProps = (orderId: number) => {
     return {
-      className: `cursor-pointer ${
-        openRows.includes(orderId) ? 'bg-gray-200' : ''
+      className: ` cursor-pointer  ${
+        openRows.includes(orderId) ? 'bg-white' : ''
       }`,
       onClick: (e: React.MouseEvent<HTMLTableRowElement>) => {
         e.preventDefault()
@@ -104,26 +104,29 @@ const TimeReports = () => {
   }
   return (
     <div className='m-4 bg-white h-[539px] flex justify-center p-5'>
-      <Table className=''>
-        <TableHeader className='p-8'>
+      <Table className='border-separate border-spacing-y-2 w-full'>
+        <TableHeader className='p-8 '>
           <TableRow className='bg-gray-100'>
             {/**top levl headers with nested forain array of input */}
             {tableHeaders.map((header, index) => (
               <TableHead
                 key={index}
-                className={`w-1/5 ${index === 0 && 'pl-12'}`}
-                colSpan={index === tableHeaders.length - 1 ? 2 : 1}>
+                className={`w-1/5 bg-white ${index === 0 && 'pl-12'} `}
+                colSpan={index === tableHeaders.length - 1 ? 2 : 1}
+              >
+                
                 {header}
               </TableHead>
             ))}
           </TableRow>
         </TableHeader>
-        <TableBody>
+        <TableBody className='bg-white shadow-md rounded-lg p-4 mb-2'>
           {/**---1:  */}
           {orders.map((order) => (
             <React.Fragment key={order.id}>
-              {/* Main Row */}
-              <TableRow {...rowProps(order.id)}>
+              {/* < className='bg-white shadow-md rounded-lg p-4 mb-2 col-span-5'> */}
+                 {/* Main Row */}
+              <TableRow {...rowProps(order.id)} >
                 {/**top level user in information*/}
                 <UserTableHeader
                   openRows={openRows}
@@ -147,7 +150,7 @@ const TimeReports = () => {
                     return (
                       <>
                         {/* Header Row for Attributes */}
-                        <TableRow className='bg-gray-50'>
+                        <TableRow className=''>
                           {attributeEntries.map(([key, value]) => (
                             <TableCell key={key}>
                               <p className='font-bold'>{key}</p>
@@ -159,7 +162,7 @@ const TimeReports = () => {
                         {Array.from({ length: maxRows }).map((_, rowIndex) => (
                           <TableRow
                             key={rowIndex}
-                            className='bg-gray-100'>
+                            className='odd:bg-gray-100'>
                             {attributeEntries.map(([key, value]) => (
                               <TableCell key={`${value}-${rowIndex}`}>
                                 {Array.isArray(value)
@@ -174,6 +177,7 @@ const TimeReports = () => {
                   })()}
                 </>
               )}
+          
             </React.Fragment>
           ))}
         </TableBody>

@@ -18,6 +18,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
+import { Button } from '@/components/ui/button'
 const Educators = () => {
   const orders = [
     {
@@ -46,14 +47,17 @@ const Educators = () => {
     },
   ]
   return (
-    <div className='m-4 bg-white h-[699px] p-4 w-full'>
-      <div className='mt-16'>
+    <div className='m-4 bg-white h-[699px] p-5 flex justify-center mt-16'>
+    
         <Table className='w-full'>
           <TableHeader>
-            <TableRow className='grid grid-cols-3 gap-4'>
+            <TableRow className='grid grid-cols-5 gap-4'>
               <TableHead>Namn</TableHead>
               <TableHead>Efternamn</TableHead>
               <TableHead className='w-[100px]'>Email</TableHead>
+              <TableHead
+                className={`w-1/5 'pl-12'} `}
+                colSpan={2}></TableHead>
             </TableRow>
           </TableHeader>
           <TableBody className='w-full'>
@@ -62,17 +66,20 @@ const Educators = () => {
               return (
                 <TableRow
                   key={order.id}
-                  className='grid grid-cols-3 gap-4 bg-white shadow-md rounded-lg p-4 mb-2'
-                >
+                  className='grid grid-cols-5 gap-4 bg-white shadow-md rounded-lg p-4 mb-2'>
                   <TableCell>{firstName}</TableCell>
                   <TableCell>{lastName}</TableCell>
                   <TableCell className='text-center'>{email}</TableCell>
+                 <TableCell className='col-span-2 pl-9'>
+          <Button  size='sm'
+                variant='outline'  className='self start mb-2 rounded-full'> INAKTIVERA UTBILDARE FRÅN LISTA</Button>
+        </TableCell>
                 </TableRow>
               )
             })}
           </TableBody>
         </Table>
-      </div>
+   
     </div>
   )
 }
