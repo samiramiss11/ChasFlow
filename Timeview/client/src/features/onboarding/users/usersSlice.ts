@@ -98,15 +98,17 @@ const userSlice = createSlice({
       }
 
       // }
-      localStorage.setItem('users', JSON.stringify(state))
+      localStorage.setItem('selectedUser', JSON.stringify(state.selectedUser))
     },
     setSelectedCourseCode: (state, action: PayloadAction<string | null>) => {
       let newCourseCode = action.payload ?? ''
       console.log(newCourseCode)
       state.selectedCourseCode = newCourseCode //.push
       // }
-      localStorage.setItem('users', JSON.stringify(state))
-    },
+ localStorage.setItem(
+        'selectedCourseCode',
+        JSON.stringify(state.selectedCourseCode)
+      )    },
   },
 })
 
