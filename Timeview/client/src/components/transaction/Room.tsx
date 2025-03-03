@@ -8,7 +8,7 @@ import CheckboxMenu from './CheckboxMenu'
  */
 const Room = ({ roomDetails }: { roomDetails: RoomType }) => {
   return (
-    <div className='flex gap-4 justify-around  min-h-fit p-6 items-center'>
+    <div className='flex flex-wrap gap-4 justify-around  min-h-fit px-6 items-center'>
       {/**1st box */}
       <div>
         <img
@@ -18,7 +18,7 @@ const Room = ({ roomDetails }: { roomDetails: RoomType }) => {
         />
       </div>
       {/**2nd box */}
-      <div className='space-y-2'>
+      <div className='space-y-1'>
         <h6 className=''>
           {' '}
           <b>{roomDetails.title}</b>
