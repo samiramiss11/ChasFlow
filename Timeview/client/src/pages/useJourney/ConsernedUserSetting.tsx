@@ -26,6 +26,7 @@ import {
 import { removeLastTimeIntervall } from '@/features/transaction/booking/setBookings'
 import { clearIntervals } from '@/features/transaction/booking/booking'
 import { fetchConsultants, fetchCourses } from '@/features/api'
+import { USER_ROLE } from '@/utils/types'
 export const clientLoader =
   (store: ReduxStore, queryClient: any) => async () => {
     const tokenUser = store.getState().userState.user
@@ -36,16 +37,24 @@ export const clientLoader =
     console.log('cleared')
     store.dispatch(populateKonsultants(PRIVILAGED_USERS))
 
-    let consultants = []
+    let konsultantNamesMeta = []
     let courseCode = []
     try {
-      ;[consultants, courseCode] = await Promise.all([
+    const [consultantsRemote, courseCodeRemote] = await Promise.all([
         fetchConsultants(),
         fetchCourses(),
       ])
+      const consultants = consultantsRemote
+      courseCode = courseCodeRemote
+      konsultantNamesMeta = consultantsRemote.map(
+        (userWithRole: any) => userWithRole.name
+      )
+      console.log('complete')
+      store.dispatch(populateKonsultants(consultantsRemote))
+      
     } catch (error) {
       console.error('Failed to fetch data. Backend may be offline.', error)
-      consultants = ['Nan']
+      konsultantNamesMeta = ['Nan']
       courseCode = ['Nan']
       //         errors.msg = error.response.data.msg
       //     return errors
@@ -55,7 +64,11 @@ export const clientLoader =
       //   const errors = useActionData()
       // Keep consultants and courseCode empty if API calls fail
     }
-    if (!tokenUser || tokenUser.role !== 'admin') {
+    if (
+      !tokenUser ||
+      (tokenUser.role !== USER_ROLE.Manager &&
+        tokenUser.role !== USER_ROLE.Employee2)
+    ) {
       //console.log('Redirecting...')
       return redirect('/' + JOURNY_LINSK_CONSTANTS.TRANSACTION_STEP1)
     }
@@ -65,7 +78,7 @@ export const clientLoader =
     //{ products }
 
     return {
-      userMeta: consultants,
+      userMeta: konsultantNamesMeta,
       courseCodeMeta: courseCode,
     }
   }
@@ -107,7 +120,7 @@ type DataConformedMetaOfDatabase = {
 const ConsernedUserSetting = () => {
   const { userMeta, courseCodeMeta } =
     useLoaderData() as DataConformedMetaOfDatabase
-
+console.log(userMeta)
   let fetcher = useFetcher()
   if (!userMeta) {
     return (

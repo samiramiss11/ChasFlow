@@ -48,7 +48,7 @@ type FormRowSelectProps = {
   defaultValue?: string | undefined
   onChange?: (event: ChangeEvent<HTMLSelectElement>) => void
 }
-
+import { nanoid } from 'nanoid'
 const SelectInput = ({
   name,
   labelText,
@@ -76,7 +76,7 @@ const SelectInput = ({
               if (itemValue !== null) {
                 options.push(
                   <option
-                    key={itemValue}
+                    key={nanoid()}
                     value={itemValue}
                   >
                     {itemValue}

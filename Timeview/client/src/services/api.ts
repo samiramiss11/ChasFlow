@@ -61,26 +61,40 @@ export const loginUser = async (email: string, password: string) => {
   localStorage.setItem('token', token);
 };
 
-// Fetch Courses
-export const fetchCourses = async () => {
-  try {
-    const response = await api.get('/courses');
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
-};
 
-// Fetch Consultants
+
 export const fetchConsultants = async () => {
   try {
-    const response = await api.get('/consultants');
-    return response.data;  // Return the consultants data
+    const response = await api.get('/consultants')
+    const data = response.data // Return the consultants data
+
+    const frontendTypeConvertedConsultants = data.map((obj: any) => ({
+      id: obj.consultantID, // Use obj instead of consultants
+      name: obj.username,
+      role: USER_ROLE.Employee,
+    }))
+    //const FitSelectComponentConverted = consultants.map((obj) =>  obj.courseCode))
+    const konsultantNamesMeta = frontendTypeConvertedConsultants.map(
+      (userWithRole: any) => userWithRole.name
+    )
+    return konsultantNamesMeta
   } catch (error) {
-    console.error('Error fetching consultants:', error);
-    throw error;
+    console.error('Error fetching consultants:', error)
+    return error
   }
-};
+}
+
+export const fetchCourses = async () => {
+  try {
+    const response = await api.get('/courses')
+    const data = response.data
+    const courseMeta = data.map((withoutId: any) => withoutId.courseCode)
+    return courseMeta
+  } catch (error) {
+    return error
+  }
+}
+import { USER_ROLE } from '@/utils/types'
 
 // Fetch consultant by ID
 export const fetchConsultantById = async (consultantID: string) => {

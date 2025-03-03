@@ -83,17 +83,18 @@ export const fetchConsultants = async () => {
   try {
     const response = await api.get('/consultants')
     const data = response.data // Return the consultants data
-
+console.log(data)
     const frontendTypeConvertedConsultants = data.map((obj: any) => ({
       id: obj.consultantID, // Use obj instead of consultants
-      name: obj.username,
+      name: obj.
+username
+,
       role: USER_ROLE.Employee,
     }))
     //const FitSelectComponentConverted = consultants.map((obj) =>  obj.courseCode))
-    const konsultantNamesMeta = frontendTypeConvertedConsultants.map(
-      (userWithRole: any) => userWithRole.name
-    )
-    return konsultantNamesMeta
+ 
+
+    return frontendTypeConvertedConsultants
   } catch (error) {
     console.error('Error fetching consultants:', error)
     return error
