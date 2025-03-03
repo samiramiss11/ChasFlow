@@ -17,14 +17,19 @@ import AdminNavbar from '@/components/admin/AdminNavbar'
  */
 const AdminLayout = () => {
   return (
-    <div>
+        <div className="w-full min-h-screen flex flex-col">
       <AdminNavbar />
-      <div className='bg-slate-200 grid grid-cols-1 lg:grid-cols-[250px_1fr] '>
-        <BigSidebar />
-        <div className='w-full min-h-screen flex flex-col '>
-          <Outlet />
-
-          <div className='mt-[calc(100vh-90%)]'>
+      <div className="flex flex-grow">
+        {/* Sidebar */}
+        <div className="w-[250px] lg:w-[300px] bg-slate-200">
+          <BigSidebar />
+        </div>
+        {/* Main Content */}
+        <div className="flex-1 bg-red-300">
+          <div className="w-full mx-auto">
+            <Outlet />
+          </div>
+          <div className="-mt-32">
             <ChassStamp />
           </div>
         </div>

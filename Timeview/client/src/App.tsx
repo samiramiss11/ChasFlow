@@ -174,6 +174,7 @@ const router = createBrowserRouter(
       loader: dashboardLoader(),
     },
     {
+      index:true,
       loader: populateLoader(store, queryClient),
       element: <Landing />,
     },
