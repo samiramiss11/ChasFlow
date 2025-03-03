@@ -20,6 +20,10 @@ export const clientLoader = (queryClient: any) => async () => {
 
 import { JOURNY_LINSK_CONSTANTS } from '../../utils/links'
 import { Button } from '@/components/ui/button'
+/**
+ * possibly guide user, should not be the index page. mabye a user wish to operate on the batch or if is admin. to view reports.
+ * @returns 
+ */
 const FeatureHome = () => {
   return (
     <RoundedHeroWrapper>

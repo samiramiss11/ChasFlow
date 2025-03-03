@@ -32,7 +32,7 @@ export const clientLoader =
     if (!user) {
       return redirect('/login') // Redirect if user is not found
     }
-
+console.log('redirect user')
     switch (user.role) {
       case USER_ROLE.Employee:
         console.log(USER_ROLE.Employee)

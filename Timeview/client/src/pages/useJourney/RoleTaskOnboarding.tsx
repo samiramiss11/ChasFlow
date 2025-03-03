@@ -34,6 +34,13 @@ export const clientAction =
 //     return redirect(JOURNY_LINSK_CONSTANTS.ONBOARDING_STEP3)
 // }
 import { useNavigate } from 'react-router'
+/**
+ * Login with heavy refracturing to enable multiple functionallities
+ * - forgot password: reusable confirm dialog for a primary button that open a dialog opposed to a link button
+ * - the ball shaped HeroWrapper always display 2 columns. the first column contain a confirmation button that redirect bassed on role.
+ * - 
+ * @returns 
+ */
 const RoleTaskOnboarding = () => {
   const { userExistInStore } = useLoaderData() as {
     userExistInStore: ComplexUserPrivilage | boolean

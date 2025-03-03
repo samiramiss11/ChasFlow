@@ -11,6 +11,10 @@ export const clientLoader = (store: ReduxStore) => async () => {
 import ChassStamp from '../../components/Shared/ChassStamp'
 import BigSidebar from '@/components/admin/BigSidebar'
 import AdminNavbar from '@/components/admin/AdminNavbar'
+/**
+ * admin has a sidebar compare to other users that only get a hero +1 section
+ * @returns 
+ */
 const AdminLayout = () => {
   return (
     <div>

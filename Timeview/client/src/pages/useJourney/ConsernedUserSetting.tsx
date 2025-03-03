@@ -98,6 +98,12 @@ type DataConformedMetaOfDatabase = {
   userMeta: string[] | null
   courseCodeMeta: string[]
 }
+/**
+ * within a hero section display optional selection for a current user that will own a batch of bookigs.
+ * there is a link for crud of relevant selection list if there is any need of create operations.
+ * otherwise navigate programmatically
+ * @returns 
+ */
 const ConsernedUserSetting = () => {
   const { userMeta, courseCodeMeta } =
     useLoaderData() as DataConformedMetaOfDatabase

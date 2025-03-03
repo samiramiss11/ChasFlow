@@ -29,6 +29,12 @@ export const clientLoader =
   }
 import OrdersList from '@/components/transaction/OrdersList'
 import { useLoaderData } from 'react-router-dom'
+/**
+ * IS centered in a TransactionCard with a list of:
+ * 1. items
+ * 2. display the selected user with totalTime booked for the current session
+ * @returns 
+ */
 const ViewBookings = () => {
   const { allbooking, relatedUser } = useLoaderData() as OwnedBatch
   return (

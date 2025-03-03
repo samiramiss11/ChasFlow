@@ -61,6 +61,11 @@ export const clientAction =
   }
 import OnlineBooking from '@/components/transaction/OnlineBooking'
 import { Form } from 'react-router-dom'
+/**
+ * on this page popovers are displayed to construct objects from 2 form requests. 
+ * one type of formRequest come from either GroupedBookings or OnlineBooking that map the room id to toggle checkbox values
+ * @returns 
+ */
 const Bookings = () => {
   const { contextWithStaticData } = useLoaderData() as GroupedRoomResponse
   console.log(contextWithStaticData)

@@ -17,6 +17,11 @@ export const clientLoader = (store: ReduxStore) => async () => {
   return null
 }
 
+/**
+ * toggle dropdown med knapp som inte orsakar toggle.
+ * - varje array som representerar en rad mappas ut
+ * @returns 
+ */
 const TimeReports = () => {
   const orders = [
     {

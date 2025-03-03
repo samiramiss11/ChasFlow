@@ -10,6 +10,11 @@ export const clientLoader = (store: ReduxStore) => async () => {
 import { Button } from '@/components/ui/button'
 import FormInput from '@/components/FormInput'
 import { Label } from '@/components/ui/label'
+
+/**
+ * kan enbart admin byta lösenord eller ska andra personer också ha ingång till admin sidebar? + denna sida?
+ * @returns 
+ */
 const Settings = () => {
   const name = 'null'
   return (

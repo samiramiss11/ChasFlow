@@ -30,6 +30,10 @@ export const clientAction =
     return null
   }
 import { AiOutlineStop } from 'react-icons/ai'
+/**
+ * add consultant perform a create request that is posted to some endpoint
+ * @returns 
+ */
 const AddUserSettings = () => {
   const navigate = useNavigate()
   return (
