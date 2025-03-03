@@ -15,47 +15,47 @@ import FormInput from '@/components/FormInput'
  * @returns 
  */
 const Settings = () => {
-  const name = 'förnamn'
-  const efternamn = 'förnamn'
-  const email = 'förnamn'
-  const nuvarande = 'förnamn'
-  const nytt_lösen = 'förnamn'
-  const bekräfta = 'bekräfta'
+  const name = 'Förnamn';
+  const efternamn = 'Efternamn';
+  const email = 'E-post';
+  const nuvarande = 'Nuvarande lösenord';
+  const nytt_lösen = 'Nytt lösenord';
+  const bekräfta = 'Bekräfta lösenord';
 
   const columnOne = () => {
     return <div>  <div className='flex flex-col '>
           <FormInput
-            type='search'
-            label='search course'
-            name='search'
+            type='text'
+            label='Förnamn'
+            name='name'
         defaultValue={name}
         className=''
           />
         </div>
         <div className='flex flex-col '>
           <FormInput
-            type='search'
-            label='search course'
-            name='search'
-            defaultValue={name}
+            type='text'
+            label='E-post'
+            name='email'
+            defaultValue={email}
           />
       </div>
       { }
      <div>
           <div className='flex flex-col'>
           <FormInput
-            type='search'
-            label='search course'
+            type='text'
+            label='Efternamn'
           
-            name='search'
-            defaultValue={name}
+            name='lastname'
+            defaultValue={efternamn}
           />
         </div>
         <div className='flex flex-col'>
           
           <FormInput
-            type='search'
-            label='search course'
+            type='text'
+            label='Nuvarande lösenord'
             name='search'
             defaultValue={name}
           />
@@ -72,11 +72,11 @@ const Settings = () => {
 
     <div className="flex flex-col">
       <div className="flex flex-col">
-        <FormInput type="search" label="search course" name="search" defaultValue={name} />
+        <FormInput type="text" label="Nytt lösenord" name="search" defaultValue={name} />
       </div>
 
       <div className="flex flex-col">
-        <FormInput type="search" label="search course" name="search" defaultValue={name} />
+        <FormInput type="text" label="Bekräfta lösenord" name="search" defaultValue={name} />
           </div>
            {/** ✅ Button pushed to bottom */}
   <div className="flex justify-end mt-auto pb-12">

@@ -47,7 +47,7 @@ const Educators = () => {
     },
   ]
   return (
-    <div className='m-4 bg-white h-[699px] p-5 flex justify-center mt-16'>
+    <div className='m-4 bg-white h-[699px] p-5 flex justify-center '>
     
         <Table className='w-full'>
           <TableHeader>
@@ -66,7 +66,7 @@ const Educators = () => {
               return (
                 <TableRow
                   key={order.id}
-                  className='grid grid-cols-5 gap-4 bg-white shadow-md rounded-lg p-4 mb-2'>
+                  className='grid grid-cols-5 gap-4 bg-white shadow-md rounded-3xl px-4 mb-2 items-center'>
                   <TableCell>{firstName}</TableCell>
                   <TableCell>{lastName}</TableCell>
                   <TableCell className='text-center'>{email}</TableCell>

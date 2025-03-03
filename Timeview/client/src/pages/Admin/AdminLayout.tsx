@@ -21,11 +21,11 @@ const AdminLayout = () => {
       <AdminNavbar />
       <div className="flex flex-grow">
         {/* Sidebar */}
-        <div className="w-[250px] lg:w-[300px] bg-slate-200">
+        <div className="w-[250px] lg:w-[300px] ">
           <BigSidebar />
         </div>
-        {/* Main Content */}
-        <div className="flex-1 bg-red-300">
+        {/* Main Content bg-[#EFF4FA] */}
+        <div className="flex-1 bg-slate-300 ">
           <div className="w-full mx-auto">
             <Outlet />
           </div>
