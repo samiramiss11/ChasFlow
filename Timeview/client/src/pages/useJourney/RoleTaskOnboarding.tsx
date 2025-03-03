@@ -130,10 +130,10 @@ const RoleTaskOnboarding = () => {
     const confirmButton = (
       <Link
         to={
-          '../' +
-          JOURNY_LINSK_CONSTANTS.ONBOARDING_STEP1 +
+          '../../' +
+          JOURNY_LINSK_CONSTANTS.ADMIN_STEP0 +
           '/' +
-          JOURNY_LINSK_CONSTANTS.ONBOARDING_STEP3
+          JOURNY_LINSK_CONSTANTS.ADMIN_STEP2
         }>
         <Button
           size='sm'

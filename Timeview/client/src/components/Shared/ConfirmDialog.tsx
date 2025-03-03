@@ -37,7 +37,7 @@ const ConfirmDialog = ({
     
       </DialogTrigger>
       <DialogContent className='bg-slate-200 px-7 pt-12 max-w-[813px] h-[462px]  rounded-md '>
-        <DialogHeader className=' px-7 py-12 flex flex-col gap-5 '>
+        <DialogHeader className=' px-7 pt-12 flex flex-col gap-5 '>
           <div className='flex flex-col items-center'>
             <div>
               <DialogTitle className=''>
@@ -52,8 +52,10 @@ const ConfirmDialog = ({
             </div>
           </div>
         </DialogHeader>
-        {children && children}
-        <div className='flex  justify-between items-center  mt-12 pt-12'>
+        <div className='flex-grow px-7 min-h-[20px]'>
+          {children &&  children }
+          </div>
+        <div className='flex  justify-between items-center  mt-10 pt-10'>
           <DialogClose asChild>
             <Button
               size='sm'
