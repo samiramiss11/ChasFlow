@@ -59,10 +59,32 @@ export const fetchAdminProfile = async () => {
   return response.data
 }
 
-export const loginUser = async (email: string, password: string) => {
-  const response = await api.post('/auth/login-page', { email, password })
-  const { token } = response.data
-  localStorage.setItem('token', token)
+export const loginUser = async ({
+  email,
+  password,
+}: {
+  email: string
+  password: string
+}) => {
+   try {
+    const response = await api.post('/auth/login-page', { email, password })
+
+    if (!response.data || !response.data.token) {
+      throw new Error('Invalid response from server')
+    }
+
+    const { token } = response.data
+    console.log('Login Response:', response.data)
+
+    localStorage.setItem('token', token)
+    return token
+  } catch (error: any) {
+    console.error('Login failed:', error.response?.data || error.message)
+    return null
+    // return Error(
+    //   error.response?.data?.message || 'Login failed. Please try again.'
+    // )
+  }
 }
 
 // Fetch Courses

@@ -65,8 +65,10 @@ const getUserFromLocalStorage = (): SetComplexUserPrivilages => {
 
 const initialState: UserState = {
   users: getUserFromLocalStorage(),
-  selectedUser: null,
-  selectedCourseCode: null,
+  selectedUser: JSON.parse(localStorage.getItem('selectedUser') || 'null'),
+  selectedCourseCode: JSON.parse(
+    localStorage.getItem('selectedCourseCode') || 'null'
+  ),
   //participants: getParticipantsFromLocalStorage() || [PRIVILAGED_USERS[2]],
 }
 

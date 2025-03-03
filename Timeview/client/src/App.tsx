@@ -172,12 +172,18 @@ const router = createBrowserRouter(
       element: <DashboardLayout />,
       errorElement: <Error />,
       loader: dashboardLoader(),
+       children: [
+        {
+          index: true,
+          loader: populateLoader(store, queryClient),
+          element: <Landing />,
+        },
+        onboardingPrefix,
+        transactionPrefix,
+        adminPrefix,
+      ],
     },
-    {
-      index:true,
-      loader: populateLoader(store, queryClient),
-      element: <Landing />,
-    },
+
     { path: '/login', element: <LoginPage /> },
     { path: '/admin/*', element: <AdminPage /> },
     { path: '*', element: <NotFoundPage /> },
@@ -188,10 +194,6 @@ const router = createBrowserRouter(
     { path: '/booking-confirmation', element: <BookingConfirmation /> },
     { path: '/profile-setting', element: <ProfileSetting /> },
     { path: '/consultant', element: <Consultant /> },
-
-    onboardingPrefix,
-    transactionPrefix,
-    adminPrefix,
 
     {
       path: '*', // Catch-all route

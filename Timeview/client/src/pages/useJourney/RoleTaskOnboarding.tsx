@@ -13,6 +13,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { ReduxStore } from '@/lib/store'
 import { ComplexUserPrivilage } from '@/features/onboarding/users/usersSlice'
+import { loginUser as remoteLogin } from '@/features/api'
 export const clientLoader = (store: ReduxStore) => async () => {
   const tokenUser = store.getState().userState.user
 
@@ -23,11 +24,21 @@ export const clientAction =
   (store: ReduxStore): ActionFunction =>
   async ({ request }) => {
     const formData = await request.formData()
-    const data = Object.fromEntries(formData)
-    console.log(data)
 
-    store.dispatch(loginUser({ user: USER, jwt: '...', token: '...' }))
-    return null
+    const data = Object.fromEntries(formData.entries()) as Record<
+      string,
+      string
+    >
+    const { email, password } = data
+
+    // Call remoteLogin with the correct type
+    const user: string = await remoteLogin({ email, password })
+    console.log(user, 'user response')
+
+    store.dispatch(
+      loginUser({ user: USER, jwt: user ? ':)' : '...', token: user })
+    )
+    return redirect('../' + JOURNY_LINSK_CONSTANTS.ONBOARDING_STEP3)
   }
 
 // export const clientAction = ()=>{
