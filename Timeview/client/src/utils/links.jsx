@@ -10,7 +10,7 @@ export const JOURNY_LINSK_CONSTANTS = {
   TRANSACTION_STEP1: 'boka',
   TRANSACTION_STEP2: 'bokningar',
   TRANSACTION_STEP3: 'checkout',
-  ADMIN_STEP0: 'admin',
+  ADMIN_STEP0: 'admin-page',
   ADMIN_STEP1: 'Bokningar',
   ADMIN_STEP2: 'Inställningar',
   ADMIN_STEP3: 'Tidsrapportering',

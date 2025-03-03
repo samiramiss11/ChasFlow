@@ -224,13 +224,14 @@ const App = (): JSX.Element => {
       </Provider>
     </AuthProvider> */
   return (
-    <Router>
-      <AuthProvider>
-        <Provider store={store}>
-          <BookingProvider>
-            <ProfileProvider>
-              <QueryClientProvider client={queryClient}>
-                <Navbar />
+    // <Router>
+    //   <AuthProvider>
+    <Provider store={store}>
+      <BookingProvider>
+        <ProfileProvider>
+          <QueryClientProvider client={queryClient}>
+            <RouterProvider router={router} />
+            {/* <Navbar />
                 <Routes>
                   <Route
                     path='/login'
@@ -273,13 +274,13 @@ const App = (): JSX.Element => {
                     element={<Consultant />}
                   />
                 </Routes>
-                <Footer />
-              </QueryClientProvider>
-            </ProfileProvider>
-          </BookingProvider>
-        </Provider>
-      </AuthProvider>
-    </Router>
+                <Footer /> */}
+          </QueryClientProvider>
+        </ProfileProvider>
+      </BookingProvider>
+    </Provider>
+    //   </AuthProvider>
+    // </Router>
   )
 }
 
