@@ -30,31 +30,31 @@ const ConfirmDialog = ({
 }: ConfirmationProps) => {
   return (
     <Dialog modal={false}>
-      <DialogTrigger>
-        <div className='flex align-items   items-center'>
+      <DialogTrigger asChild>
+     
           {/* <Link to={'../' + JOURNY_LINSK_CONSTANTS.ONBOARDING_STEP1}> */}
           {textValues.trigger}
-        </div>
+    
       </DialogTrigger>
       <DialogContent className='bg-slate-200 px-7 pt-12 max-w-[813px] h-[462px]  rounded-md '>
         <DialogHeader className=' px-7 py-12 flex flex-col gap-5 '>
           <div className='flex flex-col items-center'>
             <div>
               <DialogTitle className=''>
-                <p>
+             
                   <b>{textValues.title}</b>
-                </p>
+              
               </DialogTitle>
               <DialogDescription className=''>
                 {' '}
-                <p>{textValues.description}</p>
+            {textValues.description}
               </DialogDescription>
             </div>
           </div>
         </DialogHeader>
         {children && children}
         <div className='flex  justify-between items-center  mt-12 pt-12'>
-          <DialogClose>
+          <DialogClose asChild>
             <Button
               size='sm'
               variant='default'
