@@ -16,12 +16,15 @@ import { Label } from '@/components/ui/label'
  * @returns 
  */
 const Settings = () => {
-  const name = 'null'
-  return (
-    <div className='m-4 bg-white'>
-      <div className='grid grid-cols-2 gap-4'>
-        {/** Namn */}
-        <div className='flex flex-col'>
+  const name = 'förnamn'
+  const efternamn = 'förnamn'
+  const email = 'förnamn'
+  const nuvarande = 'förnamn'
+  const nytt_lösen = 'förnamn'
+  const bekräfta = 'bekräfta'
+
+  const columnOne = () => {
+    return <div>  <div className='flex flex-col '>
           <Label htmlFor='namn'>Namn</Label>
           <FormInput
             type='search'
@@ -30,15 +33,69 @@ const Settings = () => {
             defaultValue={name}
           />
         </div>
+        <div className='flex flex-col '>
+          <Label htmlFor='namn'>Namn</Label>
+          <FormInput
+            type='search'
+            label='search course'
+            name='search'
+            defaultValue={name}
+          />
       </div>
-      <Button
-        size='sm'
-        variant='default'
-        className='self-end mb-2 rounded-full chasBlue'
-      >
-        SKAPA NYTT LÖSENORD
-      </Button>
+      { }
+     <div>
+          <div className='flex flex-col'>
+          <Label htmlFor='namn'>Namn</Label>
+          <FormInput
+            type='search'
+            label='search course'
+          
+            name='search'
+            defaultValue={name}
+          />
+        </div>
+        <div className='flex flex-col'>
+          <Label htmlFor='namn'>Namn</Label>
+          <FormInput
+            type='search'
+            label='search course'
+            name='search'
+            defaultValue={name}
+          />
+        </div></div>
     </div>
+  }
+  return (
+    <div className="m-4 bg-white rounded-lg p-8 flex flex-col h-[490px]">
+  <h4>Skapa nytt lösenord</h4>
+
+  {/** ✅ Grid takes up remaining space */}
+  <div className="grid grid-cols-2 gap-4 w-[60%] flex-grow">
+    {columnOne()}
+
+    <div className="flex flex-col">
+      <div className="flex flex-col">
+        <Label htmlFor="namn">Namn</Label>
+        <FormInput type="search" label="search course" name="search" defaultValue={name} />
+      </div>
+
+      <div className="flex flex-col">
+        <Label htmlFor="namn">Namn</Label>
+        <FormInput type="search" label="search course" name="search" defaultValue={name} />
+          </div>
+           {/** ✅ Button pushed to bottom */}
+  <div className="flex justify-end mt-auto pb-12">
+    <Button size="sm" variant="default" className="rounded-full chasBlue">
+      SKAPA NYTT LÖSENORD
+    </Button>
+  </div>
+        </div>
+        
+  </div>
+
+ 
+</div>
+
   )
 }
 
