@@ -1,11 +1,11 @@
 import React from 'react'
 import { Outlet } from 'react-router'
-import { RoundBallPositioningWrapper } from '@/components/Shared'
+import { RoundBallPositioningWrapper } from '../../components/Shared'
 /**
  * move the ball position to the
  * @returns
  */
-import CentralizedBanner from '@/components/Shared/CenteralizedBanner'
+import CentralizedBanner from '../../components/Shared/CenteralizedBanner'
 const UserJourneyLayout = () => {
   const heroContent = {
     hero: 'ChasPass',

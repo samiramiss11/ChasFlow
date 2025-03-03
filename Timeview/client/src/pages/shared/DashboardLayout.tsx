@@ -1,10 +1,10 @@
 import { Outlet, useNavigation } from 'react-router'
 
-import { Footer } from '@/components/Shared'
+import { Footer } from '../../components/Shared'
 //Navbar ,
 import { createContext, useContext } from 'react'
 
-import { Loading, Header } from '@/components/Shared'
+import { Loading, Header } from '../../components/Shared'
 import { useLocation } from 'react-router'
 export const clientLoader = () => async () => {
   return null
@@ -16,7 +16,7 @@ interface DashboardContextType {
 const DashboardContext = createContext<DashboardContextType | undefined>(
   undefined
 )
-import { JOURNY_LINSK_CONSTANTS } from '@/utils/links'
+import { JOURNY_LINSK_CONSTANTS } from '../../utils/links'
 const DashboardLayout = () => {
   const navigation = useNavigation()
   const location = useLocation()

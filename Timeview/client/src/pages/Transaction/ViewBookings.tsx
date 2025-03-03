@@ -1,5 +1,5 @@
 import React from 'react'
-import TransactionCard from '@/components/transaction/TransactionCard'
+import TransactionCard from '../../components/transaction/TransactionCard'
 import Confirm from '../../components/transaction/Confirm'
 import { ReduxStore } from '@/lib/store'
 import { OwnedBatch } from '@/features/transaction/booking/setBookings'

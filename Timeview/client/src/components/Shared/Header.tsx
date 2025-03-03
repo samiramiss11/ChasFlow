@@ -4,9 +4,9 @@ import { useAppDispatch, useAppSelector } from '@/lib/hooks'
 import { useQueryClient } from '@tanstack/react-query'
 
 import { RootState } from '@/lib/store'
-import { links } from '@/utils/links'
+import { links } from '../../utils/links'
 import Logo from './Logo'
-import { JOURNY_LINSK_CONSTANTS } from '@/utils/links'
+import { JOURNY_LINSK_CONSTANTS } from '../../utils/links'
 const Header = () => {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
@@ -41,8 +41,7 @@ const Header = () => {
               </p>
               <button
                 className='btn btn-xs btn-outline btn-primary '
-                onClick={handleLogout}
-              >
+                onClick={handleLogout}>
                 logout
               </button>
             </div>
@@ -53,8 +52,7 @@ const Header = () => {
                   <Link
                     key={link.id}
                     to={link.path}
-                    className='link link-hover text-xs sm:text-sm'
-                  >
+                    className='link link-hover text-xs sm:text-sm'>
                     {link.text}
                   </Link>
                 )

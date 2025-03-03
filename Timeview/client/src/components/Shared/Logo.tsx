@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react'
 import main from 'assets/chas-academy-logo.png'
 import { Link } from 'react-router-dom'
-import { JOURNY_LINSK_CONSTANTS } from '@/utils/links'
+import { JOURNY_LINSK_CONSTANTS } from '../../utils/links'
 
 const Logo = ({ isTextBased, ...props }: any) => {
   return (
@@ -10,8 +10,7 @@ const Logo = ({ isTextBased, ...props }: any) => {
         to={
           `/${JOURNY_LINSK_CONSTANTS.ONBOARDING_STEP1}/` +
           JOURNY_LINSK_CONSTANTS.ONBOARDING_STEP2
-        }
-      >
+        }>
         {' '}
         {!isTextBased ? (
           <img

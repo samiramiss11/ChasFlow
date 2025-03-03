@@ -1,6 +1,6 @@
 import React from 'react'
 import { useLocation } from 'react-router'
-import { JOURNY_LINSK_CONSTANTS } from '@/utils/links'
+import { JOURNY_LINSK_CONSTANTS } from '../../utils/links'
 
 type SectionLayoutProps = {
   confirm_success?: boolean

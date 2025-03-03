@@ -9,7 +9,7 @@ interface BannerProps {
   }
 }
 import { useLocation } from 'react-router'
-import { JOURNY_LINSK_CONSTANTS } from '@/utils/links'
+import { JOURNY_LINSK_CONSTANTS } from '../../utils/links'
 const CenteralizedBanner: React.FC<BannerProps> = ({
   children,
   heroContent,

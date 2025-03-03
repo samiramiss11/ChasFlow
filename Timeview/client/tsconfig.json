@@ -7,6 +7,8 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
+    "baseUrl": "./",
+    "paths": { "@/*": ["src/*"] },
     "forceConsistentCasingInFileNames": true,
     "module": "esnext",
     "moduleResolution": "node",
@@ -15,8 +17,6 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src/**/*",
-  "vite-env.d.ts"
-  ],
+  "include": ["src/**/*", "vite-env.d.ts"],
   "exclude": ["node_modules", "dist"]
 }

@@ -4,8 +4,8 @@ import {
   RoundedHeroWrapper,
   ResponsiveBallContent,
   ConfirmDialog,
-} from '@/components/Shared'
-import { JOURNY_LINSK_CONSTANTS } from '@/utils/links'
+} from '../../components/Shared'
+import { JOURNY_LINSK_CONSTANTS } from '../../utils/links'
 import { Button } from '@/components/ui/button'
 import { Link, Form, redirect } from 'react-router-dom'
 import { ActionFunction, useLoaderData } from 'react-router'
@@ -72,8 +72,7 @@ const RoleTaskOnboarding = () => {
                 toggleUser(true)
               }
               navigate('../' + JOURNY_LINSK_CONSTANTS.ONBOARDING_STEP3)
-            }}
-          >
+            }}>
             Bekräfta
           </Button>
         </div>
@@ -117,13 +116,11 @@ const RoleTaskOnboarding = () => {
           JOURNY_LINSK_CONSTANTS.ONBOARDING_STEP1 +
           '/' +
           JOURNY_LINSK_CONSTANTS.ONBOARDING_STEP3
-        }
-      >
+        }>
         <Button
           size='sm'
           variant='outline'
-          className='mb-2 rounded-full chasBlue w-40 text-center whitespace-nowrap'
-        >
+          className='mb-2 rounded-full chasBlue w-40 text-center whitespace-nowrap'>
           Byt utbildare
         </Button>
       </Link>
@@ -133,8 +130,7 @@ const RoleTaskOnboarding = () => {
       <>
         <ConfirmDialog
           textValues={textValues}
-          confirmButton={confirmButton}
-        >
+          confirmButton={confirmButton}>
           {linkChild}
         </ConfirmDialog>
       </>
@@ -145,8 +141,7 @@ const RoleTaskOnboarding = () => {
       <HeroLayout>
         <Form
           className=' pt-8'
-          method='POST'
-        >
+          method='POST'>
           <ResponsiveBallContent>
             {/** column 1:  grid-cols-1 md:grid-cols-2 : did not take equal width*/}
             <div className='flex flex-col w-full'>{columnOne()}</div>

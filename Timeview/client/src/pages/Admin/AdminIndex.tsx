@@ -1,10 +1,10 @@
-import React from 'react';
-import { useEffect } from 'react';
-import { JOURNY_LINSK_CONSTANTS } from '../../utils/links';
-import { useNavigate, useLocation } from 'react-router';
+import React from 'react'
+import { useEffect } from 'react'
+import { JOURNY_LINSK_CONSTANTS } from '../../utils/links'
+import { useNavigate, useLocation } from 'react-router'
 const AdminIndex = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
+  const navigate = useNavigate()
+  const location = useLocation()
 
   useEffect(() => {
     // Perform navigation in useEffect to avoid rendering issues
@@ -14,10 +14,10 @@ const AdminIndex = () => {
         state: { from: location.pathname }, // Pass serializable state
         replace: true,
       }
-    );
-  }, [navigate, location.pathname]);
+    )
+  }, [navigate, location.pathname])
 
-  return null; // Prevent rendering anything since we're redirecting
-};
+  return null // Prevent rendering anything since we're redirecting
+}
 
-export default AdminIndex;
+export default AdminIndex

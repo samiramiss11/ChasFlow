@@ -2,7 +2,7 @@ import {
   HeroLayout,
   RoundedHeroWrapper,
   RoundBallPositioningWrapper,
-} from '@/components/Shared'
+} from '../../components/Shared'
 import { Link } from 'react-router-dom'
 // const featuredProductsQuery = {
 //   queryKey: [''],
@@ -18,7 +18,7 @@ export const clientLoader = (queryClient: any) => async () => {
   return null
 }
 
-import { JOURNY_LINSK_CONSTANTS } from '@/utils/links'
+import { JOURNY_LINSK_CONSTANTS } from '../../utils/links'
 import { Button } from '@/components/ui/button'
 const FeatureHome = () => {
   return (
@@ -28,15 +28,13 @@ const FeatureHome = () => {
           <Button
             size='sm'
             variant='default'
-            className='self-end mb-2 rounded-full chasBlue'
-          >
+            className='self-end mb-2 rounded-full chasBlue'>
             <Link to={JOURNY_LINSK_CONSTANTS.ONBOARDING_STEP2}>Boka Rum</Link>
           </Button>
           <Button
             size='sm'
             variant='default'
-            className='self-end mb-2 rounded-full chasBlue'
-          >
+            className='self-end mb-2 rounded-full chasBlue'>
             {' '}
             <Link to={'../' + JOURNY_LINSK_CONSTANTS.TRANSACTION_STEP1}>
               Redigera Rokade Rum

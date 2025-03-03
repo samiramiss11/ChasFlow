@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button'
-import { JOURNY_LINSK_CONSTANTS } from '@/utils/links'
+import { JOURNY_LINSK_CONSTANTS } from '../../utils/links'
 import {
   Dialog,
   DialogContent,
@@ -16,8 +16,7 @@ const CheckoutDialog = () => {
         <Button
           size='sm'
           variant='default'
-          className='self-start mb-2 rounded-full chasBlue ml-[100px]'
-        >
+          className='self-start mb-2 rounded-full chasBlue ml-[100px]'>
           {/* <Link to={'../' + JOURNY_LINSK_CONSTANTS.ONBOARDING_STEP1}> */}
           BEKRÄFTA BOKNING
         </Button>
@@ -45,13 +44,11 @@ const CheckoutDialog = () => {
               '/' +
               JOURNY_LINSK_CONSTANTS.ONBOARDING_STEP3
             }
-            className='text-decoration-none'
-          >
+            className='text-decoration-none'>
             <Button
               size='sm'
               variant='default'
-              className='self-end mb-2 rounded-full chasBlue ml-[100px]'
-            >
+              className='self-end mb-2 rounded-full chasBlue ml-[100px]'>
               TILLBAKA TILL VÄLJ UTBILDARE
             </Button>
           </Link>

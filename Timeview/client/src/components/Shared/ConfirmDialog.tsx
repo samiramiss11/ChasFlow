@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react'
 //import * as Dialog from '@radix-ui/react-dialog'
 import { Button } from '@/components/ui/button'
-import { JOURNY_LINSK_CONSTANTS } from '@/utils/links'
+import { JOURNY_LINSK_CONSTANTS } from '../../utils/links'
 import {
   Dialog,
   DialogContent,
@@ -58,8 +58,7 @@ const ConfirmDialog = ({
             <Button
               size='sm'
               variant='default'
-              className=' mb-2 rounded-full chasBlue w-40 px-6 text-center whitespace-nowrap'
-            >
+              className=' mb-2 rounded-full chasBlue w-40 px-6 text-center whitespace-nowrap'>
               {/* <Link to={'../' + JOURNY_LINSK_CONSTANTS.ONBOARDING_STEP1}> */}
               Avbryt
             </Button>

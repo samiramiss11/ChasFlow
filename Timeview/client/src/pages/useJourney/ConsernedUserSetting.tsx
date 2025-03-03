@@ -7,7 +7,7 @@ import {
   HeroLayout,
   RoundedHeroWrapper,
   ResponsiveBallContent,
-} from '@/components/Shared'
+} from '../../components/Shared'
 import {
   useLoaderData,
   useFetcher,
@@ -88,7 +88,7 @@ export const clientAction =
 
 import FormSelect from '@/components/SelectInput'
 import { Button } from '@/components/ui/button'
-import { JOURNY_LINSK_CONSTANTS } from '@/utils/links'
+import { JOURNY_LINSK_CONSTANTS } from '../../utils/links'
 
 /**
  * note user is not used for map operation
@@ -126,8 +126,7 @@ const ConsernedUserSetting = () => {
           <div>
             <fetcher.Form
               className='pt-8'
-              method='POST'
-            >
+              method='POST'>
               <ResponsiveBallContent>
                 {/* col 1 */}
                 <div className='flex flex-col gap-4'>
@@ -166,8 +165,7 @@ const ConsernedUserSetting = () => {
                     to={
                       '../' + JOURNY_LINSK_CONSTANTS.ONBOARDING_ALTERNATIV_STEP2
                     }
-                    className=''
-                  >
+                    className=''>
                     <b>
                       <u> Lägg till ny utbildare?</u>
                     </b>{' '}

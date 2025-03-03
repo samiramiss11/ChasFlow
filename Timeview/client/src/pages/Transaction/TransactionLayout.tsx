@@ -9,16 +9,16 @@ export const clientLoader = (store: ReduxStore) => async () => {
 }
 import { Link } from 'react-router-dom'
 import { IoIosArrowRoundBack } from 'react-icons/io'
-import { JOURNY_LINSK_CONSTANTS } from '@/utils/links'
+import { JOURNY_LINSK_CONSTANTS } from '../../utils/links'
 import {
   HeroLayout,
   RoundedHeroWrapper,
   RoundedBallSlicePositionWrapper,
   CenteralizedBanner,
-} from '@/components/Shared'
+} from '../../components/Shared'
 import { useLocation } from 'react-router'
-import {} from '@/components/Shared'
-import ConfirmDialog from '@/components/Shared/ConfirmDialog'
+import {} from '../../components/Shared'
+import ConfirmDialog from '../../components/Shared/ConfirmDialog'
 import { Button } from '@/components/ui/button'
 /**
  * the navigation is mostly contained in the page sections, except for one navigation from the index page within the prefix group
@@ -33,8 +33,7 @@ const TransactionLayout = () => {
         <Button
           size='sm'
           variant='default'
-          className='self-start mb-2 rounded-full chasBlue ml-[100px]'
-        >
+          className='self-start mb-2 rounded-full chasBlue ml-[100px]'>
           Byt utbildare
         </Button>
       ),
@@ -49,13 +48,11 @@ const TransactionLayout = () => {
           JOURNY_LINSK_CONSTANTS.ONBOARDING_STEP1 +
           '/' +
           JOURNY_LINSK_CONSTANTS.ONBOARDING_STEP3
-        }
-      >
+        }>
         <Button
           size='sm'
           variant='outline'
-          className='mb-2 rounded-full chasBlue w-40 text-center whitespace-nowrap'
-        >
+          className='mb-2 rounded-full chasBlue w-40 text-center whitespace-nowrap'>
           Byt utbildare
         </Button>
       </Link>

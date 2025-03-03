@@ -71,7 +71,7 @@ export const clientLoader =
  * currently the component is bundled and sent to client before redirect
  * @returns
  */
-import { JOURNY_LINSK_CONSTANTS } from '@/utils/links'
+import { JOURNY_LINSK_CONSTANTS } from '../../utils/links'
 const Landing = () => {
   const { meta } = useLoaderData() as any
   const navigate = useNavigate()

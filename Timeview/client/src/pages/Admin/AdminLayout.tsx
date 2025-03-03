@@ -8,7 +8,7 @@ export const clientLoader = (store: ReduxStore) => async () => {
   store.getState().userState.user
   return null
 }
-import ChassStamp from '@/components/Shared/ChassStamp'
+import ChassStamp from '../../components/Shared/ChassStamp'
 import BigSidebar from '@/components/admin/BigSidebar'
 import AdminNavbar from '@/components/admin/AdminNavbar'
 const AdminLayout = () => {

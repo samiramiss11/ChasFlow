@@ -3,7 +3,7 @@ import { NavLink, Link } from 'react-router-dom'
 
 import { useLocation } from 'react-router'
 import NextLinkToBodyFactory from '@/utils/factories/NextLinkToBodyFactory'
-import { JOURNY_LINSK_CONSTANTS } from '@/utils/links'
+import { JOURNY_LINSK_CONSTANTS } from '../../utils/links'
 import { Button } from '@/components/ui/button'
 /**
  * 25-01-28
@@ -47,14 +47,12 @@ const Confirm = () => {
           ) : (
             <Link
               to={finalLink}
-              className='text-decoration-none'
-            >
+              className='text-decoration-none'>
               <Button
                 size='sm'
                 variant='default'
                 className='self-end mb-2 rounded-full '
-                asChild
-              >
+                asChild>
                 <span>{nextPageInfo.buttons[0].text}</span>
               </Button>
             </Link>
@@ -68,13 +66,11 @@ const Confirm = () => {
             {/**don't to='../', its good to avoid relative path to avoid trailing path => reduce checks */}
             <NavLink
               to={'/' + JOURNY_LINSK_CONSTANTS.TRANSACTION_STEP1}
-              className='text-decoration-none'
-            >
+              className='text-decoration-none'>
               <Button
                 size='sm'
                 variant='outline'
-                className='self start mb-2 rounded-full'
-              >
+                className='self start mb-2 rounded-full'>
                 {nextPageInfo.buttons[1].text}
               </Button>
             </NavLink>

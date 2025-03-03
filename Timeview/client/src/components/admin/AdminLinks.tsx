@@ -1,5 +1,5 @@
 import React from 'react'
-import { sideBar_links } from '@/utils/links'
+import { sideBar_links } from '../../utils/links'
 import { Link } from 'react-router-dom'
 const AdminLinks = () => {
   return (
@@ -9,8 +9,7 @@ const AdminLinks = () => {
           <li key={link.path}>
             <Link
               to={link.path}
-              className='capitalize'
-            >
+              className='capitalize'>
               {link.label}
             </Link>
           </li>
