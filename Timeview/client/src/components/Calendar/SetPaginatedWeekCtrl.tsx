@@ -22,7 +22,7 @@ import { cn } from '@/lib/utils'
 const SetPaginatedWeekCtrl = () => {
   const { search, pathname } = useLocation()
   //const numOfPages = 20 / usually from backend page offset pagination
-  const numOfWeeksDisplayed = 20
+  const numOfWeeksDisplayed = 10
   const numOfWeeks = 52
   const pages = Array.from({ length: numOfWeeks }, (_, index) => index + 1)
   //const page = 1 , page offset pagination usually give this.
@@ -32,6 +32,8 @@ const SetPaginatedWeekCtrl = () => {
   if (numOfWeeks < 2) return null
 
   // Slice only the portion of weeks to display
+
+
   const displayedWeeks = pages.slice(
     pageOffset,
     pageOffset + numOfWeeksDisplayed
@@ -70,19 +72,28 @@ const SetPaginatedWeekCtrl = () => {
   // })
   // console.log(prevUrl, nextUrl)
 
-  const handlePrev = () => {
-    if (pageOffset > 0) {
-      setPageOffset((prev) => prev - numOfWeeksDisplayed)
-      setCurrentPage(pageOffset) // Set to the first week of the new batch
-    }
-  }
+ // Ensure at least 10 pages are displayed
+  const maxOffset = numOfWeeks - numOfWeeksDisplayed;
 
   const handleNext = () => {
-    if (pageOffset + numOfWeeksDisplayed < numOfWeeks) {
-      setPageOffset((prev) => prev + numOfWeeksDisplayed)
-      setCurrentPage(pageOffset + numOfWeeksDisplayed + 1) // Set to the first week of the new batch
-    }
+   if (pageOffset + numOfWeeksDisplayed < numOfWeeks) {
+    setPageOffset((prevOffset) => {
+      const newOffset = Math.min(prevOffset + numOfWeeksDisplayed, maxOffset);
+      setCurrentPage(newOffset + 1); // Set current page to first item in new range
+      return newOffset;
+    });
   }
+  };
+console.log(pageOffset, 'page-offset')
+const handlePrev = () => {
+  if (pageOffset > 0) {
+    setPageOffset((prevOffset) => {
+      const newOffset = Math.max(prevOffset - numOfWeeksDisplayed, 0);
+      setCurrentPage(newOffset + 1); // Update current page to first item in range
+      return newOffset;
+    });
+  }
+};
   return (
     <>
       <input
@@ -101,12 +112,10 @@ const SetPaginatedWeekCtrl = () => {
             type='button'
             onClick={handlePrev}
             disabled={currentPage === 1}
-            className={cn(
-              'flex items-center gap-1 px-3 py-2 rounded text-white',
-              currentPage === 1
-                ? 'opacity-50 cursor-not-allowed'
-                : 'hover:bg-gray-100'
-            )}
+           className={cn(
+  'flex items-center gap-1 px-3 py-2 rounded text-white',
+  currentPage === 1 ? 'pointer-events-none opacity-50' : 'hover:bg-gray-100'
+)}
             aria-label='Previous Page'
           >
             <ChevronLeft className='h-4 w-4' />
@@ -123,7 +132,7 @@ const SetPaginatedWeekCtrl = () => {
           <button
             type='button'
             onClick={handleNext}
-            disabled={currentPage === numOfWeeks}
+            disabled={pageOffset >= maxOffset}
             className={cn(
               'flex items-center gap-1 px-3 py-2  rounded text-white',
               currentPage === 41

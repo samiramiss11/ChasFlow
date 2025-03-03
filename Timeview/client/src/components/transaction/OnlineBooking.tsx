@@ -6,7 +6,7 @@ const OnlineBooking = () => {
       <div className='p-8'>
         <h5 className='font-bold'>Online</h5>
       </div>
-      <div className='max-w-[50%] mx-auto'>
+      <div className='max-w-[60%] mx-auto'>
         {' '}
         <Room roomDetails={onlineRooms} />
       </div>

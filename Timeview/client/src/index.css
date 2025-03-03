@@ -291,9 +291,9 @@ ul {
 .btn-block {
   width: 100%;
 }
-button:disabled {
+/* button:disabled {
   cursor: wait;
-}
+} */
 .danger-btn {
   color: var(--red-dark);
   background: var(--red-light);
