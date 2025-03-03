@@ -1,49 +1,49 @@
-// AuthContext.tsx keep this
-import React, { createContext, useState, useContext, ReactNode } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { loginUser } from '../services/api' // API to authenticate the user
+// // AuthContext.tsx keep this
+// import React, { createContext, useState, useContext, ReactNode } from 'react'
+// import { useNavigate } from 'react-router-dom'
+// import { loginUser } from '../services/api' // API to authenticate the user
 
-interface AuthContextType {
-  isAuthenticated: boolean
-  login: (email: string, password: string) => Promise<void>
-  logout: () => void
-}
+// interface AuthContextType {
+//   isAuthenticated: boolean
+//   login: (email: string, password: string) => Promise<void>
+//   logout: () => void
+// }
 
-const defaultValue: AuthContextType = {
-  isAuthenticated: false,
-  login: async () => {},
-  logout: () => {},
-}
+// const defaultValue: AuthContextType = {
+//   isAuthenticated: false,
+//   login: async () => {},
+//   logout: () => {},
+// }
 
-export const AuthContext = createContext<AuthContextType>(defaultValue)
+// export const AuthContext = createContext<AuthContextType>(defaultValue)
 
-export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [authState, setAuthState] = useState(defaultValue)
-  const navigate = useNavigate()
+// export const AuthProvider = ({ children }: { children: ReactNode }) => {
+//   const [authState, setAuthState] = useState(defaultValue)
+//   const navigate = useNavigate()
 
-  const login = async (email: string, password: string) => {
-    try {
-      await loginUser(email, password) // Call login API
-      setAuthState({ ...authState, isAuthenticated: true })
-      navigate('/admin') // Redirect to AdminPage
-    } catch (error) {
-      console.error('Login failed:', error)
-    }
-  }
+//   const login = async (email: string, password: string) => {
+//     try {
+//       await loginUser(email, password) // Call login API
+//       setAuthState({ ...authState, isAuthenticated: true })
+//       navigate('/admin') // Redirect to AdminPage
+//     } catch (error) {
+//       console.error('Login failed:', error)
+//     }
+//   }
 
-  const logout = () => {
-    localStorage.removeItem('token')
-    setAuthState({ ...authState, isAuthenticated: false })
-  }
+//   const logout = () => {
+//     localStorage.removeItem('token')
+//     setAuthState({ ...authState, isAuthenticated: false })
+//   }
 
-  return (
-    <AuthContext.Provider value={{ ...authState, login, logout }}>
-      {children}
-    </AuthContext.Provider>
-  )
-}
+//   return (
+//     <AuthContext.Provider value={{ ...authState, login, logout }}>
+//       {children}
+//     </AuthContext.Provider>
+//   )
+// }
 
-export const useAuth = () => useContext(AuthContext)
+// export const useAuth = () => useContext(AuthContext)
 
 // It looks like you want to replace the useAuth context in LoginPage.tsx with a clientLoader-based approach. Here’s how you can modify your implementation to use a client loader in React Router while maintaining authentication logic:
 
@@ -57,21 +57,21 @@ export const useAuth = () => useContext(AuthContext)
 // tsx
 // Copy
 // Edit
-// import { redirect } from 'react-router-dom';
-// import { loginUser } from '../services/api';
+// import { redirect } from 'react-router-dom'
+// import { loginUser } from '../services/api'
 
 // export const loginLoader = async ({ request }: { request: Request }) => {
-//   const formData = await request.formData();
-//   const email = formData.get('email') as string;
-//   const password = formData.get('password') as string;
+//   const formData = await request.formData()
+//   const email = formData.get('email') as string
+//   const password = formData.get('password') as string
 
 //   try {
-//     await loginUser(email, password);
-//     return redirect('/booking-consult');
+//     await loginUser(email, password)
+//     return redirect('/booking-consult')
 //   } catch (error) {
-//     return { error: 'Login failed. Please try again.' };
+//     return { error: 'Login failed. Please try again.' }
 //   }
-// };
+// }
 // 2. Update LoginPage.tsx
 // Modify the login form to use React Router's useFetcher for submitting login data.
 

@@ -1,18 +1,18 @@
 // LoginPage.tsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
+// import { useAuth } from '../context/AuthContext';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { login } = useAuth();
+  // const { login } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await login(email, password); // Call login from AuthContext
+      // await login(email, password); // Call login from AuthContext
       navigate('/booking-consult'); // Redirect to AdminPage on successful login
     } catch (error) {
       console.error('Login failed', error);
