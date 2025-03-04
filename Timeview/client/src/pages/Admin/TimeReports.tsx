@@ -28,7 +28,7 @@ const TimeReports = () => {
       address: '123 Main St',
       date: '2025-02-24',
       attributes: {
-        datum: ['2025-02-20T08:30:00Z'],
+        datum: ['2025-02-20T08'],
         tid: ['08:30 - 10:00'],
         Programkod: ['CS101'],
         Rum: ['Room A1'],
@@ -43,7 +43,7 @@ const TimeReports = () => {
       attributes: {
         datum: ['2025-02-22T13:00:00Z', '2025-02-22T13:00:00Z'],
         tid: ['13:00 - 14:30', '13:00 - 14:30'],
-        Programkod: ['PHYS303', 'PHYS303'],
+        Programkod: ['PHYS103', 'PHYS302'],
         Rum: ['Room C3', 'Room C3'],
         Sammanlagda_timmar: [1, 1],
       },
@@ -81,7 +81,7 @@ const TimeReports = () => {
   }))
   const data = { tableHeaders: tableHeaders, orders: transformedOrders }
   return (
-    <div className='m-4 bg-white h-[539px] flex justify-center p-5'>
+    <div className='m-4  h-[539px] flex justify-center p-5'>
       {false ? (
         <TableInTableAccordion propDrilling={data} />
       ) : (

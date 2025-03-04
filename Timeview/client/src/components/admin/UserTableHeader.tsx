@@ -33,11 +33,19 @@ const UserTableHeader = ({ openRows, order }: tableHeaderProps) => {
         </span>
       </TableCell>
       <TableCell>{order.address}</TableCell>
-      <TableCell className=''>{'ss'}</TableCell>
+      <TableCell className=''>{'Programomkod'}</TableCell>
       <TableCell className=''>{order.date}</TableCell>
 
-      <TableCell>
-        <Button> Skriv ut CSV för [konsult namn]</Button>
+      <TableCell className='h-full pb-1'>
+        <div className='flex flex-col h-full justify-end '>
+          <Button
+            type='button'
+            size='sm'
+            variant='default'
+            className='rounded-full'>
+            Skriv ut CSV för [konsult namn]
+          </Button>
+        </div>
       </TableCell>
     </>
   )
