@@ -43,7 +43,7 @@ const TableInTableAccordion = ({ propDrilling }: AccordionResponse) => {
     }
   }
   return (
-    <div className='m-4 bg-white h-[539px] flex justify-center p-5'>
+    <div className='m-4 bg-white h-[539px] flex justify-center p-5 w-full'>
       <Table className='border-separate border-spacing-y-2 w-full'>
         <TableHeader className='p-8 '>
           <TableRow className='bg-gray-100'>

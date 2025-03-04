@@ -13,23 +13,23 @@ import BigSidebar from '@/components/admin/BigSidebar'
 import AdminNavbar from '@/components/admin/AdminNavbar'
 /**
  * admin has a sidebar compare to other users that only get a hero +1 section
- * @returns 
+ * @returns
  */
 const AdminLayout = () => {
   return (
-        <div className="w-full min-h-screen flex flex-col">
+    <div className='w-full min-h-screen flex flex-col'>
       <AdminNavbar />
-      <div className="flex flex-grow">
+      <div className='flex flex-grow'>
         {/* Sidebar */}
-        <div className="w-[250px] lg:w-[300px] ">
+        <div className='w-[170px] lg:w-[170px] '>
           <BigSidebar />
         </div>
         {/* Main Content bg-[#EFF4FA] */}
-        <div className="flex-1 bg-slate-300 ">
-          <div className="w-full mx-auto">
+        <div className='flex-1 bg-slate-300 '>
+          <div className='w-full mx-auto'>
             <Outlet />
           </div>
-          <div className="-mt-32">
+          <div className='-mt-32'>
             <ChassStamp />
           </div>
         </div>

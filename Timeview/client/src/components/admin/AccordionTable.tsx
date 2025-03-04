@@ -37,7 +37,7 @@ const AccordionTable = ({ propDrilling }: AccordionResponse) => {
 
   const rowProps = (orderId: number) => {
     return {
-      className: ` cursor-pointer  ${
+      className: ` cursor-pointer rounded-3xl  ${
         openRows.includes(orderId) ? 'bg-white' : ''
       }`,
       onClick: (e: React.MouseEvent<HTMLTableRowElement>) => {
@@ -58,18 +58,18 @@ const AccordionTable = ({ propDrilling }: AccordionResponse) => {
   }
 
   return (
-    <div className='m-4 bg-white h-[539px] flex justify-center p-5 '>
+    <div className=' flex justify-center  rounded-3xl bg-white p-2'>
       {/**previously a table in a table (mapped rows) */}
-      <div className='border-separate border-spacing-y-2 w-full'>
-        <div className='bg-white shadow-md rounded-lg p-4 mb-2'>
-          <Table className='w-full table-fixed'>
-            <TableHeader className='p-8'>
-              <TableRow>
+      <div className=' p-0 mb-2 '>
+        <div className=''>
+          <Table className=''>
+            <TableHeader className='rounded-3xl '>
+              <TableRow className='grid grid-cols-5 gap-4'>
                 {tableHeaders.map((header, index) => (
                   <TableHead
                     key={index} // ✅ Use TableHead (th) instead of TableCell (td)
-                    className={`w-1/5 bg-white font-bold text-left ${
-                      index === 0 ? 'pl-12' : ''
+                    className={`justify-self-start font-bold text-left  ${
+                      index === 0 ? '' : ''
                     }`}
                     colSpan={index === tableHeaders.length - 1 ? 2 : 1} // Ensure last header spans columns
                   >
@@ -80,12 +80,12 @@ const AccordionTable = ({ propDrilling }: AccordionResponse) => {
             </TableHeader>
           </Table>
         </div>
-        <div className='bg-white shadow-md rounded-lg p-4 mb-2'>
+        <div className=''>
           {/**---1:  */}
           {orders.map((order) => (
             <React.Fragment key={order.id}>
-              <Table className='bg-white shadow-md rounded-lg p-4 mb-2 col-span-5'>
-                <TableBody>
+              <Table className=' mb-2 '>
+                <TableBody className=' shadow-md rounded-3xl  p-8 mb-2'>
                   {/* Main Row */}
                   <TableRow {...rowProps(order.id)}>
                     {/**top level user in information*/}
@@ -113,9 +113,11 @@ const AccordionTable = ({ propDrilling }: AccordionResponse) => {
                         return (
                           <>
                             {/* Header Row for Attributes */}
-                            <TableRow>
+                            <TableRow className='rounded-3xl p-2'>
                               {attributeEntries.map(([key]) => (
-                                <TableHead key={key}>
+                                <TableHead
+                                  key={key}
+                                  className='rounded-3xl p-2'>
                                   {' '}
                                   {/* ✅ Use <TableHead> (th) for headers */}
                                   <p className='font-bold'>{key}</p>
@@ -128,7 +130,7 @@ const AccordionTable = ({ propDrilling }: AccordionResponse) => {
                               (_, rowIndex) => (
                                 <TableRow
                                   key={rowIndex}
-                                  className='odd:bg-gray-100'>
+                                  className='even:bg-gray-100'>
                                   {attributeEntries.map(([key, value]) => (
                                     <TableCell key={`${value}-${rowIndex}`}>
                                       {Array.isArray(value)
