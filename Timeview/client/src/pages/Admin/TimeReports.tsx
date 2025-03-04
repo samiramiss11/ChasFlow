@@ -124,7 +124,7 @@ const TimeReports = () => {
           {/**---1:  */}
           {orders.map((order) => (
             <React.Fragment key={order.id}>
-              {/* < className='bg-white shadow-md rounded-lg p-4 mb-2 col-span-5'> */}
+              {/* < Table className='bg-white shadow-md rounded-lg p-4 mb-2 col-span-5'> */}
                  {/* Main Row */}
               <TableRow {...rowProps(order.id)} >
                 {/**top level user in information*/}

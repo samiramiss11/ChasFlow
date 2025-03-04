@@ -35,7 +35,8 @@ const GroupedBookings = ({ contextWithStaticData }: GroupedRoomResponse) => {
                 <div key={index}>
                   <div className='flex justify-center'>
                     <div>
-                      <h1 className='text-xl font-bold'> Våning {layer.id}</h1>
+                    <h1 className='text-xl font-bold'>{group.id} room</h1>
+                    <h1 className='text-xl font-bold'> Våning {layer.id}</h1>
                     </div>
                   </div>
                   <div className='flex '>
