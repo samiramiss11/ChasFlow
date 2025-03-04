@@ -1,11 +1,11 @@
 import React from 'react'
 
 export type TableEntries = {
-  Datum: string //Date;
-  Tid: string
-  prograomkod: string // **(Typo)**
-  rum: string
-  sammanlagdatimmar: number
+  Datum: string[] //Date;
+  Tid: string[]
+  prograomkod: string[] // **(Typo)**
+  rum: string[]
+  sammanlagdatimmar: number[]
 }
 export type UserData = {
   id: number
@@ -72,11 +72,11 @@ const TimeReports = () => {
   const transformedOrders = orders.map((order) => ({
     ...order,
     attributes: {
-      Datum: order.attributes.datum[0] ?? '', // Convert string to Date new Date()
-      Tid: order.attributes.tid[0] ?? '',
-      prograomkod: order.attributes.Programkod[0] ?? '', // Fix casing
-      rum: order.attributes.Rum[0] ?? '', // Fix casing
-      sammanlagdatimmar: order.attributes.Sammanlagda_timmar[0] ?? 0, // Fix casing
+      Datum: order.attributes.datum || [''], // Ensure it’s always an array
+      Tid: order.attributes.tid || [''],
+      prograomkod: order.attributes.Programkod || [''],
+      rum: order.attributes.Rum || [''],
+      sammanlagdatimmar: order.attributes.Sammanlagda_timmar || [0],
     },
   }))
   const data = { tableHeaders: tableHeaders, orders: transformedOrders }

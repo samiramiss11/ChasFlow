@@ -84,9 +84,8 @@ const AccordionTable = ({ propDrilling }: AccordionResponse) => {
           {/**---1:  */}
           {orders.map((order) => (
             <React.Fragment key={order.id}>
-              <Table className=' mb-2 '>
-                <TableBody className=' shadow-md rounded-3xl  p-8 mb-2'>
-                  {/* Main Row */}
+              <Table className=' mb-2 rounded-3xl border-collapse overflow-hidden shadow-md  drop-shadow-lg'>
+                <TableHeader className=' '>
                   <TableRow {...rowProps(order.id)}>
                     {/**top level user in information*/}
                     <UserTableHeader
@@ -94,6 +93,9 @@ const AccordionTable = ({ propDrilling }: AccordionResponse) => {
                       order={order}
                     />
                   </TableRow>
+                </TableHeader>
+                <TableBody className='  p-8 mb-2 bg-white'>
+                  {/* Main Row */}
 
                   {/**---2: Expanded Details */}
                   {openRows.includes(order.id) && (
@@ -102,22 +104,30 @@ const AccordionTable = ({ propDrilling }: AccordionResponse) => {
                         const attributeEntries = Object.entries(
                           order.attributes
                         )
-                        console.log(attributeEntries)
-                        // Determine the maximum number of rows needed (longest array length)
-                        const maxRows = Math.max(
-                          ...attributeEntries.map(([_, value]) =>
-                            Array.isArray(value) ? value.length : 1
-                          )
-                        )
+                        // const attributeEntries = Object.entries(
+                        //   order.attributes
+                        // ).map(([key, value]) => [
+                        //   key,
+                        //   Array.isArray(value) ? value : [value], // Convert single values to arrays
+                        // ])
 
+                        const maxRows =
+                          attributeEntries.length > 0
+                            ? Math.max(
+                                ...attributeEntries.map(([_, value]) =>
+                                  Array.isArray(value) ? value.length : 0
+                                )
+                              )
+                            : 0
+                        console.log(maxRows, 'ma')
                         return (
                           <>
                             {/* Header Row for Attributes */}
-                            <TableRow className='rounded-3xl p-2'>
+                            <TableRow className='bg-white p-2'>
                               {attributeEntries.map(([key]) => (
                                 <TableHead
-                                  key={key}
-                                  className='rounded-3xl p-2'>
+                                  key={String(key)}
+                                  className=' p-2 '>
                                   {' '}
                                   {/* ✅ Use <TableHead> (th) for headers */}
                                   <p className='font-bold'>{key}</p>
@@ -132,7 +142,9 @@ const AccordionTable = ({ propDrilling }: AccordionResponse) => {
                                   key={rowIndex}
                                   className='even:bg-gray-100'>
                                   {attributeEntries.map(([key, value]) => (
-                                    <TableCell key={`${value}-${rowIndex}`}>
+                                    <TableCell
+                                      key={`${value}-${rowIndex}`}
+                                      className=''>
                                       {Array.isArray(value)
                                         ? value[rowIndex] || ''
                                         : value}
