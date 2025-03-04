@@ -1,0 +1,11 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+# Block admin pages
+Disallow: /admin-
+
+# Block registration pages
+Disallow: /register-konsult
+Disallow: /user-onboarding/register-konsult
+
+# Allow everything else
+Allow: /
