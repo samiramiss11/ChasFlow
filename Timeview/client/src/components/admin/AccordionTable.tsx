@@ -58,21 +58,19 @@ const AccordionTable = ({ propDrilling }: AccordionResponse) => {
   }
 
   return (
-    <div className=' flex justify-center  rounded-3xl bg-white p-2'>
+    <div className=' flex justify-center  rounded-3xl bg-white p-2 w-full'>
       {/**previously a table in a table (mapped rows) */}
-      <div className=' p-0 mb-2 '>
+      <div className=' p-0 mb-2 w-full'>
         <div className=''>
-          <Table className=''>
-            <TableHeader className='rounded-3xl '>
-              <TableRow className='grid grid-cols-5 gap-4'>
+          <Table className='w-full'>
+            <TableHeader className='rounded-3xl'>
+              <TableRow className='grid grid-cols-6 gap-1'>
                 {tableHeaders.map((header, index) => (
                   <TableHead
-                    key={index} // ✅ Use TableHead (th) instead of TableCell (td)
-                    className={`justify-self-start font-bold text-left  ${
-                      index === 0 ? '' : ''
-                    }`}
-                    colSpan={index === tableHeaders.length - 1 ? 2 : 1} // Ensure last header spans columns
-                  >
+                    key={index}
+                    className={`justify-self-start  xl:justify-self-center font-bold text-left w-1/5 
+    ${index === tableHeaders.length - 1 ? 'col-span-2' : 'col-span-1'}
+  `}>
                     {header}
                   </TableHead>
                 ))}
@@ -127,7 +125,7 @@ const AccordionTable = ({ propDrilling }: AccordionResponse) => {
                               {attributeEntries.map(([key]) => (
                                 <TableHead
                                   key={String(key)}
-                                  className=' p-2 '>
+                                  className=' p-1 px-3 '>
                                   {' '}
                                   {/* ✅ Use <TableHead> (th) for headers */}
                                   <p className='font-bold'>{key}</p>
