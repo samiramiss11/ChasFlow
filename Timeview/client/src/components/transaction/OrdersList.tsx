@@ -54,7 +54,7 @@ const OrdersList = () => {
                     )
                     return (
                       <TableRow key={`${index}-${room}`}>
-                        <TableCell>
+                        <TableCell className='p-3'>
                           <p>
                             {' '}
                             <b className='font-extrabold text-muted-foreground'>
@@ -63,7 +63,7 @@ const OrdersList = () => {
                             {' ' + dayOfWeek[entry.day - 1]}
                           </p>
                         </TableCell>
-                        <TableCell>
+                        <TableCell className='p-3'>
                           <p>
                             kl{' '}
                             <b className='text-muted-foreground'>
@@ -71,7 +71,7 @@ const OrdersList = () => {
                             </b>
                           </p>
                         </TableCell>
-                        <TableCell>
+                        <TableCell className='p-3'>
                           {' '}
                           <p>
                             i rum {room}{' '}
@@ -81,15 +81,14 @@ const OrdersList = () => {
                             </b>
                           </p>
                         </TableCell>
-                        <TableCell>
+                        <TableCell className='p-3'>
                           <div className='flex items-center justify-between '>
                             {' '}
                             <Button
                               size='sm'
                               variant='outline'
                               className='self-end mb-2 rounded-full bg-viewBookingButton 
-] '
-                            >
+] '>
                               <span className='p-3'> Ta bort</span>
                             </Button>
                           </div>
