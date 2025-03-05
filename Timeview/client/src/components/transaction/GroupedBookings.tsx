@@ -28,15 +28,14 @@ const GroupedBookings = ({ contextWithStaticData }: GroupedRoomResponse) => {
         return (
           <div
             key={index}
-            className='w-1/2  p-4 border-r last:border-r-0  border-chasBlue  '
-          >
+            className='w-1/2  p-4 border-r last:border-r-0  border-chasBlue'>
             {Object.values(sortedLayers).map((layer, index) => {
               return (
                 <div key={index}>
                   <div className='flex justify-center'>
                     <div>
-                    <h1 className='text-xl font-bold'>{group.id} room</h1>
-                    <h1 className='text-xl font-bold'> Våning {layer.id}</h1>
+                      <h1 className='text-xl font-bold'>{group.id} room</h1>
+                      <h1 className='text-xl font-bold'> Våning {layer.id}</h1>
                     </div>
                   </div>
                   <div className='flex '>
