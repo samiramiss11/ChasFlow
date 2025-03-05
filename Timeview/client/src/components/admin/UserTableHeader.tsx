@@ -18,25 +18,37 @@ export type tableHeaderProps = {
   order: UserWithoutAttributes
 }
 const UserTableHeader = ({ openRows, order }: tableHeaderProps) => {
+  const columns = [
+    { key: 'name', content: order.name, hasIcon: true },
+    { key: 'address', content: order.address },
+    { key: 'programCode', content: 'Programomkod' },
+    { key: 'date', content: order.date },
+  ]
+
   return (
     <>
-      <TableCell>
-        <span className='flex items-align '>
-          <ChevronUp
-            className={` ${
-              openRows.includes(order.id)
-                ? 'rotate-180 text-gray-800'
-                : 'text-gray-600'
-            } transiti on-all`}
-          />
-          {order.name}
-        </span>
-      </TableCell>
-      <TableCell>{order.address}</TableCell>
-      <TableCell className=''>{'Programomkod'}</TableCell>
-      <TableCell className=''>{order.date}</TableCell>
+      {columns.map(({ key, content, hasIcon }) => (
+        <TableCell
+          key={key}
+          className='p-3'>
+          {hasIcon ? (
+            <span className='flex items-center'>
+              <ChevronUp
+                className={` ${
+                  openRows.includes(order.id)
+                    ? 'rotate-180 text-gray-800'
+                    : 'text-gray-600'
+                } transition-all`}
+              />
+              {content}
+            </span>
+          ) : (
+            content
+          )}
+        </TableCell>
+      ))}
 
-      <TableCell className='h-full pb-1'>
+      <TableCell className='h-full pb-1 p-3'>
         <div className='flex flex-col h-full justify-end '>
           <Button
             type='button'
