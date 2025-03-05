@@ -94,10 +94,12 @@ const AccordionTable = ({ propDrilling }: AccordionResponse) => {
                 </TableHeader>
                 <TableBody className='  p-8 mb-2 bg-white'>
                   {/* Main Row */}
-                  <PopulatedTableBody
-                    openRows={openRows}
-                    order={order}
-                  />
+                  {openRows.includes(order.id) && (
+                    <PopulatedTableBody
+                      openRows={openRows}
+                      order={order}
+                    />
+                  )}
                   {/**---2: Expanded Details */}
                 </TableBody>
               </Table>

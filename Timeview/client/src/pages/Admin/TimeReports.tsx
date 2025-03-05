@@ -1,11 +1,11 @@
 import React from 'react'
 
 export type TableEntries = {
-  Datum: string[] //Date;
-  Tid: string[]
-  prograomkod: string[] // **(Typo)**
+  datum: string[] //Date;
+  tid: string[]
+  programKod: string[] // **(Typo)**
   rum: string[]
-  sammanlagdatimmar: number[]
+  sammanlagda_timmar: number[]
 }
 export type UserData = {
   id: number
@@ -30,9 +30,9 @@ const TimeReports = () => {
       attributes: {
         datum: ['2025-02-20T08'],
         tid: ['08:30 - 10:00'],
-        Programkod: ['CS101'],
-        Rum: ['Room A1'],
-        Sammanlagda_timmar: [1],
+        programKod: ['CS101'],
+        rum: ['Room A1'],
+        sammanlagda_timmar: [1],
       },
     },
     {
@@ -43,9 +43,9 @@ const TimeReports = () => {
       attributes: {
         datum: ['2025-02-22T', '2025-02-22T1'],
         tid: ['13:00 - 14:30', '13:00 - 14:30'],
-        Programkod: ['PHYS103', 'PHYS302'],
+        programKod: ['PHYS103', 'PHYS302'],
         Rum: ['Room C3', 'Room C3'],
-        Sammanlagda_timmar: [1, 1],
+        sammanlagda_timmar: [1, 1],
       },
     },
     {
@@ -56,9 +56,9 @@ const TimeReports = () => {
       attributes: {
         datum: ['2025-02-21T1'],
         tid: ['10:15 - 11:45'],
-        Programkod: ['MATH202'],
-        Rum: ['Room B2'],
-        Sammanlagda_timmar: [1],
+        programKod: ['MATH202'],
+        rum: ['Room B2'],
+        sammanlagda_timmar: [1],
       },
     },
   ]
@@ -66,11 +66,11 @@ const TimeReports = () => {
   const transformedOrders = orders.map((order) => ({
     ...order,
     attributes: {
-      Datum: order.attributes.datum || [''], // Ensure it’s always an array
-      Tid: order.attributes.tid || [''],
-      prograomkod: order.attributes.Programkod || [''],
+      datum: order.attributes.datum || [''], // Ensure it’s always an array
+      tid: order.attributes.tid || [''],
+      programKod: order.attributes.programKod || [''],
       rum: order.attributes.Rum || [''],
-      sammanlagdatimmar: order.attributes.Sammanlagda_timmar || [0],
+      sammanlagda_timmar: order.attributes.sammanlagda_timmar || [0],
     },
   }))
   const data = { tableHeaders: tableHeaders, orders: transformedOrders }
