@@ -18,20 +18,18 @@ const SetDayTabs = () => {
       />
       <div
         role='tablist'
-        className=' tabs tabs-lifted md:flex flex-auto sm:center justify-center items-center '
-      >
+        className=' tabs tabs-lifted md:flex flex-auto sm:center justify-center items-center '>
         {dayOfWeek.map((item, index) => {
           return (
             <button
               type='submit'
               key={index}
               onClick={() => setCurrentItem(index)}
-              className={
+              className={`h-[56px] flex-grow tab ${
                 index === currentItem
-                  ? 'tab flex-grow bg-white '
-                  : 'tab tab-active text-primary text-white flex-grow [--tab-bg:black]  [--tab-border-color:white]'
-              }
-            >
+                  ? 'bg-white'
+                  : 'tab-active text-primary text-white [--tab-bg:black] [--tab-border-color:white]'
+              }`}>
               {item}
             </button>
           )

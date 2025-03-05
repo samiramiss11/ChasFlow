@@ -40,7 +40,7 @@ export const clientLoader =
     let konsultantNamesMeta = []
     let courseCode = []
     try {
-    const [consultantsRemote, courseCodeRemote] = await Promise.all([
+      const [consultantsRemote, courseCodeRemote] = await Promise.all([
         fetchConsultants(),
         fetchCourses(),
       ])
@@ -51,7 +51,6 @@ export const clientLoader =
       )
       console.log('complete')
       store.dispatch(populateKonsultants(consultantsRemote))
-      
     } catch (error) {
       console.error('Failed to fetch data. Backend may be offline.', error)
       konsultantNamesMeta = ['Nan']
@@ -67,10 +66,11 @@ export const clientLoader =
     if (
       !tokenUser ||
       (tokenUser.role !== USER_ROLE.Manager &&
-        tokenUser.role !== USER_ROLE.Employee2)
+        tokenUser.role !== USER_ROLE.Employee2 &&
+        true)
     ) {
       //console.log('Redirecting...')
-      return redirect('/' + JOURNY_LINSK_CONSTANTS.TRANSACTION_STEP1)
+      //return redirect('/' + JOURNY_LINSK_CONSTANTS.TRANSACTION_STEP1)
     }
     // const response = await queryClient.ensureQueryData(featuredProductsQuery)
     // const products = response.data.data
@@ -115,12 +115,12 @@ type DataConformedMetaOfDatabase = {
  * within a hero section display optional selection for a current user that will own a batch of bookigs.
  * there is a link for crud of relevant selection list if there is any need of create operations.
  * otherwise navigate programmatically
- * @returns 
+ * @returns
  */
 const ConsernedUserSetting = () => {
   const { userMeta, courseCodeMeta } =
     useLoaderData() as DataConformedMetaOfDatabase
-console.log(userMeta)
+  console.log(userMeta)
   let fetcher = useFetcher()
   if (!userMeta) {
     return (
