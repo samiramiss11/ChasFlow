@@ -24,7 +24,7 @@ export type UserData = {
   attributes: TableEntries
 }
 import { AccordionResponse } from '@/pages/Admin/TimeReports'
-
+import PopulatedTableBody from './PopulatedTableBody'
 const AccordionTable = ({ propDrilling }: AccordionResponse) => {
   const { tableHeaders, orders } = propDrilling
   const [openRows, setOpenRows] = useState<number[]>([])
@@ -94,68 +94,11 @@ const AccordionTable = ({ propDrilling }: AccordionResponse) => {
                 </TableHeader>
                 <TableBody className='  p-8 mb-2 bg-white'>
                   {/* Main Row */}
-
+                  <PopulatedTableBody
+                    openRows={openRows}
+                    order={order}
+                  />
                   {/**---2: Expanded Details */}
-                  {openRows.includes(order.id) && (
-                    <>
-                      {(() => {
-                        const attributeEntries = Object.entries(
-                          order.attributes
-                        )
-                        // const attributeEntries = Object.entries(
-                        //   order.attributes
-                        // ).map(([key, value]) => [
-                        //   key,
-                        //   Array.isArray(value) ? value : [value], // Convert single values to arrays
-                        // ])
-
-                        const maxRows =
-                          attributeEntries.length > 0
-                            ? Math.max(
-                                ...attributeEntries.map(([_, value]) =>
-                                  Array.isArray(value) ? value.length : 0
-                                )
-                              )
-                            : 0
-                        console.log(maxRows, 'ma')
-                        return (
-                          <>
-                            {/* Header Row for Attributes */}
-                            <TableRow className='bg-white p-2'>
-                              {attributeEntries.map(([key]) => (
-                                <TableHead
-                                  key={String(key)}
-                                  className=' p-1 px-3 '>
-                                  {' '}
-                                  {/* ✅ Use <TableHead> (th) for headers */}
-                                  <p className='font-bold'>{key}</p>
-                                </TableHead>
-                              ))}
-                            </TableRow>
-
-                            {/* Attribute Values (Each row contains values at index `rowIndex`) */}
-                            {Array.from({ length: maxRows }).map(
-                              (_, rowIndex) => (
-                                <TableRow
-                                  key={rowIndex}
-                                  className='even:bg-gray-100'>
-                                  {attributeEntries.map(([key, value]) => (
-                                    <TableCell
-                                      key={`${value}-${rowIndex}`}
-                                      className=''>
-                                      {Array.isArray(value)
-                                        ? value[rowIndex] || ''
-                                        : value}
-                                    </TableCell>
-                                  ))}
-                                </TableRow>
-                              )
-                            )}
-                          </>
-                        )
-                      })()}
-                    </>
-                  )}
                 </TableBody>
               </Table>
             </React.Fragment>
