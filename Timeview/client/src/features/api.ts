@@ -66,7 +66,7 @@ export const loginUser = async ({
   email: string
   password: string
 }) => {
-   try {
+  try {
     const response = await api.post('/auth/login-page', { email, password })
 
     if (!response.data || !response.data.token) {
@@ -105,16 +105,13 @@ export const fetchConsultants = async () => {
   try {
     const response = await api.get('/consultants')
     const data = response.data // Return the consultants data
-console.log(data)
+    console.log(data)
     const frontendTypeConvertedConsultants = data.map((obj: any) => ({
       id: obj.consultantID, // Use obj instead of consultants
-      name: obj.
-username
-,
+      name: obj.username,
       role: USER_ROLE.Employee,
     }))
     //const FitSelectComponentConverted = consultants.map((obj) =>  obj.courseCode))
- 
 
     return frontendTypeConvertedConsultants
   } catch (error) {
