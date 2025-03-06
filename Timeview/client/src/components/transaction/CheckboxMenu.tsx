@@ -41,8 +41,10 @@ const CheckboxMenu = ({ roomId }: { roomId: string }) => {
   }
   const handlePopupToggle = (isOpen: boolean) => {
     setOpen(isOpen)
+  }
 
-    if (isOpen) {
+  useEffect(() => {
+    if (open) {
       // Fetch available timeslots when opening
       fetcher.submit(
         { actionType: 'fetch', roomId },
@@ -67,7 +69,7 @@ const CheckboxMenu = ({ roomId }: { roomId: string }) => {
         { method: 'POST' } //, action: '/boka'
       )
     }
-  }
+  }, [open])
 
   return (
     <DropdownMenu
