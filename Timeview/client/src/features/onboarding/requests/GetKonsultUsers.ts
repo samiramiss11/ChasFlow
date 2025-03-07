@@ -1,4 +1,4 @@
-import api from '@/features/api'
+import { api } from '@/services/api'
 export const fetchCourses = async () => {
   try {
     const response = await api.get('/courses')
