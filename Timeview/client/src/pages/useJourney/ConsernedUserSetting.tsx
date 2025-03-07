@@ -25,7 +25,7 @@ import {
 } from '@/features/onboarding/users/usersSlice'
 import { removeLastTimeIntervall } from '@/features/transaction/booking/setBookings'
 import { clearIntervals } from '@/features/transaction/booking/booking'
-import { fetchConsultants, fetchCourses } from '@/features/api'
+import { fetchConsultants, fetchCourses } from '@/services/api'
 import { USER_ROLE } from '@/utils/types'
 export const clientLoader =
   (store: ReduxStore, queryClient: any) => async () => {

@@ -48,18 +48,14 @@ const timeIntervalSlice = createSlice({
     // },
     toggleInterval: (state, action: PayloadAction<TogglePayload>) => {
       //dont need select since it is frontend specific
-      const { roomId, interval } = action.payload
-
-      if (!state.rooms[roomId]) {
-        state.rooms[roomId] = { selectedInterval: [] } // Initialize if missing
-      }
-
-      // if (!state[roomId]) {
-      //   state[roomId] = { day: '', week: '', selectedInterval: [] }  //not set the global + specific simultaneously
+      // const { roomId, interval } = action.payload
+      // if (!state.rooms[roomId]) {
+      //   state.rooms[roomId] = { selectedInterval: [] } // Initialize if missing
       // }
-
-      const selectedIntervals = state.rooms[roomId].selectedInterval
-
+      // // if (!state[roomId]) {
+      // //   state[roomId] = { day: '', week: '', selectedInterval: [] }  //not set the global + specific simultaneously
+      // // }
+      // const selectedIntervals = state.rooms[roomId].selectedInterval
       // if (selectedIntervals.includes(interval)) {
       //   state.rooms[roomId].selectedIntervals = selectedIntervals.filter(
       //     (i) => i !== interval

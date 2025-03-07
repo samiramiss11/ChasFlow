@@ -25,6 +25,8 @@ import {
   clearIntervals,
 } from '@/features/transaction/booking/booking'
 import { addTimeIntervalState } from '@/features/transaction/booking/setBookings'
+import { setTimeSlots } from '@/features/transaction/booking/checkBoxSlice'
+import { fetchAvailableTimeSlots } from '@/features/api'
 export const clientAction =
   (store: ReduxStore): ActionFunction =>
   async ({ request }): Promise<Response | null> => {
@@ -32,13 +34,60 @@ export const clientAction =
     const formData = await request.formData()
     // const data = Object.fromEntries(formData)
     // console.log(data)
+    const actionType = formData.get('actionType') as string
+    const roomId = formData.get('roomId') as string
+    if (roomId) {
+      if (actionType === 'fetch') {
+        const dayindex = store.getState().bookingState.day
+        const dayStrings = ['Måndag', 'Tisdag', 'Onsdag', 'Torsdag', 'Fredag']
+        const dayString = dayStrings[dayindex - 1]
+        const week = store.getState().bookingState.week
+        console.log(dayString, week)
+        // Fetch available timeslots
+        const timeslots = await fetchAvailableTimeSlots(week, dayString, roomId)
+        store.dispatch(setTimeSlots(timeslots))
+        // return json({ timeslots })
+
+        console.log('opeen')
+      }
+      if (actionType === 'save') {
+        const room = store.getState().bookingState.rooms[roomId]
+
+        if (room) {
+          // Access the selectedInterval for the found room
+          const selectedTimeSlots = room.selectedInterval
+          console.log(selectedTimeSlots, 'selection') // This will log the array of selected intervals for the specific room
+          // const [startTime, endTime] = [
+          //   selectedTimeSlots[0].split('-')[0],
+          //   selectedTimeSlots[selectedTimeSlots.length - 1].split('-')[1],
+          // ]
+          // You can now perform the save action or any other logic with selectedTimeSlots
+        }
+        // Save selected timeslots
+        console.log('close')
+        const selectedTimeslots = formData.getAll(
+          'selectedTimeslots[]'
+        ) as string[]
+        // await saveSelectedTimeslotsToDB(roomId, selectedTimeslots)
+        // return json({ success: true })
+      }
+    }
+
     const formType = formData.get('formType')
 
     if (formType === 'setDayTabs') {
       const dayFromFormData = formData.get('day') as string
+      console.log('set day', dayFromFormData)
+
+      const updatedState = store.getState().bookingState
+      localStorage.setItem('batch', JSON.stringify(updatedState))
       store.dispatch(setGlobalProp({ day: dayFromFormData }))
     } else if (formType === 'week') {
       const weekFromFormData = formData.get('week') as string
+      const updatedState = store.getState().bookingState
+      localStorage.setItem('batch', JSON.stringify(updatedState))
+      console.log('set day', weekFromFormData)
+
       store.dispatch(setGlobalProp({ week: weekFromFormData }))
     } else {
       const payload = {
@@ -48,7 +97,7 @@ export const clientAction =
       store.dispatch(setGlobalProp(payload))
     }
     const currentDay_On_WeedBooking = store.getState().bookingState
-    console.log(currentDay_On_WeedBooking)
+    //console.log(currentDay_On_WeedBooking)
 
     const currentState = store.getState().bookingState // ✅ Store before clearing
     if (Object.keys(currentState.rooms).length > 0) {
@@ -56,31 +105,21 @@ export const clientAction =
       store.dispatch(addTimeIntervalState(currentState)) // ✅ Store first
     }
     store.dispatch(clearIntervals())
-    console.log('all bookings', store.getState().allBookingState)
+    //console.log('all bookings', store.getState().allBookingState)
     return null
   }
 import OnlineBooking from '@/components/transaction/OnlineBooking'
 import { Form } from 'react-router-dom'
 /**
- * on this page popovers are displayed to construct objects from 2 form requests. 
+ * on this page popovers are displayed to construct objects from 2 form requests.
  * one type of formRequest come from either GroupedBookings or OnlineBooking that map the room id to toggle checkbox values
- * @returns 
+ * @returns
  */
 const Bookings = () => {
   const { contextWithStaticData } = useLoaderData() as GroupedRoomResponse
-  console.log(contextWithStaticData)
-  const toDo = {
-    bookingArray: [
-      {
-        day: '',
-        time: { start: 'time', end: 'time' },
-        room: 'room',
-        konsultant: 'name',
-      },
-    ],
-    antalTimmar: 8,
-    konsult: 'konsult-name',
-  }
+  // console.log(contextWithStaticData)
+  //const items = JSON.parse(localStorage.getItem('items'))
+
   return (
     <div>
       <BookingControlContainer />

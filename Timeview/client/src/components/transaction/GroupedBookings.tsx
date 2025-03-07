@@ -9,7 +9,6 @@ const GroupedBookings = ({ contextWithStaticData }: GroupedRoomResponse) => {
     <div className='flex  py-12   gap-4'>
       {contextWithStaticData.slice(0, 2).map((group, index) => {
         //if (index < 2), better slice than check unnecessary groups, can still use index 'for key
-        console.log(group)
 
         const groupedRooms = group.rooms.reduce<ReducedGroupOfRooms>(
           (acc, room) => {
