@@ -40,10 +40,14 @@ const OrdersList = () => {
                 Object.entries(entry.rooms).map(
                   ([room, details]: [string, any]) => {
                     const { selectedInterval } = details
-                    const firstTime = selectedInterval[0].replace('-', '')
-                    const lastTime = selectedInterval[
-                      selectedInterval.length - 1
-                    ].replace('-', '')
+                    console.log(selectedInterval)
+                    const firstTime =
+                      selectedInterval[0]?.replace('-', '') || ''
+                    const lastTime =
+                      selectedInterval[selectedInterval.length - 1]?.replace(
+                        '-',
+                        ''
+                      ) || ''
 
                     const startTime = firstTime.slice(
                       0,

@@ -25,6 +25,7 @@ import {
   clearIntervals,
 } from '@/features/transaction/booking/booking'
 import { addTimeIntervalState } from '@/features/transaction/booking/setBookings'
+import { fetchAvailableTimeSlots } from '@/features/api'
 export const clientAction =
   (store: ReduxStore): ActionFunction =>
   async ({ request }): Promise<Response | null> => {
@@ -36,12 +37,30 @@ export const clientAction =
     const roomId = formData.get('roomId') as string
     if (roomId) {
       if (actionType === 'fetch') {
+        const dayindex = store.getState().bookingState.day
+        const dayStrings = ['Måndag', 'Tisdag', 'Onsdag', 'Torsdag', 'Fredag']
+        const dayString = dayStrings[dayindex - 1]
+        const week = store.getState().bookingState.week
+        console.log(dayString, week)
         // Fetch available timeslots
-        // const timeslots = await fetchAvailableTimeSlots(roomId)
+        const timeslots = await fetchAvailableTimeSlots(week, dayString, roomId)
         // return json({ timeslots })
+
         console.log('opeen')
       }
       if (actionType === 'save') {
+        const room = store.getState().bookingState.rooms[roomId]
+
+        if (room) {
+          // Access the selectedInterval for the found room
+          const selectedTimeSlots = room.selectedInterval
+          console.log(selectedTimeSlots, 'selection') // This will log the array of selected intervals for the specific room
+          // const [startTime, endTime] = [
+          //   selectedTimeSlots[0].split('-')[0],
+          //   selectedTimeSlots[selectedTimeSlots.length - 1].split('-')[1],
+          // ]
+          // You can now perform the save action or any other logic with selectedTimeSlots
+        }
         // Save selected timeslots
         console.log('close')
         const selectedTimeslots = formData.getAll(
@@ -56,9 +75,17 @@ export const clientAction =
 
     if (formType === 'setDayTabs') {
       const dayFromFormData = formData.get('day') as string
+      console.log('set day', dayFromFormData)
+
+      const updatedState = store.getState().bookingState
+      localStorage.setItem('batch', JSON.stringify(updatedState))
       store.dispatch(setGlobalProp({ day: dayFromFormData }))
     } else if (formType === 'week') {
       const weekFromFormData = formData.get('week') as string
+      const updatedState = store.getState().bookingState
+      localStorage.setItem('batch', JSON.stringify(updatedState))
+      console.log('set day', weekFromFormData)
+
       store.dispatch(setGlobalProp({ week: weekFromFormData }))
     } else {
       const payload = {
@@ -89,6 +116,7 @@ import { Form } from 'react-router-dom'
 const Bookings = () => {
   const { contextWithStaticData } = useLoaderData() as GroupedRoomResponse
   // console.log(contextWithStaticData)
+  //const items = JSON.parse(localStorage.getItem('items'))
 
   return (
     <div>

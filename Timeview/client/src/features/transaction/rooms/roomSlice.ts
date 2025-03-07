@@ -1,6 +1,6 @@
 export const ROOMS = [
   {
-    id: 'big',
+    id: 'stort',
     rooms: [
       {
         id: '8',
@@ -34,7 +34,7 @@ export const ROOMS = [
     ],
   },
   {
-    id: 'small',
+    id: 'litet',
     rooms: [
       {
         id: '1',
