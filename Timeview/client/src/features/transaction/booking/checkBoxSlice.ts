@@ -1,44 +1,37 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-import { StatiCheckbox } from '@/utils/transaction/checkbox'
-interface CheckboxState {
-  checkboxes: Record<string, Record<string, StatiCheckbox[]>> // week -> day -> checkboxes
+interface TimeSlot {
+  timeSlotID: number
+  startTime: string
+  endTime: string
+  roomID: number
+  created_at: string
 }
 
-const initialState: CheckboxState = {
-  checkboxes: {},
+interface TimeSlotState {
+  slots: TimeSlot[]
 }
 
-const checkboxSlice = createSlice({
-  name: 'checkbox',
+const initialState: TimeSlotState = {
+  slots: [],
+}
+
+const timeSlotSlice = createSlice({
+  name: 'timeSlots',
   initialState,
   reducers: {
-    setCheckboxes: (
-      state,
-      action: PayloadAction<{
-        week: string
-        day: string
-        checkboxes: StatiCheckbox[]
-      }>
-    ) => {
-      const { week, day, checkboxes } = action.payload
-      if (!state.checkboxes[week]) {
-        state.checkboxes[week] = {}
-      }
-      state.checkboxes[week][day] = checkboxes
+    setTimeSlots: (state, action: PayloadAction<TimeSlot[]>) => {
+      state.slots = action.payload
     },
-    toggleCheckbox: (
-      state,
-      action: PayloadAction<{ week: string; day: string; name: string }>
-    ) => {
-      const { week, day, name } = action.payload
-      const checkboxes = state.checkboxes[week]?.[day] || []
-      state.checkboxes[week][day] = checkboxes.map((cb) =>
-        cb.name === name ? { ...cb, selected: !cb.selected } : cb
-      )
+    addTimeSlot: (state, action: PayloadAction<TimeSlot>) => {
+      state.slots.push(action.payload)
+    },
+    clearTimeSlots: (state) => {
+      state.slots = []
     },
   },
 })
 
-export const { setCheckboxes, toggleCheckbox } = checkboxSlice.actions
-export default checkboxSlice.reducer
+export const { setTimeSlots, addTimeSlot, clearTimeSlots } =
+  timeSlotSlice.actions
+export default timeSlotSlice.reducer

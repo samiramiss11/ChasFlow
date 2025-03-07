@@ -25,6 +25,7 @@ import {
   clearIntervals,
 } from '@/features/transaction/booking/booking'
 import { addTimeIntervalState } from '@/features/transaction/booking/setBookings'
+import { setTimeSlots } from '@/features/transaction/booking/checkBoxSlice'
 import { fetchAvailableTimeSlots } from '@/features/api'
 export const clientAction =
   (store: ReduxStore): ActionFunction =>
@@ -44,6 +45,7 @@ export const clientAction =
         console.log(dayString, week)
         // Fetch available timeslots
         const timeslots = await fetchAvailableTimeSlots(week, dayString, roomId)
+        store.dispatch(setTimeSlots(timeslots))
         // return json({ timeslots })
 
         console.log('opeen')
