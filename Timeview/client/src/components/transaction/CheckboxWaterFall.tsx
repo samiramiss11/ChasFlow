@@ -38,7 +38,6 @@ const CheckboxWaterFall = ({
   //       )
   //     )
   //   }
-
   const handleTimeSlotSelect = ({
     roomID,
     slot,
@@ -48,30 +47,29 @@ const CheckboxWaterFall = ({
     slot: { timeSlotID: string; startTime: string; endTime: string }
     isChecked: boolean
   }) => {
-    setSelectedTimeSlots((prevSelections) => {
-      const updatedRooms = { ...prevSelections }
+    const updatedRooms: Record<
+      string,
+      { timeSlotID: string; startTime: string; endTime: string }[]
+    > = { ...selectedTimeSlots }
 
-      // Ensure at least one slot is selected per room
-      const currentSlots = updatedRooms[roomID] || []
+    const currentSlots = updatedRooms[roomID] || []
 
-      if (isChecked) {
-        // Add the slot if checked
-        updatedRooms[roomID] = [...currentSlots, slot]
+    if (isChecked) {
+      // If checked, add the slot
+      updatedRooms[roomID] = [...currentSlots, slot]
+    } else {
+      // If unchecked, remove the slot, but ensure at least one slot is selected
+      if (currentSlots.length > 1) {
+        const filteredSlots = currentSlots.filter(
+          (s) => s.timeSlotID !== slot.timeSlotID
+        )
+        updatedRooms[roomID] = filteredSlots
       } else {
-        if (currentSlots.length === 1) {
-          updatedRooms[roomID] = [] // Clear all slots
-        }
-        // If this is the last slot, do not uncheck it (ensure at least one slot is selected)
-        else if (currentSlots.length > 1) {
-          const filteredSlots = currentSlots.filter(
-            (s) => s.timeSlotID !== slot.timeSlotID
-          )
-          updatedRooms[roomID] = filteredSlots
-        }
+        updatedRooms[roomID] = [] // Keep the current slot if it's the only one
       }
+    }
 
-      return updatedRooms
-    })
+    setSelectedTimeSlots(updatedRooms) // Directly passing the updated value
   }
 
   return (
