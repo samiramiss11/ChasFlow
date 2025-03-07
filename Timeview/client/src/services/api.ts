@@ -73,6 +73,7 @@ export const fetchConsultants = async () => {
       name: obj.username,
       role: USER_ROLE.Employee,
     }))
+    
     //const FitSelectComponentConverted = consultants.map((obj) =>  obj.courseCode))
     const konsultantNamesMeta = frontendTypeConvertedConsultants.map(
       (userWithRole: any) => userWithRole.name
