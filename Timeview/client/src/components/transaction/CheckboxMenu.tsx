@@ -26,7 +26,7 @@ const CheckboxMenu = ({ roomId }: { roomId: string }) => {
   const [selectedTimeSlots, setSelectedTimeSlots] = useState<
     Record<string, { timeSlotID: string; startTime: string; endTime: string }[]>
   >({})
-
+  console.log('selectedTimes', selectedTimeSlots)
   //const dispatch = useAppDispatch()
   const fetcher = useFetcher()
   const handlePopupToggle = (isOpen: boolean) => {
@@ -76,7 +76,10 @@ const CheckboxMenu = ({ roomId }: { roomId: string }) => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className='mt-1 overflow-hidden rounded bg-white/75 p-2 text-left shadow backdrop-blur hover:bg-gray-200/50'>
-        <CheckboxWaterFall setSelectedTimeSlots={setSelectedTimeSlots} />
+        <CheckboxWaterFall
+          setSelectedTimeSlots={setSelectedTimeSlots}
+          selectedTimeSlots={selectedTimeSlots}
+        />
       </DropdownMenuContent>
     </DropdownMenu>
   )
