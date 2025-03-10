@@ -59,3 +59,23 @@ export const links = [
     icon: <LiaMapMarkedAltSolid />,
   },
 ]
+
+
+export const dropdownLinks = [
+
+  {
+    id: nanoid(),
+    label: 'Inställningar',
+    href: `/${JOURNY_LINSK_CONSTANTS.ADMIN_STEP0}/${JOURNY_LINSK_CONSTANTS.ADMIN_STEP2}`,
+  },
+    {
+    id: nanoid(),
+    label: 'Tidsrapportering',
+    href: `/${JOURNY_LINSK_CONSTANTS.ADMIN_STEP0}/${JOURNY_LINSK_CONSTANTS.ADMIN_STEP3}`,
+  },
+      {
+    id: nanoid(),
+    label: 'Utbildare',
+    href: `/${JOURNY_LINSK_CONSTANTS.ADMIN_STEP0}/${JOURNY_LINSK_CONSTANTS.ADMIN_STEP4}`,
+  },
+]

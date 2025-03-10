@@ -1,5 +1,4 @@
 import React, { ReactNode } from 'react'
-import main from 'assets/chas-academy-logo.png'
 import { Link } from 'react-router-dom'
 import { JOURNY_LINSK_CONSTANTS } from '../../utils/links'
 
