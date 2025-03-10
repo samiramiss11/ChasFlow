@@ -3,6 +3,7 @@
 
 import { logoutUser } from "@/features/onboarding/user/userSlice";
 import { useAppDispatch } from "@/lib/hooks";
+import { Button } from "@/components/ui/button";
 function SignOutLink() {
   const dispatch = useAppDispatch();
 
@@ -13,9 +14,9 @@ function SignOutLink() {
 
   return (
    
-      <button className='w-full text-left' onClick={handleLogout}>
-        Logout
-      </button>
+      <Button className='w-[115px] text-left rounded-full ' onClick={handleLogout}>
+        LOGGA UT
+      </Button>
 
   );
 }

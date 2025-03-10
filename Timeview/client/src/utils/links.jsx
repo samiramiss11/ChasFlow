@@ -62,7 +62,11 @@ export const links = [
 
 
 export const dropdownLinks = [
-
+ {
+    id: nanoid(),
+    label: 'Bokningssida',
+    href: `/${JOURNY_LINSK_CONSTANTS.TRANSACTION_STEP1}`,
+  },
   {
     id: nanoid(),
     label: 'Inställningar',
