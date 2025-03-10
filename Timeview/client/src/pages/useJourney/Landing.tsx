@@ -22,9 +22,9 @@ export const clientLoader =
       : 0
     const randomUser = PRIVILAGED_USERS[randomIndex]
 
-    store.dispatch(loginUser({ user: randomUser, jwt: '...', token: '...' }))
-    store.dispatch(populateKonsultants(PRIVILAGED_USERS))
-    store.dispatch(selectedUser(PRIVILAGED_USERS[1])) //employe
+   // store.dispatch(loginUser({ user: randomUser, jwt: '...', token: '...' }))
+   // store.dispatch(populateKonsultants(PRIVILAGED_USERS))
+   // store.dispatch(selectedUser(PRIVILAGED_USERS[1])) //employe
 
     const user = store.getState().userState.user
     // Perform any meta or auth check

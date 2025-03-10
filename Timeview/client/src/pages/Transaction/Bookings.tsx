@@ -26,7 +26,7 @@ import {
 } from '@/features/transaction/booking/booking'
 import { addTimeIntervalState } from '@/features/transaction/booking/setBookings'
 import { setTimeSlots } from '@/features/transaction/booking/checkBoxSlice'
-import { fetchAvailableTimeSlots } from '@/features/api'
+import { fetchAvailableTimeSlots } from '@/services/api'
 export const clientAction =
   (store: ReduxStore): ActionFunction =>
   async ({ request }): Promise<Response | null> => {
@@ -96,6 +96,10 @@ export const clientAction =
       }
       store.dispatch(setGlobalProp(payload))
     }
+
+    /**
+     * default behavior
+     */
     const currentDay_On_WeedBooking = store.getState().bookingState
     //console.log(currentDay_On_WeedBooking)
 

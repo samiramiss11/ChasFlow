@@ -35,9 +35,9 @@ export const clientAction =
     const user: string = await remoteLogin({ email, password })
     console.log(user, 'user response')
 
-    store.dispatch(
-      loginUser({ user: USER, jwt: user ? ':)' : '...', token: user })
-    )
+    // store.dispatch(
+    //   loginUser({ user: USER, jwt: user ? ':)' : '...', token: user })
+    // )
     return redirect('../' + JOURNY_LINSK_CONSTANTS.ONBOARDING_STEP3)
   }
 

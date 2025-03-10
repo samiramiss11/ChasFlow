@@ -35,16 +35,17 @@ const Header = () => {
         {/* USER */} {/* LINKS */}
         <div className='align-element flex justify-center sm:justify-end '>
           {user ? (
-            <div className='flex gap-x-2 sm:gap-x-8 items-center'>
-              <p className='text-xs sm:text-sm'>
-                Hello, {JSON.stringify(user)}
-              </p>
-              <button
-                className='btn btn-xs btn-outline btn-primary '
-                onClick={handleLogout}>
-                logout
-              </button>
-            </div>
+             <div className='flex gap-x-6 justify-center items-center'>
+              {links.map((link) => {
+                return (
+                  <Link
+                    key={link.id}
+                    to={link.path}
+                    className='link link-hover text-xs sm:text-sm'>
+                    {link.text}
+                  </Link>
+                );
+              })}</div>
           ) : (
             <div className='flex gap-x-6 justify-center items-center'>
               {links.map((link) => {
