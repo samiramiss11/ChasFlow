@@ -83,7 +83,7 @@ import { Provider } from 'react-redux'
 const onboardingPrefix = {
   path: JOURNY_LINSK_CONSTANTS.ONBOARDING_STEP1,
   element: <UserJourneyLayout />,
-  loader: featureLoader(),
+  //loader: featureLoader(store),
   children: [
     {
       index: true,
@@ -171,7 +171,7 @@ const router = createBrowserRouter(
       path: '/',
       element: <DashboardLayout />,
       errorElement: <Error />,
-      loader: dashboardLoader(),
+      loader: dashboardLoader(store),
        children: [
         {
           index: true,

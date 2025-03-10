@@ -33,7 +33,7 @@ export const clientAction =
 
     // Call remoteLogin with the correct type
     const user: string = await remoteLogin({ email, password })
-    console.log(user, 'user response')
+   // console.log(user, 'user response') //just a token using axios api default
 
     // store.dispatch(
     //   loginUser({ user: USER, jwt: user ? ':)' : '...', token: user })
@@ -72,6 +72,7 @@ const RoleTaskOnboarding = () => {
             id='pass'
             name='email'
             type='text'
+            defaultValue={'erik.jonsson@chasacademy.se'}
           />
         </div>
 
@@ -171,6 +172,7 @@ const RoleTaskOnboarding = () => {
                   id='search'
                   name='password'
                   type='text'
+                  defaultValue={'Chas@2025timeedit'}
                 />
               </div>
             </div>

@@ -22,7 +22,7 @@ export interface OwnedBatch {
 // Retrieve the set data from localStorage and ensure it matches SetTimeIntervalState
 const getSetFromLocalStorage = (): SetTimeIntervalState => {
   const batch = localStorage.getItem('setOfbatches')
-  console.log(batch, 'this is a batch')
+  //console.log(batch, 'this is a batch')
   const parsedBatch = batch ? JSON.parse(batch) : defaultState
 
   // // Check if parsedBatch is valid

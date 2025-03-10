@@ -90,7 +90,7 @@ export const fetchConsultants = async () => {
   try {
     const response = await api.get('/consultants')
     const data = response.data // Return the consultants data
-    console.log(data)
+    //console.log(data)
     const frontendTypeConvertedConsultants = data.map((obj: any) => ({
       id: obj.consultantID, // Use obj instead of consultants
       name: obj.username,

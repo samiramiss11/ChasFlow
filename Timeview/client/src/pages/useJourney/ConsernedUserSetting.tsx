@@ -34,7 +34,7 @@ export const clientLoader =
     //1. fetch endpoint and put in store for later use (or just here)
     store.dispatch(removeLastTimeIntervall())
     store.dispatch(clearIntervals())
-    console.log('cleared')
+    //console.log('cleared')
     store.dispatch(populateKonsultants(PRIVILAGED_USERS))
 
     let konsultantNamesMeta = []
@@ -49,7 +49,7 @@ export const clientLoader =
       konsultantNamesMeta = consultantsRemote.map(
         (userWithRole: any) => userWithRole.name
       )
-      console.log('complete')
+     // console.log('complete')
       store.dispatch(populateKonsultants(consultantsRemote))
     } catch (error) {
       console.error('Failed to fetch data. Backend may be offline.', error)
@@ -120,7 +120,7 @@ type DataConformedMetaOfDatabase = {
 const ConsernedUserSetting = () => {
   const { userMeta, courseCodeMeta } =
     useLoaderData() as DataConformedMetaOfDatabase
-  console.log(userMeta)
+  //console.log(userMeta)
   let fetcher = useFetcher()
   if (!userMeta) {
     return (

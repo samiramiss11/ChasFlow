@@ -6,7 +6,23 @@ import { createContext, useContext } from 'react'
 
 import { Loading, Header } from '../../components/Shared'
 import { useLocation } from 'react-router'
-export const clientLoader = () => async () => {
+import { fetchAdminProfile } from '@/services/api'
+export const clientLoader = (store: ReduxStore) => async () => {
+  const tokenUser = store.getState().userState.user
+  console.log('tokenUser',tokenUser)
+  if (!tokenUser) {
+    const token = localStorage.getItem('token') || null
+    console.log('pre',token)
+    if (token) {
+      const newTokenUser = fetchAdminProfile()
+
+      
+      console.log('fetch admin',newTokenUser)
+    }
+
+    
+  }
+
   return null
 }
 interface DashboardContextType {
@@ -17,6 +33,7 @@ const DashboardContext = createContext<DashboardContextType | undefined>(
   undefined
 )
 import { JOURNY_LINSK_CONSTANTS } from '../../utils/links'
+import { ReduxStore } from '@/lib/store';
 const DashboardLayout = () => {
   const navigation = useNavigation()
   const location = useLocation()
