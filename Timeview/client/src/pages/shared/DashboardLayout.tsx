@@ -7,6 +7,7 @@ import { createContext, useContext } from 'react'
 import { Loading, Header } from '../../components/Shared'
 import { useLocation } from 'react-router'
 import { fetchAdminProfile } from '@/services/api'
+import { loginUser } from '@/features/onboarding/user/userSlice'
 export const clientLoader = (store: ReduxStore) => async () => {
   const tokenUser = store.getState().userState.user
   console.log('tokenUser',tokenUser)
@@ -14,13 +15,12 @@ export const clientLoader = (store: ReduxStore) => async () => {
     const token = localStorage.getItem('token') || null
     console.log('pre',token)
     if (token) {
-      const newTokenUser = fetchAdminProfile()
-
+      const newTokenUser = await fetchAdminProfile()
+      const Username = `${newTokenUser.firstNamd} ${newTokenUser.lastName}`
+      store.dispatch(loginUser({ user: {id:'meh-we-dont-do-that-over-here',name:Username,role:'admin'}, jwt: token, token: token }))
       
       console.log('fetch admin',newTokenUser)
     }
-
-    
   }
 
   return null
