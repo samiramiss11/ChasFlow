@@ -96,6 +96,17 @@ exports.saveBooking = async (req, res) => {
   const { consultantID, courseID, selectedWeek, selectedDay, selectedRoom, selectedTimeSlots } = req.body;
   
   try {
+
+    if (!consultantID || !courseID || !selectedWeek || !selectedDay || !selectedRoom || !selectedTimeSlots) {
+       console.log(req.body)
+      return res.status(400).json({ error: 'Missing required fields' });
+    }
+
+    // Ensure selectedTimeSlots is an array. uh if we send a record may need to  Parse the JSON Properly
+    const timeSlots = Array.isArray(selectedTimeSlots)
+      ? selectedTimeSlots
+      : JSON.parse(selectedTimeSlots);
+    
     const bookingDate = getISOWeekDate(new Date().getFullYear(), selectedWeek, selectedDay);
     // Loop over selected time slots and create booking records
     for (const timeSlotID of selectedTimeSlots) {

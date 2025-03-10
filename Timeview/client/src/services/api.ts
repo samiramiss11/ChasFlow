@@ -131,7 +131,7 @@ export const fetchConsultantById = async (consultantID: string) => {
 // Save booking
 export const saveBookings = async (data: any) => {
   try {
-    const response = await api.post('/bookings', data)
+    const response = await api.post('/bookings/save', data)
     return response.data
   } catch (error) {
     console.error('Error saving bookings:', error)

@@ -6,7 +6,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { FaChevronDown } from 'react-icons/fa'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect,useRef } from 'react'
 
 /**
  * Default is when everything is default false. if we need to store context as we
@@ -26,14 +26,26 @@ const CheckboxMenu = ({ roomId }: { roomId: string }) => {
   const [selectedTimeSlots, setSelectedTimeSlots] = useState<
     Record<string, { timeSlotID: string; startTime: string; endTime: string }[]>
   >({})
-  console.log('selectedTimes', selectedTimeSlots)
+ // console.log('selectedTimes', selectedTimeSlots)
   //const dispatch = useAppDispatch()
   const fetcher = useFetcher()
+  //const isFirstRender = useRef(true);
+     const hasOpened = useRef(false);
+
   const handlePopupToggle = (isOpen: boolean) => {
     setOpen(isOpen)
   }
 
   useEffect(() => {
+    // if (isFirstRender.current) {
+    //   isFirstRender.current = false; // Skip first render
+    //   return;
+    // }
+     if (!hasOpened.current && !open) {
+    return; // Skip the first effect run when component mounts
+  }
+  
+  hasOpened.current = true; 
     if (open) {
       // Fetch available timeslots when opening
       fetcher.submit(
@@ -54,7 +66,7 @@ const CheckboxMenu = ({ roomId }: { roomId: string }) => {
         {
           actionType: 'save',
           roomId,
-          selectedTimeslots: selectedTimeSlots,
+          selectedTimeslots: JSON.stringify(selectedTimeSlots),
         },
         { method: 'POST' } //, action: '/boka'
       )

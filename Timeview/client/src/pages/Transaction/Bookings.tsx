@@ -26,7 +26,7 @@ import {
 } from '@/features/transaction/booking/booking'
 import { addTimeIntervalState } from '@/features/transaction/booking/setBookings'
 import { setTimeSlots } from '@/features/transaction/booking/checkBoxSlice'
-import { fetchAvailableTimeSlots } from '@/services/api'
+import { fetchAvailableTimeSlots ,saveBookings} from '@/services/api'
 export const clientAction =
   (store: ReduxStore): ActionFunction =>
   async ({ request }): Promise<Response | null> => {
@@ -50,24 +50,44 @@ export const clientAction =
 
         console.log('opeen')
       }
-      if (actionType === 'save') {
-        const room = store.getState().bookingState.rooms[roomId]
+      if (actionType === 'save') { //uncomment Record selection in context, send in formAction
+        // const room = store.getState().bookingState.rooms[roomId]
 
-        if (room) {
-          // Access the selectedInterval for the found room
-          const selectedTimeSlots = room.selectedInterval
-          console.log(selectedTimeSlots, 'selection') // This will log the array of selected intervals for the specific room
-          // const [startTime, endTime] = [
-          //   selectedTimeSlots[0].split('-')[0],
-          //   selectedTimeSlots[selectedTimeSlots.length - 1].split('-')[1],
-          // ]
-          // You can now perform the save action or any other logic with selectedTimeSlots
-        }
+        // if (room) {
+        //   // Access the selectedInterval for the found room
+        //   const selectedTimeSlots = room.selectedInterval
+        //   console.log(selectedTimeSlots, 'selection') // This will log the array of selected intervals for the specific room
+        //   // const [startTime, endTime] = [
+        //   //   selectedTimeSlots[0].split('-')[0],
+        //   //   selectedTimeSlots[selectedTimeSlots.length - 1].split('-')[1],
+        //   // ]
+        //   // You can now perform the save action or any other logic with selectedTimeSlots
+        // }
         // Save selected timeslots
         console.log('close')
         const selectedTimeslots = formData.getAll(
-          'selectedTimeslots[]'
+          'selectedTimeslots'
         ) as string[]
+         const dayindex = store.getState().bookingState.day
+        const dayStrings = ['Måndag', 'Tisdag', 'Onsdag', 'Torsdag', 'Fredag']
+        const dayString = dayStrings[dayindex - 1]
+        const week = store.getState().bookingState.week
+        const consultantID = store.getState().konsultantState.selectedUser?.id
+        const courseID = store.getState().konsultantState.selectedCourseCode
+
+         const data = {
+        consultantID,
+        courseID,
+        date: new Date(8.64e15),
+        week: week,
+        day: dayString,
+        roomID: roomId,
+        timeSlotID: selectedTimeslots,
+        }
+        console.log(data,'data')
+        saveBookings(data)
+        console.log(selectedTimeslots)
+
         // await saveSelectedTimeslotsToDB(roomId, selectedTimeslots)
         // return json({ success: true })
       }

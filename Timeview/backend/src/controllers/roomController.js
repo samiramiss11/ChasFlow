@@ -44,7 +44,7 @@ exports.getAvailableTimeSlots = async (req, res) => {
       !slot.bookings || slot.bookings.length === 0  // Check if no bookings exist
     );
     
-    console.log("Available Time Slots:", availableTimeSlots); // Debug to see filtered slots
+   // console.log("Available Time Slots:", availableTimeSlots); // Debug to see filtered slots
     
     res.json(availableTimeSlots);
   }
