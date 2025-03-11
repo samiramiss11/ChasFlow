@@ -148,7 +148,7 @@ const ConsernedUserSetting = () => {
               method='POST'>
               <ResponsiveBallContent>
                 {/* col 1 */}
-                <div className='flex flex-col gap-4'>
+                <div className='flex flex-col gap-4 max-w-[200px]'>
                   <FormSelect
                     labelText='select category'
                     name='valdKonsultant'
@@ -159,7 +159,7 @@ const ConsernedUserSetting = () => {
                     type='submit'
                     size='sm'
                     variant='default'
-                    className='self-start mb-2 rounded-full'
+                    className='self-start mb-2 rounded-full  py-2 px-6"'
                     // asChild
                   >
                     Bekräfta
@@ -171,7 +171,7 @@ const ConsernedUserSetting = () => {
                 </div>
 
                 {/* col 2 */}
-                <div className='flex flex-col'>
+                <div className='ml-10 flex flex-col max-w-[200px] gap-2'>
                   <FormSelect
                     labelText='Skriv in kurskoden'
                     name='kurskod'

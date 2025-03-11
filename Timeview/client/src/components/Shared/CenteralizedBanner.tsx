@@ -32,10 +32,10 @@ const CenteralizedBanner: React.FC<BannerProps> = ({
         {/* Right Side - Hero Content */}
         <div className=' md:w-1/2 z-30 text-white  md:pl-10'>
           <div className='w-full md:w-[80%] ml-auto  flex flex-col justify-center'>
-            <h1 className='text-4xl font-bold'>{heroContent.hero}</h1>
+            <h1 className={`-ml-4 text-4xl font-bold ${isLoginPage ? '' : 'opacity-50 '}font-caveat text-9xl leading-[1.2] text-center`}>{heroContent.hero}</h1>
             {isLoginPage && (
               <>
-                <h3 className='text-xl italic text-black'>
+                <h3 className='text-xl italic text-black flex justify-center'>
                   {heroContent.subheader}
                 </h3>
                 <p className='mt-3 text-black'>{heroContent.paragraph}</p>

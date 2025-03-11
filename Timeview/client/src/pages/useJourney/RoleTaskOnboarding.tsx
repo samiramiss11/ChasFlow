@@ -66,7 +66,7 @@ const RoleTaskOnboarding = () => {
   const columnOne = () => {
     return (
       <div className=''>
-        <div className='flex flex-col w-full gap-2'>
+        <div className='flex flex-col w-full gap-2 max-w-[200px]'>
           <Label htmlFor='email'>Email</Label>
           <Input
             id='pass'
@@ -92,7 +92,7 @@ const RoleTaskOnboarding = () => {
               }
               //navigate('../' + JOURNY_LINSK_CONSTANTS.ONBOARDING_STEP3)
             }}>
-            Bekräfta
+            Logga in
           </Button>
         </div>
       </div>
@@ -101,7 +101,7 @@ const RoleTaskOnboarding = () => {
   const forgotPassword = ({ linkChild }: { linkChild: JSX.Element }) => {
     const textValues = {
       trigger: (
-        <button>
+        <button className='text-inherit'>
           {/* <Link
           to={`/user-journey/${JOURNY_LINSK_CONSTANTS.ONBOARDING_ALTERNATIV_STEP2}`}
           className=''
@@ -109,8 +109,8 @@ const RoleTaskOnboarding = () => {
           <b>
             <u>Glömt lösenord?</u>
           </b>{' '}
-          Klicka här för att ange din e-post och få en återställningslänk
-          skickad till dig
+          <span className='text-gray-300'>Klicka här för att ange din e-post och få en återställningslänk
+          skickad till dig</span>
         </button>
       ),
       title: 'Har du glömt ditt lösenord?',
@@ -140,7 +140,7 @@ const RoleTaskOnboarding = () => {
           size='sm'
           variant='outline'
           className='mb-2 rounded-full chasBlue w-40 text-center whitespace-nowrap'>
-          Byt utbildare
+          SKICKA MEJL
         </Button>
       </Link>
     )
@@ -166,7 +166,7 @@ const RoleTaskOnboarding = () => {
             <div className='flex flex-col w-full'>{columnOne()}</div>
             {/**column 2 */}
             <div className=''>
-              <div className='flex flex-col w-full gap-2'>
+              <div className='flex flex-col w-full gap-2  max-w-[200px]'>
                 <Label htmlFor='lösenord'>Lösenord</Label>
                 <Input
                   id='search'
