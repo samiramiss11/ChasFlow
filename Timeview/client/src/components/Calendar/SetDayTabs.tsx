@@ -31,10 +31,15 @@ const SetDayTabs = () => {
         
         const formattedDate = date.toLocaleDateString('sv-SE', {
             day: '2-digit',
-            month: '2-digit',
+            month:'2-digit',// week < 10 ? '1-digit' : 
         }); // Outputs "30/12"
 
-        return `${day} ${formattedDate}`;
+        const [controlledDigitDay, controlledDigitMonth] = formattedDate.split('/'); 
+//const finalFormattedDate = week < 10 ? `${controlledDigitDay}/${Number(controlledDigitMonth)}` : formattedDate;
+
+       const trimmedDate = `${day} ${Number(controlledDigitDay)}/${Number(controlledDigitMonth)}`;
+
+       return 'formatTrim' === 'formatTrim' ? trimmedDate : `${day} ${formattedDate}`;
       // return { //{ day: string; date: string }
       //   day,
       //   date: date.toLocaleDateString(), // Store the formatted date
