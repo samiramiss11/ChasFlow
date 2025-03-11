@@ -54,7 +54,7 @@ export const links = [
 
   {
     id: nanoid(),
-    text: 'LOGG IN',
+    text: 'LOGGA IN',
     path: `/${JOURNY_LINSK_CONSTANTS.ONBOARDING_STEP1}/${JOURNY_LINSK_CONSTANTS.ONBOARDING_STEP2}`,
     icon: <LiaMapMarkedAltSolid />,
   },

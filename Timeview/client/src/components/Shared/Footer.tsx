@@ -3,6 +3,7 @@ import Logo from './Logo'
 import { useLoaderData } from 'react-router'
 import Address from './Address'
 import ChassStamp from './ChassStamp'
+import { Link } from 'react-router-dom';
 const clientLoader = async () => {
   return null
 }
@@ -40,9 +41,9 @@ const Footer = () => {
         </div>
       </div>
       {/** */}
-      <div className='flex items-center  gap-8 justify-center pb-7'>
-    <div>    <p>@ 2025 Chas Vissual Managment.se</p></div>
-       <div> <p>Läs mer om vår Tillgänglighetsåtgärder</p></div>
+      <div className='flex items-center  gap-8 justify-center pb-7 '>
+    <div>    <p className='text-grayChas font-light'>@ 2025 Chas Vissual Managment.se</p></div>
+       <div> <Link to='../tillgänglighetsåtgärder' className='underline'><p className='text-grayChas font-light'>Läs mer om vår Tillgänglighetsåtgärder</p></Link></div>
       </div>
     </footer>
   )

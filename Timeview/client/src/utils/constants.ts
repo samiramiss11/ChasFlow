@@ -11,6 +11,7 @@ const QUERIES = {
 
 export const FOOT_CONSTANTS = {
   HEADER: 'Chas Academy',
+  LOCATION:'Arenavägen 61',
   ADRESS: '121 77 Johanneshov',
   LAND: 'Sverige',
   TEL: '08-123-45-67',

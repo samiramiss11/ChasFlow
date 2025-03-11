@@ -1,5 +1,37 @@
 /* ============= GLOBAL CSS =============== */
 
+
+a
+/* Typography */
+h1 {
+  @apply scroll-m-20 text-4xl font-extrabold tracking-tighter lg:text-5xl;
+}
+
+h2 {
+  @apply scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0;
+}
+
+h3 {
+  @apply scroll-m-20 text-2xl font-semibold tracking-tight;
+}
+
+h4 {
+  @apply scroll-m-20 text-xl font-semibold tracking-tight;
+}
+
+p {
+  @apply leading-5 [&:not(:first-child)]:mt-6;
+}
+
+blockquote {
+  @apply mt-6 border-l-2 pl-6 italic;
+}
+
+code {
+  @apply relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold;
+}
+/* ============= GLOBAL CSS =============== */
+
 *,
 ::after,
 ::before {
@@ -8,9 +40,42 @@
   box-sizing: border-box;
 }
 
+
 html {
   font-size: 100%;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
 } /*16px*/
+
+body[data-scroll-locked] {
+  padding-right: 0px !important;
+  overflow: hidden !important;
+}
+
+
+.DilogContent {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+}
+
+.DialogOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+
 
 :root {
   /* colors */
