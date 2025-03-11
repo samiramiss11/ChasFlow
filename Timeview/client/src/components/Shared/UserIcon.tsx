@@ -1,5 +1,6 @@
 import { LuUser } from 'react-icons/lu';
 //async; (possible in next.js)
+import { FaUser } from "react-icons/fa";
 function UserIcon() {
 //   const profileImage = await fetchProfileImage();
 //   if (profileImage) {
@@ -7,6 +8,5 @@ function UserIcon() {
 //       <img src={profileImage} className='w-6 h-6 rounded-full object-cover' />
 //     );
 //   }
-  return <LuUser className='w-6 h-6 bg-primary rounded-full text-white' />;
-}
+  return <FaUser className='w-32 h-32 rounded-full  text-white' />;}
 export default UserIcon;
