@@ -38,6 +38,15 @@ const SetPaginatedWeekCtrl = () => {
     pageOffset + numOfWeeksDisplayed
   )
 
+  const handleClick = ( ()=> {
+    const targetElement = document.getElementById('section');
+    if (targetElement) {
+        const yOffset = 0 // Adjust based on your fixed header height
+        const y = targetElement.getBoundingClientRect().top + window.scrollY + yOffset;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+  });
+  
   const renderPagination = displayedWeeks.map((pageNumber) => {
     const isActive = pageNumber === currentPage
     // const url = constructUrl({ pageNumber, search, pathname })
@@ -55,7 +64,10 @@ const SetPaginatedWeekCtrl = () => {
         className='text-white'>
         <PaginationButtonLink
           isActive={isActive}
-          onClick={() => setCurrentPage(pageNumber)}>
+          onClick={() => {
+            setCurrentPage(pageNumber)
+            handleClick()
+          }}>
           V. {pageNumber}
         </PaginationButtonLink>
       </PaginationItem>

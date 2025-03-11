@@ -144,8 +144,9 @@ const Bookings = () => {
   // console.log(contextWithStaticData)
   //const items = JSON.parse(localStorage.getItem('items'))
 
+  //can scroll section into view with id
   return (
-    <div>
+    <section id='section'>
       <BookingControlContainer />
 
       <GroupedBookings contextWithStaticData={contextWithStaticData} />
@@ -159,7 +160,7 @@ const Bookings = () => {
           <Confirm />
         </Form>
       </div>
-    </div>
+    </section>
   )
 }
 
