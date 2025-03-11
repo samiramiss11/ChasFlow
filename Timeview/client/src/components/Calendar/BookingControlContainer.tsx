@@ -23,6 +23,7 @@ const BookingControlContainer = () => {
       <fetcher.Form
         method='POST'
         onSubmit={handleSubmit}
+        className='mb-4'
       >
         <SetPaginatedWeekCtrl />
       </fetcher.Form>

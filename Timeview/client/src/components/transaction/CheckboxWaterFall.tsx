@@ -72,14 +72,21 @@ const CheckboxWaterFall = ({
     setSelectedTimeSlots(updatedRooms) // Directly passing the updated value
   }
 
+  const formattedTimeSlots = checkboxes.map((timeslot) => ({
+  ...timeslot,
+  startTime: timeslot.startTime.replace(/:00$/, ""),
+  endTime: timeslot.endTime.replace(/:00$/, ""),
+}));
+
   return (
     <fetcher.Form method='post'>
-      {checkboxes.map((timeslot) => {
+      {formattedTimeSlots.map((timeslot) => {
         const isChecked =
           selectedTimeSlots[timeslot.roomID]?.some(
             (slot) => slot.timeSlotID === String(timeslot.timeSlotID)
           ) || false
-
+        console.log(timeslot.startTime)
+        
         return (
           <DropdownMenuItem
             key={timeslot.timeSlotID}
