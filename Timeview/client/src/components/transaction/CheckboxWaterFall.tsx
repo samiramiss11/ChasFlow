@@ -85,7 +85,7 @@ const CheckboxWaterFall = ({
           selectedTimeSlots[timeslot.roomID]?.some(
             (slot) => slot.timeSlotID === String(timeslot.timeSlotID)
           ) || false
-        console.log(timeslot.startTime)
+      
         
         return (
           <DropdownMenuItem

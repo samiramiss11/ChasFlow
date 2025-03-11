@@ -36,6 +36,13 @@ export const fetchRoomsForDay = async (week: number, day: string) => {
   }
 }
 //fetch available time slots
+/**
+ * secondary fetch 
+ * @param week modified iin controlBookingContainer
+ * @param day 
+ * @param roomID passed as a prop to CheckBoxMenu
+ * @returns 
+ */
 export const fetchAvailableTimeSlots = async (
   week: number | null,
   day: string | null,
@@ -43,7 +50,7 @@ export const fetchAvailableTimeSlots = async (
 ) => {
   try {
     const response = await api.get(`/timeslots/${week}/${day}/${roomID}`)
-    console.log('Time Slots Data:', response.data)
+  //  console.log('Time Slots Data:', response.data)
     return response.data // This should return { availableTimeSlots: [...] }
   } catch (error) {
     console.error('Error fetching time slots:', error)

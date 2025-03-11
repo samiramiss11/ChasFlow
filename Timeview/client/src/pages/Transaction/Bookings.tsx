@@ -120,16 +120,19 @@ export const clientAction =
     /**
      * default behavior
      */
+    if (formType === 'confirm') 
+          {
     const currentDay_On_WeedBooking = store.getState().bookingState
     //console.log(currentDay_On_WeedBooking)
-
+    console.log(currentDay_On_WeedBooking)
     const currentState = store.getState().bookingState // ✅ Store before clearing
     if (Object.keys(currentState.rooms).length > 0) {
       // ✅ Ensure rooms exist
       store.dispatch(addTimeIntervalState(currentState)) // ✅ Store first
     }
     store.dispatch(clearIntervals())
-    //console.log('all bookings', store.getState().allBookingState)
+      //console.log('all bookings', store.getState().allBookingState)
+      }
     return null
   }
 import OnlineBooking from '@/components/transaction/OnlineBooking'
@@ -157,6 +160,11 @@ const Bookings = () => {
       </div>
       <div className='px-20'>
         <Form method='POST'>
+            <input
+        type='hidden'
+        name='formType'
+        value='confirm'
+      />
           <Confirm />
         </Form>
       </div>
