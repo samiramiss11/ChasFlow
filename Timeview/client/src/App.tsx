@@ -67,7 +67,7 @@ import {
   Educators,
 } from './pages/Admin'
 import { Provider } from 'react-redux'
-
+import Policy from './pages/Policy'
 /**
  * -2025-01-28
  * the landing page navigate or redirect to 2 optional prefixes (onboarding, transaction),
@@ -180,8 +180,13 @@ const router = createBrowserRouter(
         },
         onboardingPrefix,
         transactionPrefix,
-        adminPrefix,
+         adminPrefix,
+         {
+          path: 'tillgänglighetsåtgärder',
+          element: <Policy />,
+        }
       ],
+       
     },
 
     { path: '/login', element: <LoginPage /> },

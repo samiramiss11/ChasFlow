@@ -26,12 +26,41 @@ export default {
         bannerShade: '#7693A34D',
         input: '#156079',
         viewBookingButton: '#7693A340',
+        grayChas:'#F8F8F8'
       },
       fontFamily: {
-        sans: ['Roboto', 'sans-serif'],
+         sans: ['Poppins', 'sans-serif'], // Body text font
+        heading: ['Playpen Sans', 'sans-serif'],
+        caveat: ['Caveat', 'sans-serif'],
       },
       borderRadius: {
         button: '20px',
+      },
+      fontWeight: {
+        light: '300', // Poppins Light
+      },
+       lineHeight: {
+        h1: '45px',
+        h2: '38px',
+        h3: '34px',
+        body: '24px',
+        bodyHighlight: '24px', // Same line-height for highlighted text
+        small: '20px', // For smaller text
+        button: '18px', // For button text line height
+      },
+
+      spacing: {
+        gutter: '24px', // Space between columns
+        margin: '48px', // Margin for containers
+        section: '32px', // Space between sections
+        component: '16px', // Space within components
+      },
+      screens: {
+        'sm': '640px',
+        'md': '768px',
+        'lg': '1024px',
+        'xl': '1280px',
+        '2xl': '1536px',
       },
     },
   },
