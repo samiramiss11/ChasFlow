@@ -18,11 +18,11 @@ function LinksDropdown() {
   return (
     <DropdownMenu 
      modal={false}>
-      <DropdownMenuTrigger asChild>
-        <Button variant='ghost' className='flex gap-4 max-w-[100px] '>
-          Log in
-          <UserIcon />
-        </Button>
+      <DropdownMenuTrigger asChild className='flex items-c'>
+       <Button variant='ghost' className='flex items-center gap-2 max-w-[100px]'>
+    Logga in
+    <UserIcon />
+  </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className='w-[218px] mt-1 overflow-hidden rounded bg-white/75 p-2 text-left shadow  ' align='start' sideOffset={10}>
       

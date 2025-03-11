@@ -63,6 +63,7 @@ const SetPaginatedWeekCtrl = () => {
         key={pageNumber}
         className='text-white'>
         <PaginationButtonLink
+          size={'sm'}
           isActive={isActive}
           onClick={() => {
             setCurrentPage(pageNumber)
