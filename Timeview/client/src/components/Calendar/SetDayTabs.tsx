@@ -34,10 +34,13 @@ const SetDayTabs = () => {
             month:'2-digit',// week < 10 ? '1-digit' : 
         }); // Outputs "30/12"
 
-        const [controlledDigitDay, controlledDigitMonth] = formattedDate.split('/'); 
-//const finalFormattedDate = week < 10 ? `${controlledDigitDay}/${Number(controlledDigitMonth)}` : formattedDate;
+        const [dayPart, monthPart] = formattedDate.split('/'); 
+         const finalDay = Number(dayPart) < 10 ? `${dayPart}\u00A0` : dayPart;
+  const finalMonth = Number(monthPart) < 10 ? `\u00A0${monthPart}` : monthPart;
+        //const finalFormattedDate = week < 10 ? `${controlledDigitDay}/${Number(controlledDigitMonth)}` : formattedDate;
+               const trimmedDate = `${day} ${Number(finalDay)}${Number(dayPart) < 10?' ':''}/${Number(dayPart) < 10?' ':''}${Number(finalMonth)}`;
 
-       const trimmedDate = `${day} ${Number(controlledDigitDay)}/${Number(controlledDigitMonth)}`;
+      // const trimmedDate = `${day} ${Number(controlledDigitDay)}/${Number(controlledDigitMonth)}`;
 
        return 'formatTrim' === 'formatTrim' ? trimmedDate : `${day} ${formattedDate}`;
       // return { //{ day: string; date: string }
@@ -64,14 +67,14 @@ const SetDayTabs = () => {
       />
       <div
         role='tablist'
-        className=' tabs tabs-lifted md:flex flex-auto sm:center justify-center items-center '>
+        className=' tabs tabs-lifted md:flex flex-auto sm:center justify-center items-center  '>
         {daysWithDates.map((item, index) => {
           return (
             <button
               type='submit'
               key={index}
               onClick={() => setCurrentItem(index)}
-              className={`h-[56px] flex-grow tab ${
+              className={`flex-1 min-w-[20%]  h-[56px] flex-grow tab  ${
                 index === currentItem
                   ? 'bg-white'
                   : 'tab-active text-primary text-white [--tab-bg:black] [--tab-border-color:white]'
