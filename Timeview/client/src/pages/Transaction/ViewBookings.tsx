@@ -45,7 +45,7 @@ const ViewBookings = () => {
             <OrdersList />
             <div className='p-8'>
               <p>
-                Du önska avboka <b>{`${allbooking.timeInTotal || 0} timmar`}</b>{' '}
+                Du önska boka <b>{`${allbooking.timeInTotal || 0} timmar`}</b>{' '}
                 för <b>{`${relatedUser?.selectedUser?.name}`}</b>
               </p>
             </div>

@@ -7,7 +7,8 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 export interface TimeIntervalState {
   day: number
   week: number
-  rooms: Record<string, { selectedInterval: string[] }> //nicer syntax, keep room seperate form global properties
+  rooms: Record<string, { selectedInterval: string[]; }>; //nicer syntax, keep room seperate form global properties
+  totalHours: number
   // [roomId: string]: {
   //   selectedInterval: string[]                     //This conflict causes the TS2411 error.----
   // }
@@ -18,6 +19,7 @@ export interface TimeIntervalState {
 const defaultState: TimeIntervalState = {
   day: 1,
   week: 1,
+  totalHours:0,
   rooms: {},
 }
 
@@ -103,6 +105,15 @@ const timeIntervalSlice = createSlice({
 
       state.rooms[roomId].selectedInterval = interval
       console.log('current interval', state.rooms[roomId].selectedInterval)
+      state.totalHours = state.totalHours + interval.length
+             // Get previous interval length
+         const previousLength = state.rooms[roomId].selectedInterval.length;
+
+        // Update selected interval for the room
+           state.rooms[roomId].selectedInterval = interval;
+
+         // Adjust totalHours correctly
+       state.totalHours = state.totalHours - previousLength + interval.length;
       // state.rooms[roomId].selectedIntervals = {
       //   day: '',
       //   week: '',

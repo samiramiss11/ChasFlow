@@ -81,8 +81,9 @@ const timeIntervalSlice = createSlice({
             ])
           )
 
-          state.timeInTotal += newState.rooms[roomId].selectedInterval.length
         })
+        
+          state.timeInTotal += newState.totalHours
       }
 
       localStorage.setItem('setOfbatches', JSON.stringify(state))
