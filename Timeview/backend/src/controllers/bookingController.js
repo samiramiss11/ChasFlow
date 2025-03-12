@@ -92,8 +92,22 @@ exports.getAvailableTimeSlots = async (req, res) => {
 };  */
 // save/create all rooms
 
+const getISOWeekDate = (year, week, dayOfWeek) => {
+  const simple = new Date(year, 0, 1 + (week - 1) * 7);
+  const dow = simple.getDay();
+  const ISOweekStart = simple;
+  if (dow <= 4) ISOweekStart.setDate(simple.getDate() - simple.getDay() + 1);
+  else ISOweekStart.setDate(simple.getDate() + 8 - simple.getDay());
+
+  const targetDate = new Date(ISOweekStart);
+  targetDate.setDate(ISOweekStart.getDate() + ['Måndag', 'Tisdag', 'Onsdag', 'Torsdag', 'Fredag', 'Lördag', 'Söndag'].indexOf(dayOfWeek));
+
+  return targetDate.toISOString();
+};
+
 exports.saveBooking = async (req, res) => {
   const { consultantID, courseID, selectedWeek, selectedDay, selectedRoom, selectedTimeSlots } =req.body;
+   console.log(req.body)
  
   try {
 

@@ -60,7 +60,7 @@ const CheckboxMenu = ({ roomId }: { roomId: string }) => {
       //   .filter((slot) => slot.selected)
       //   .map((slot) => slot.name)
 
-      const timeSlotsArray = Object.values(selectedTimeSlots) || []; //each component can noly hold a single record
+      const timeSlotsArray = Object.values(selectedTimeSlots).flat() || []; //each component can noly hold a single record
       console.log(timeSlotsArray, 'sdf')
       const bookingIds = timeSlotsArray.map((slot) => slot.timeSlotID)
       
