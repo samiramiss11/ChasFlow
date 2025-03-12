@@ -93,8 +93,8 @@ exports.getAvailableTimeSlots = async (req, res) => {
 // save/create all rooms
 
 exports.saveBooking = async (req, res) => {
-  const { consultantID, courseID, selectedWeek, selectedDay, selectedRoom, selectedTimeSlots } = req.body;
-  
+  const { consultantID, courseID, selectedWeek, selectedDay, selectedRoom, selectedTimeSlots } =req.body;
+ 
   try {
 
     if (!consultantID || !courseID || !selectedWeek || !selectedDay || !selectedRoom || !selectedTimeSlots) {
@@ -109,12 +109,12 @@ exports.saveBooking = async (req, res) => {
     
     const bookingDate = getISOWeekDate(new Date().getFullYear(), selectedWeek, selectedDay);
     // Loop over selected time slots and create booking records
-    for (const timeSlotID of selectedTimeSlots) {
+    for (const timeSlotID of timeSlots) {
       const newBooking = await Booking.create({
         consultantID,
         courseID,
-        date: mondayOfWeek,
-        week: selectedWeek,
+        date: bookingDate,
+        weekID: selectedWeek,
         day: selectedDay,
         roomID: selectedRoom,
         timeSlotID: timeSlotID,

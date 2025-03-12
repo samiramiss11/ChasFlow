@@ -60,13 +60,18 @@ const CheckboxMenu = ({ roomId }: { roomId: string }) => {
       //   .filter((slot) => slot.selected)
       //   .map((slot) => slot.name)
 
+      const timeSlotsArray = Object.values(selectedTimeSlots) || []; //each component can noly hold a single record
+      console.log(timeSlotsArray, 'sdf')
+      const bookingIds = timeSlotsArray.map((slot) => slot.timeSlotID)
+      
+      
       // dispatch(setInterval({ roomId, interval: onlyCheckedTimeIntervals }))
 
       fetcher.submit(
         {
           actionType: 'save',
           roomId,
-          selectedTimeslots: JSON.stringify(selectedTimeSlots),
+          selectedTimeslots: JSON.stringify(bookingIds),
         },
         { method: 'POST' } //, action: '/boka'
       )

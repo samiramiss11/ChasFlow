@@ -65,9 +65,7 @@ export const clientAction =
         // }
         // Save selected timeslots
         console.log('close')
-        const selectedTimeslots = formData.getAll(
-          'selectedTimeslots'
-        ) as string[]
+        const selectedTimeslots =JSON.parse(formData.get('selectedTimeslots') as string) || [];
          const dayindex = store.getState().bookingState.day
         const dayStrings = ['Måndag', 'Tisdag', 'Onsdag', 'Torsdag', 'Fredag']
         const dayString = dayStrings[dayindex - 1]
@@ -78,11 +76,10 @@ export const clientAction =
          const data = {
         consultantID,
         courseID,
-        date: new Date(8.64e15),
-        week: week,
-        day: dayString,
-        roomID: roomId,
-        timeSlotID: selectedTimeslots,
+        selectedWeek: week,
+        selectedDay: dayString,
+        selectedRoom: roomId,
+        selectedTimeSlots: selectedTimeslots,
         }
         console.log(data,'data')
         saveBookings(data)

@@ -102,7 +102,7 @@ const HeroFactory = ({ location, confirm_success }: HeroStateInformation) => {
   userSelection?.courseCodes?.find(
     (code) => code.courseID === userSelection.selectedCourseCode
     )?.courseCode || '';
-  console.log('selectedCourseCode',  userSelection?.courseCodes, userSelection.selectedCourseCode)
+  //console.log('selectedCourseCode',  userSelection?.courseCodes, userSelection.selectedCourseCode)
   if (confirm_success) {
     return confirmed_Identity
   }
