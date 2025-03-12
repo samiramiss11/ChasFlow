@@ -15,7 +15,7 @@ const buttonVariants = cva(
       variant: {
         default: 'bg-chasBlue text-white hover:bg-chasBlueHover min-w-[111px] min-h-[41px] uppercase',
         destructive:
-          'bg-destructive text-destructive-foreground hover:bg-destructive/90',
+          'bg-destructive text-destructive-foreground hover:bg-destructive/90 border border-negative hover:bg-negative hover:text-white min-h-[41px] uppercase',
         outline:
           'border-chasBlue hover:bg-chasBlueHover  border border-input bg-background hover:bg-chasBlue  hover:border-chasBlue hover:whiteforeground min-h-[41px] uppercase',
         secondary:

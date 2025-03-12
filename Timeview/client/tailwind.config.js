@@ -27,7 +27,10 @@ export default {
         bannerShade: '#7693A34D',
         input: '#156079',
         viewBookingButton: '#7693A340',
-        grayChas:'#F8F8F8'
+        grayChas: '#F8F8F8',
+        
+        postive: '#A3C856',
+        negative:'#FF9FB6'
       },
       fontFamily: {
          sans: ['Poppins', 'sans-serif'], // Body text font

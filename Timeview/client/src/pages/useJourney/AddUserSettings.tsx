@@ -103,7 +103,7 @@ const AddUserSettings = () => {
               navigate(-1)
             }}
             size='sm'
-            variant='outline'
+            variant='destructive'
             className='ml-6 mb-2 rounded-full'>
             <AiOutlineStop className='mr-2' />
             Avbryt
