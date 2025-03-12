@@ -40,10 +40,16 @@ export const PRIVILAGED_USERS = [
 export type ComplexUserPrivilage = Staff | ReadOnly
 export type SetComplexUserPrivilages = ComplexUserPrivilage[] | null
 
+export type setCourseCodes = {
+  courseID: number
+  courseCode: string
+}[]
+
 export type UserState = {
   readonly users: SetComplexUserPrivilages
+  readonly courseCodes:setCourseCodes
   selectedUser: Staff | null | Manager
-  selectedCourseCode: String | null
+  selectedCourseCode: number | null
   //participants: ReadOnly[]
 }
 
@@ -63,8 +69,20 @@ const getUserFromLocalStorage = (): SetComplexUserPrivilages => {
 //   return JSON.parse(user) as ReadOnly[]
 // }
 
+const getCourseCodesFromLocalStorage = (): setCourseCodes => {
+  const codes = localStorage.getItem('courseCodes');
+  if (!codes) return [];
+  try {
+    return JSON.parse(codes) as setCourseCodes;
+  } catch (error) {
+    console.error('Error parsing course codes from local storage:', error);
+    return [];
+  }
+};
+
 const initialState: UserState = {
   users: getUserFromLocalStorage(),
+  courseCodes:getCourseCodesFromLocalStorage(),
   selectedUser: JSON.parse(localStorage.getItem('selectedUser') || 'null'),
   selectedCourseCode: JSON.parse(
     localStorage.getItem('selectedCourseCode') || 'null'
@@ -78,6 +96,10 @@ const userSlice = createSlice({
   reducers: {
     populateKonsultants: (state, action: PayloadAction<Staff[]>) => {
       state.users = action.payload
+    },
+     populateCourseCodes: (state, action: PayloadAction<setCourseCodes>) => {
+       state.courseCodes = action.payload
+       localStorage.setItem('courseCodes', JSON.stringify(state.courseCodes))
     },
     selectedUser: (state, action: PayloadAction<Staff | string | null>) => {
       let newKonsultantId = action.payload
@@ -100,8 +122,8 @@ const userSlice = createSlice({
       // }
       localStorage.setItem('selectedUser', JSON.stringify(state.selectedUser))
     },
-    setSelectedCourseCode: (state, action: PayloadAction<string | null>) => {
-      let newCourseCode = action.payload ?? ''
+    setSelectedCourseCode: (state, action: PayloadAction<number | null>) => {
+      let newCourseCode = action.payload ?? null
       console.log(newCourseCode)
       state.selectedCourseCode = newCourseCode //.push
       // }
@@ -112,7 +134,7 @@ const userSlice = createSlice({
   },
 })
 
-export const { populateKonsultants, selectedUser, setSelectedCourseCode } =
+export const { populateKonsultants, selectedUser, setSelectedCourseCode,populateCourseCodes } =
   userSlice.actions
 
 export default userSlice.reducer

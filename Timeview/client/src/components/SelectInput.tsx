@@ -44,8 +44,10 @@ type FormRowSelectProps = {
   type?: string
   name: string
   labelText?: string
-  list: (string | null)[] // Assuming list contains strings
-  defaultValue?: string | undefined
+  list: {
+    label: string, value: number|string;
+  }[] // Assuming list contains strings
+  defaultValue?:string| number | undefined
   onChange?: (event: ChangeEvent<HTMLSelectElement>) => void
 }
 import { nanoid } from 'nanoid'
@@ -53,7 +55,7 @@ const SelectInput = ({
   name,
   labelText,
   list,
-  defaultValue = '',
+  defaultValue='' ,
   onChange,
 }: FormRowSelectProps) => {
   return (
@@ -72,14 +74,14 @@ const SelectInput = ({
         onChange={onChange}
       >
         {list
-          ? list.reduce<React.ReactNode[]>((options, itemValue) => {
-              if (itemValue !== null) {
+          ? list.reduce<React.ReactNode[]>((options, item) => {
+              if (item !== null) {
                 options.push(
                   <option
                     key={nanoid()}
-                    value={itemValue}
+                    value={item.value}
                   >
-                    {itemValue}
+                    {item.label}
                   </option>
                 )
               }

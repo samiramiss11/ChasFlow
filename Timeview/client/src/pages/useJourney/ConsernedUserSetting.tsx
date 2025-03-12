@@ -17,11 +17,11 @@ import {
 } from 'react-router-dom'
 
 import { type ReduxStore } from '@/lib/store'
-import { populateKonsultants } from '@/features/onboarding/users/usersSlice'
+import { populateKonsultants,populateCourseCodes } from '@/features/onboarding/users/usersSlice'
 import {
   PRIVILAGED_USERS,
   selectedUser,
-  setSelectedCourseCode,
+  setSelectedCourseCode,setCourseCodes
 } from '@/features/onboarding/users/usersSlice'
 import { removeLastTimeIntervall } from '@/features/transaction/booking/setBookings'
 import { clearIntervals } from '@/features/transaction/booking/booking'
@@ -44,13 +44,14 @@ export const clientLoader =
         fetchConsultants(),
         fetchCourses(),
       ])
-      const consultants = consultantsRemote
+     // const consultants = consultantsRemote
       courseCode = courseCodeRemote
       konsultantNamesMeta = consultantsRemote.map(
         (userWithRole: any) => userWithRole.name
       )
      // console.log('complete')
       store.dispatch(populateKonsultants(consultantsRemote))
+      store.dispatch(populateCourseCodes(courseCodeRemote))
     } catch (error) {
       console.error('Failed to fetch data. Backend may be offline.', error)
       konsultantNamesMeta = ['Nan']
@@ -90,7 +91,7 @@ export const clientAction =
     const valdKonsultant = formData.get('valdKonsultant') as string | null
     const kurskod = formData.get('kurskod') as string | null
 
-    store.dispatch(setSelectedCourseCode(kurskod))
+    store.dispatch(setSelectedCourseCode(Number(kurskod)))
     store.dispatch(selectedUser(valdKonsultant))
     // const tokenUser = store.getState().userState.user
     // if (!tokenUser || tokenUser.role !== 'admin') {
@@ -109,7 +110,7 @@ import { JOURNY_LINSK_CONSTANTS } from '../../utils/links'
  */
 type DataConformedMetaOfDatabase = {
   userMeta: string[] | null
-  courseCodeMeta: string[]
+  courseCodeMeta: setCourseCodes
 }
 /**
  * within a hero section display optional selection for a current user that will own a batch of bookigs.
@@ -120,6 +121,7 @@ type DataConformedMetaOfDatabase = {
 const ConsernedUserSetting = () => {
   const { userMeta, courseCodeMeta } =
     useLoaderData() as DataConformedMetaOfDatabase
+  console.log(courseCodeMeta)
   //console.log(userMeta)
   let fetcher = useFetcher()
   if (!userMeta) {
@@ -152,7 +154,9 @@ const ConsernedUserSetting = () => {
                   <FormSelect
                     labelText='select category'
                     name='valdKonsultant'
-                    list={userMeta}
+                    list={userMeta.map((meta) => {
+                      return{ label: meta, value: meta }
+                    })}
                     defaultValue={userMeta[0]}
                   />
                   <Button
@@ -175,8 +179,11 @@ const ConsernedUserSetting = () => {
                   <FormSelect
                     labelText='Skriv in kurskoden'
                     name='kurskod'
-                    list={courseCodeMeta}
-                    defaultValue={courseCodeMeta[0]}
+                    list={courseCodeMeta.map(meta => ({
+                      value: meta.courseID,  // the underlying value
+                      label: meta.courseCode // the displayed text
+                    }))}
+                    defaultValue={courseCodeMeta[0].courseID}
                   />
                 </div>
                 <div className='pt-4 col-span-2  max-w-[72ch] mx-auto break-words'>

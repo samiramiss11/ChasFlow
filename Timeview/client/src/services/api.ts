@@ -117,7 +117,7 @@ export const fetchCourses = async () => {
   try {
     const response = await api.get('/courses')
     const data = response.data
-    const courseMeta = data.map((withoutId: any) => withoutId.courseCode)
+    const courseMeta = data//.map((withoutId: any) => withoutId.courseCode), need id for db selection
     return courseMeta
   } catch (error) {
     return error

@@ -98,6 +98,11 @@ const HeroFactory = ({ location, confirm_success }: HeroStateInformation) => {
   const userSelection = useAppSelector(
     (state: RootState) => state.konsultantState
   )
+  const selectedCourseCode =
+  userSelection?.courseCodes?.find(
+    (code) => code.courseID === userSelection.selectedCourseCode
+    )?.courseCode || '';
+  console.log('selectedCourseCode',  userSelection?.courseCodes, userSelection.selectedCourseCode)
   if (confirm_success) {
     return confirmed_Identity
   }
@@ -122,8 +127,8 @@ const HeroFactory = ({ location, confirm_success }: HeroStateInformation) => {
     case '/' + JOURNY_LINSK_CONSTANTS.TRANSACTION_STEP1:
       return TransactionPage({
         selectedUser: userSelection.selectedUser?.name ?? 'select user',
-        kurskod: userSelection.selectedCourseCode
-          ? userSelection.selectedCourseCode.toString()
+        kurskod: selectedCourseCode !=''
+          ? selectedCourseCode
           : 'behöver specifiera kurskod',
         includeParagraph: true,
       })
@@ -132,7 +137,7 @@ const HeroFactory = ({ location, confirm_success }: HeroStateInformation) => {
       return TransactionPage({
         selectedUser: userSelection.selectedUser?.name ?? 'select user',
         kurskod: userSelection.selectedCourseCode
-          ? userSelection.selectedCourseCode.toString()
+          ?selectedCourseCode
           : 'behöver specifiera kurskod',
       })
     case `/${JOURNY_LINSK_CONSTANTS.TRANSACTION_STEP1}/` +
