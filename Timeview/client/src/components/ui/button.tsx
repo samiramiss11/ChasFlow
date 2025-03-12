@@ -13,11 +13,11 @@ const buttonVariants = cva(
     // data-[state=open]:bg-chasBlue data-[state=open]:text-white
     variants: {
       variant: {
-        default: 'bg-chasBlue text-white hover:bg-primary/90 min-w-[111px] min-h-[41px] uppercase',
+        default: 'bg-chasBlue text-white hover:bg-chasBlueHover min-w-[111px] min-h-[41px] uppercase',
         destructive:
           'bg-destructive text-destructive-foreground hover:bg-destructive/90',
         outline:
-          'border-chasBlu border border-input bg-background hover:bg-chasBlue  hover:border-chasBlue hover:whiteforeground min-h-[41px] uppercase',
+          'border-chasBlue hover:bg-chasBlueHover  border border-input bg-background hover:bg-chasBlue  hover:border-chasBlue hover:whiteforeground min-h-[41px] uppercase',
         secondary:
           'bg-secondary text-secondary-foreground hover:bg-secondary/80',
         ghost:

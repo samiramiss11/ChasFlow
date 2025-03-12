@@ -17,6 +17,7 @@ export default {
           400: '#1D4ED8', // This is a custom blue shade (you can choose any color)
         },
         chasBlue: '#156079', //chasBlue
+        chasBlueHover:'#082A35',
         chasCerise: '#FF6FB6', //chasCerise
         chasGreen: '#3AC856', //chasGreen
         chasOrange: '#F6B55F', //chasOrange

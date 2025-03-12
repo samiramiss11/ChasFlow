@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import {
   HeroLayout,
   RoundedHeroWrapper,
@@ -7,7 +7,7 @@ import {
 } from '../../components/Shared'
 import { JOURNY_LINSK_CONSTANTS } from '../../utils/links'
 import { Button } from '@/components/ui/button'
-import { Link, Form, redirect } from 'react-router-dom'
+import { Link, Form, useActionData } from 'react-router-dom'
 import { ActionFunction, useLoaderData } from 'react-router'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -38,7 +38,7 @@ export const clientAction =
     // store.dispatch(
     //   loginUser({ user: USER, jwt: user ? ':)' : '...', token: user })
     // )
-    return redirect('../' + JOURNY_LINSK_CONSTANTS.ONBOARDING_STEP3)
+    return user ? { success: true } : { success: false }
   }
 
 // export const clientAction = ()=>{
@@ -61,7 +61,15 @@ const RoleTaskOnboarding = () => {
     userExistInStore
   )
 
+   const actionData = useActionData() as { success: boolean }
   const navigate = useNavigate()
+
+  useEffect(() => {
+    if (actionData?.success) {
+      navigate('../' + JOURNY_LINSK_CONSTANTS.ONBOARDING_STEP3, { replace: true })
+    }
+  }, [actionData, navigate])
+
 
   const columnOne = () => {
     return (
@@ -104,7 +112,7 @@ const RoleTaskOnboarding = () => {
         <button className='text-inherit'>
           {/* <Link
           to={`/user-journey/${JOURNY_LINSK_CONSTANTS.ONBOARDING_ALTERNATIV_STEP2}`}
-          className=''
+          clasasName=''
         > */}
           <b>
             <u>Glömt lösenord?</u>
