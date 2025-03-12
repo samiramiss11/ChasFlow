@@ -31,7 +31,7 @@ const CheckboxMenu = ({ roomId }: { roomId: string }) => {
   const fetcher = useFetcher()
   //const isFirstRender = useRef(true);
      const hasOpened = useRef(false);
-
+  const dispatch = useAppDispatch()
   const handlePopupToggle = (isOpen: boolean) => {
     setOpen(isOpen)
   }
@@ -59,11 +59,15 @@ const CheckboxMenu = ({ roomId }: { roomId: string }) => {
       // const onlyCheckedTimeIntervals = selectedTimeslots
       //   .filter((slot) => slot.selected)
       //   .map((slot) => slot.name)
-
+      console.log(selectedTimeSlots, 'selectedTimeSlots')
+     
+  
       const timeSlotsArray = Object.values(selectedTimeSlots).flat() || []; //each component can noly hold a single record
       console.log(timeSlotsArray, 'sdf')
       const bookingIds = timeSlotsArray.map((slot) => slot.timeSlotID)
       
+      const timeStrings = timeSlotsArray.map((slot) => `${slot.startTime}-${slot.endTime}`); 
+      dispatch(setInterval({ roomId, interval: timeStrings }))
       
       // dispatch(setInterval({ roomId, interval: onlyCheckedTimeIntervals }))
 

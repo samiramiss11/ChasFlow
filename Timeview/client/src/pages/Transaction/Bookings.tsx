@@ -81,7 +81,8 @@ export const clientAction =
         selectedRoom: roomId,
         selectedTimeSlots: selectedTimeslots,
         }
-        console.log(data,'data')
+        console.log(data, 'data')
+      
         saveBookings(data)
         console.log(selectedTimeslots)
 

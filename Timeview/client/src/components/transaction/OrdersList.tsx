@@ -14,6 +14,7 @@ import {
   TableRow,
 } from '@/components/ui/table'
 import { ROOMS } from '@/features/transaction/rooms/roomSlice'
+import { onlineRooms } from '@/features/transaction/rooms/roomSlice'
 const OrdersList = () => {
   const { allbooking, relatedUser } = useLoaderData() as OwnedBatch
   const flattenedRooms = ROOMS.flatMap((group) =>
@@ -41,20 +42,24 @@ const OrdersList = () => {
                   ([room, details]: [string, any]) => {
                     const { selectedInterval } = details
                     console.log(selectedInterval)
-                    const firstTime =
-                      selectedInterval[0]?.replace('-', '') || ''
-                    const lastTime =
-                      selectedInterval[selectedInterval.length - 1]?.replace(
-                        '-',
-                        ''
-                      ) || ''
+                    // const firstTime =
+                    //   selectedInterval[0]?.replace('-', '') || ''
+                    // const lastTime =
+                    //   selectedInterval[selectedInterval.length - 1]?.replace(
+                    //     '-',
+                    //     ''
+                    //   ) || ''
+                    const times: string[] =  (selectedInterval ?? []).map((interval: string )=> interval.split('-') ); // Extract start times
 
-                    const startTime = firstTime.slice(
+                    const smallestTime = times.reduce((a, b) => (a < b ? a : b)); // Find earliest time
+                    const greatestTime = times.reduce((a, b) => (a > b ? a : b));
+
+                    const startTime = smallestTime.slice(
                       0,
-                      Math.ceil(firstTime.length / 2)
+                      Math.floor(smallestTime.length / 2)
                     ) // First half
-                    const endTime = lastTime.slice(
-                      Math.floor(lastTime.length / 2)
+                    const endTime = greatestTime.slice(
+                      Math.ceil(greatestTime.length / 2)
                     )
                     return (
                       <TableRow key={`${index}-${room}`}>
@@ -71,7 +76,7 @@ const OrdersList = () => {
                           <p>
                             kl{' '}
                             <b className='text-muted-foreground'>
-                              {startTime + '-' + endTime}
+                                {startTime + '-' + endTime}
                             </b>
                           </p>
                         </TableCell>
@@ -81,7 +86,7 @@ const OrdersList = () => {
                             i rum {room}{' '}
                             <b className='font-extrabold text-muted-foreground'>
                               {' '}
-                              {flattenedRooms.find((r) => r.id === room)?.title}
+                              {flattenedRooms.find((r) => r.id === room)?.title || (onlineRooms.id === room ? 'Online' : 'Rum saknas')}
                             </b>
                           </p>
                         </TableCell>
