@@ -48,6 +48,19 @@ const PopulatedTableBody = ({ openRows, order }: TriggeredDataLoad) => {
   if (loading || attributes == null) {
     return (
       <>
+         <TableRow className="bg-white p-2">
+  {Object.keys({
+    datum: [],
+    tid: [],
+    programKod: [],
+    rum: [],
+    sammanlagda_timmar: [],
+  }).map((key) => (
+    <TableHead key={key} className="p-1 px-3">
+      <p className="font-bold">{key}</p>
+    </TableHead>
+  ))}
+</TableRow>
         {Array.from({ length: 2 }).map((_, rowIndex) => (
           <TableRow
             key={rowIndex}

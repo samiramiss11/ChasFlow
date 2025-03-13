@@ -8,6 +8,7 @@ import { links } from '../../utils/links'
 import Logo from './Logo'
 import { JOURNY_LINSK_CONSTANTS } from '../../utils/links'
 import LinksDropdown from './LinksDropdown'
+import React from 'react'
 const Header = () => {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
@@ -15,14 +16,7 @@ const Header = () => {
   const queryClient = useQueryClient()
 
 
-  const handleLogout = () => {
-    navigate(
-      `/${JOURNY_LINSK_CONSTANTS.ONBOARDING_STEP1}/${JOURNY_LINSK_CONSTANTS.ONBOARDING_STEP2}`
-    )
-    queryClient.removeQueries()
-
-    dispatch(logoutUser())
-  }
+  
 
   return (
     <header className='sticky   w-full bg-neutral py-2 text-neutral-content z-[50]'>
@@ -50,7 +44,7 @@ const Header = () => {
                   </Link>
                   );
                 else {
-                  return <LinksDropdown/>
+                  return <React.Fragment key={`dropdown-${index}`}><LinksDropdown /></React.Fragment>
                 }
               })}</div>
           ) : (

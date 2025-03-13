@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import { NavLink, Link } from 'react-router-dom'
 
 import { useLocation } from 'react-router'
@@ -14,13 +14,14 @@ import { Button } from '@/components/ui/button'
  * the purpose of the component is to confirm the batch of information to compute booked roomes for users, different weeks and days.
  * @returns
  */
-import CheckoutDialog from './CheckoutDialog'
-const Confirm = () => {
+
+const Confirm = ({children}:{children?:ReactNode }) => {
   const location = useLocation()
 
-  const isAdialogButton =
-    location.pathname ==
-    `/${JOURNY_LINSK_CONSTANTS.TRANSACTION_STEP1}/${JOURNY_LINSK_CONSTANTS.TRANSACTION_STEP2}`
+  // const isAdialogButton =
+  //   location.pathname ==
+  //   `/${JOURNY_LINSK_CONSTANTS.TRANSACTION_STEP1}/${JOURNY_LINSK_CONSTANTS.TRANSACTION_STEP2}`
+  
   const nextPageInfo = NextLinkToBodyFactory({})
   const firstPageWOTrailing = `/${JOURNY_LINSK_CONSTANTS.TRANSACTION_STEP1}`
   //consider url prefix composition
@@ -42,8 +43,8 @@ const Confirm = () => {
           {/**
            *
            */}
-          {isAdialogButton ? (
-            <CheckoutDialog />
+          {children ? (
+            children
           ) : (
             <Link
               to={finalLink}

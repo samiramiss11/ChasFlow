@@ -29,6 +29,7 @@ export const clientLoader =
   }
 import OrdersList from '@/components/transaction/OrdersList'
 import { useLoaderData } from 'react-router-dom'
+import CheckoutDialog from '@/components/transaction/CheckoutDialog';
 /**
  * IS centered in a TransactionCard with a list of:
  * 1. items
@@ -52,7 +53,7 @@ const ViewBookings = () => {
           </div>
 
           <div className=''>
-            <Confirm />
+            <Confirm > <div><CheckoutDialog /></div></Confirm>
           </div>
         </div>
       </TransactionCard>
