@@ -49,16 +49,29 @@ const OrdersList = () => {
                     //     '-',
                     //     ''
                     //   ) || ''
-                    const times: string[] =  (selectedInterval ?? []).map((interval: string )=> interval.split('-') ); // Extract start times
+                    const times: string[][] = (selectedInterval ?? [].filter(Boolean)).map((interval: string) =>
+  interval.split('-')
+); // Extract start & end times
 
-                    const smallestTime = times.reduce((a, b) => (a < b ? a : b)); // Find earliest time
-                    const greatestTime = times.reduce((a, b) => (a > b ? a : b));
+// const smallestTime = times.reduce((a, b) => (a[0] < b[0] ? a : b))[0]; // Get earliest start time
+// const greatestTime = times.reduce((a, b) => (a[1] > b[1] ? a : b))[1]; // Get latest end time
+const smallestTime =
+  times.length > 0
+    ? times.reduce((a, b) => (a[0] < b[0] ? a : b))[0]
+    : '23:59'; // Default latest possible time
 
-                    const startTime = smallestTime.slice(
+const greatestTime =
+  times.length > 0
+    ? times.reduce((a, b) => (a[1] > b[1] ? a : b))[1]
+    : '00:00'; // Default earliest possible time
+console.log("Start Time:", smallestTime);
+console.log("End Time:", greatestTime);
+
+                    const startTime = smallestTime?.slice(
                       0,
                       Math.floor(smallestTime.length / 2)
                     ) // First half
-                    const endTime = greatestTime.slice(
+                    const endTime = greatestTime?.slice(
                       Math.ceil(greatestTime.length / 2)
                     )
                     return (

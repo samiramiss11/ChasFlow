@@ -162,3 +162,23 @@ const SetPaginatedWeekCtrl = () => {
 }
 
 export default SetPaginatedWeekCtrl
+
+
+import { useEffect } from 'react'
+
+// const getCurrentWeek = (): number => {
+//   const today = new Date();
+//   const startOfYear = new Date(today.getFullYear(), 0, 1); // January 1st
+//   const pastDays = Math.floor((today.getTime() - startOfYear.getTime()) / (1000 * 60 * 60 * 24));
+//   return Math.ceil((pastDays + startOfYear.getDay() + 1) / 7);
+// };
+// const SetPaginatedWeekCtrl = () => {
+
+//     const [currentPage, setCurrentPage] = useState<number>(() => getCurrentWeek());
+//   const [pageOffset, setPageOffset] = useState<number>(currentPage % 10)
+
+//   const startWeek = (currentPage - 1)  + 1;
+// const displayedWeeks = Array.from({ length: numOfWeeksDisplayed }, (_, i) => startWeek + i);
+//   // const displayedWeeks = pages.slice(
+//   //   pageOffset,
+//   //   pageOffset + numOfWeeksDisplayed
