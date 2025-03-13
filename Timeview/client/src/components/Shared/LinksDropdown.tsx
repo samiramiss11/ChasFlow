@@ -12,19 +12,21 @@ import UserIcon from './UserIcon';
 import { dropdownLinks } from '@/utils/links';
 import { Link } from 'react-router-dom';
 import UserProfile from './UserProfile';
+import { useAppSelector } from '@/lib/hooks';
 function LinksDropdown() {
   // const { userId } = auth();
   // const isAdminUser = userId === process.env.ADMIN_USER_ID;
+  const role = useAppSelector((state) => state.userState.user?.role);
   return (
     <DropdownMenu 
      modal={false}>
       <DropdownMenuTrigger asChild className='flex items-c'>
        <Button variant='ghost' className='flex items-center gap-2 max-w-[100px]'>
-    Logga in
+    { role? role : 'LOGGA IN'}
     <UserIcon />
   </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className='w-[218px] mt-1 overflow-hidden rounded bg-white/75 p-2 text-left shadow  ' align='start' sideOffset={10}>
+      <DropdownMenuContent className='w-[218px] mt-1 overflow-hidden rounded bg-white p-2 text-left shadow  ' align='start' sideOffset={10}>
       
           <DropdownMenuItem>
           
@@ -33,7 +35,7 @@ function LinksDropdown() {
           </DropdownMenuItem>
           {/* <DropdownMenuSeparator /> */}
         
-      <div className="flex flex-col items-center bg-white hover:bg-gray-100 border rounded-lg shadow-md mx-2 py-4 h-[220px]">
+      <div className="flex flex-col items-center bg-white  border rounded-lg shadow-md mx-2 py-4 h-[220px]">
   <div className="   flex flex-col justify-around m-auto h-[220px]">
     {dropdownLinks.map((link) => (
       <DropdownMenuItem key={link.href} className="">

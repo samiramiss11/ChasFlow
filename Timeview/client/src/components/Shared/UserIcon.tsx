@@ -8,5 +8,5 @@ function UserIcon() {
 //       <img src={profileImage} className='w-6 h-6 rounded-full object-cover' />
 //     );
 //   }
-  return <FaUser className='w-32 h-32 rounded-full  text-white' />;}
+  return <FaUser className='h-24 rounded-full  text-white' />;}
 export default UserIcon;
