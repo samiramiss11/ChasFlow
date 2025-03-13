@@ -90,7 +90,8 @@ const CheckboxWaterFall = ({
         return (
           <DropdownMenuItem
             key={timeslot.timeSlotID}
-            onSelect={(e) => e.preventDefault()}>
+            onSelect={(e) => e.preventDefault()}
+          className='even:bg-white'>
             <label
               htmlFor={`timeslot-${timeslot.timeSlotID}`}
               className='flex items-center gap-2'>

@@ -96,7 +96,7 @@ const CheckboxMenu = ({ roomId }: { roomId: string }) => {
           <FaChevronDown />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className='mt-1 overflow-hidden rounded bg-white/75 p-2 text-left shadow backdrop-blur hover:bg-gray-200/50'>
+      <DropdownMenuContent className='mt-1 overflow-hidden rounded bg-[#ECE9E9] p-2 text-left shadow '>
         <CheckboxWaterFall
           setSelectedTimeSlots={setSelectedTimeSlots}
           selectedTimeSlots={selectedTimeSlots}
