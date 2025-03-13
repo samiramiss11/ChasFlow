@@ -81,7 +81,7 @@ const PaginationButtonLink = ({
         variant: isActive ? 'link' : 'link',
         size,
       }),
-      className
+      className, {  'bg-white text-black':isActive}
     )}
     {...props}
   />

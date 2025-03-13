@@ -21,8 +21,8 @@ const buttonVariants = cva(
         secondary:
           'bg-secondary text-secondary-foreground hover:bg-secondary/80',
         ghost:
-          'min-w-[120px] min-h-[30px] uppercase  hover:bg-white hover:text-black hover:underline-offset-2 hover:underline',
-        link: 'bg-black text-white  underline-offset-2 underline',
+          'min-w-[102px]  uppercase ',// hover:bg-white hover:text-black hover:underline-offset-2 hover:underline //linksDropdown in header
+        link: 'bg-black text-white  underline-offset-2 underline',//hover:bg-white hover:text-black pagination button
       },
       size: {
         default: 'h-10 px-4 py-2',
