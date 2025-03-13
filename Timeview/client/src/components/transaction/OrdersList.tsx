@@ -2,7 +2,7 @@ import React from 'react'
 import { useLoaderData } from 'react-router-dom'
 import { OwnedBatch } from '@/features/transaction/booking/setBookings'
 import { ScrollArea } from '@/components/ui/scroll-area'
-import { Button } from '@/components/ui/button'
+import { getTimes, getSmallestTime,getGreatestTime,getFormattedTime } from '@/utils/transaction/Formating'
 
 import {
   Table,
@@ -15,13 +15,15 @@ import {
 import MemoTableRow from './MemoTableRow'
 import { ROOMS } from '@/features/transaction/rooms/roomSlice'
 import { onlineRooms } from '@/features/transaction/rooms/roomSlice'
+import { useAppSelector } from '@/lib/hooks'
 const OrdersList = () => {
-  const { allbooking, relatedUser } = useLoaderData() as OwnedBatch
+  const {  relatedUser } = useLoaderData() as OwnedBatch //allbooking, hmm don't want to delete from clientLoader context
   const flattenedRooms = ROOMS.flatMap((group) =>
     group.rooms.map(({ id, title }) => ({ id, title }))
   )
-  //const { day, week, rooms } = allbooking || {}
 
+  const allbookingRooms = useAppSelector((state) => state.allBookingState)
+  //const { day, week, rooms } = allbooking || {}
 
 
   return (
@@ -37,47 +39,21 @@ const OrdersList = () => {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {allbooking.sets.map((entry, index) =>
+              {allbookingRooms.sets.map((entry, index) =>
                 Object.entries(entry.rooms).map(
                   ([room, details]: [string, any]) => {
                     const { selectedInterval } = details
-                    console.log(selectedInterval)
-                    // const firstTime =
-                    //   selectedInterval[0]?.replace('-', '') || ''
-                    // const lastTime =
-                    //   selectedInterval[selectedInterval.length - 1]?.replace(
-                    //     '-',
-                    //     ''
-                    //   ) || ''
-                    const times: string[][] = (selectedInterval.selectedTimeSlots ?? [].filter(Boolean)).map((interval: string) =>
-  interval.split('-')
-); // Extract start & end times
+                    const times: string[][] = getTimes(selectedInterval.selectedTimeSlots);
+                    const smallestTime = getSmallestTime(times); // Get earliest start time
+                    const greatestTime = getGreatestTime(times); // Get latest end time
+                    const startTime = getFormattedTime(smallestTime, true); // Get formatted start time
+                    const endTime = getFormattedTime(greatestTime, false); // Get formatted end time
 
-// const smallestTime = times.reduce((a, b) => (a[0] < b[0] ? a : b))[0]; // Get earliest start time
-// const greatestTime = times.reduce((a, b) => (a[1] > b[1] ? a : b))[1]; // Get latest end time
-const smallestTime =
-  times.length > 0
-    ? times.reduce((a, b) => (a[0] < b[0] ? a : b))[0]
-    : '23:59'; // Default latest possible time
 
-const greatestTime =
-  times.length > 0
-    ? times.reduce((a, b) => (a[1] > b[1] ? a : b))[1]
-    : '00:00'; // Default earliest possible time
-console.log("Start Time:", smallestTime);
-console.log("End Time:", greatestTime);
-
-                    const startTime = smallestTime?.slice(
-                      0,
-                      Math.floor(smallestTime.length / 2)
-                    ) // First half
-                    const endTime = greatestTime?.slice(
-                      Math.ceil(greatestTime.length / 2)
-                    )
                    const roomTitle =  flattenedRooms.find((r) => r.id === room)?.title || (onlineRooms.id === room ? 'Online' : 'Rum saknas')
                     return (
                        <MemoTableRow
-                          key={index}
+                          key={`${index}-${room}`}
                           day={entry.day}
                           week={entry.week}
                           startTime={startTime}

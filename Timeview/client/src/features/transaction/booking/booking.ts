@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 
-type SyncronizedDisplayContainerRecord = {
+export type SyncronizedDisplayContainerRecord = {
   selectedTimeSlots:string,
   displayTemplatedTime:string,
 }

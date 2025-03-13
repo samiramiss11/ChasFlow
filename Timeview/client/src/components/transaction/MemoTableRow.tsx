@@ -13,9 +13,18 @@ interface MemoTableRowProps {
   room: string;
   roomTitle: string;
 }
+import { AppDispatch } from '@/lib/store';
+import { useAppDispatch } from '@/lib/hooks';
+import { filterBookingsForRoomId } from '@/features/transaction/booking/setBookings';
 const MemoTableRow = React.memo(({ day, week, startTime, endTime, room, roomTitle }: MemoTableRowProps) => {
   const dayOfWeek = ['Måndag', 'Tisdag', 'Onsdag', 'Torsdag', 'Fredag'];
-
+    console.log()
+    const dispatch = useAppDispatch()
+    
+     const handleDelete = () => {
+         dispatch(filterBookingsForRoomId(room)); // Dispatch the delete action to the store
+         console.log('delete')
+  };
   return (
     <TableRow>
       <TableCell className="p-3">
@@ -41,7 +50,7 @@ const MemoTableRow = React.memo(({ day, week, startTime, endTime, room, roomTitl
         </p>
       </TableCell>
       <TableCell className="p-3">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between" onClick={() => handleDelete()}>
           <Button size="sm" variant="outline" className="self-end mb-2 rounded-full bg-viewBookingButton">
             <span className="p-3">Ta bort</span>
           </Button>

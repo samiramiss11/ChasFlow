@@ -18,7 +18,7 @@ export interface OwnedBatch {
   allbooking: SetTimeIntervalState
   relatedUser?: UserState
 }
-
+import {SyncronizedDisplayContainerRecord} from '@/features/transaction/booking/booking'
 // Retrieve the set data from localStorage and ensure it matches SetTimeIntervalState
 const getSetFromLocalStorage = (): SetTimeIntervalState => {
   const batch = localStorage.getItem('setOfbatches')
@@ -42,17 +42,17 @@ const timeIntervalSlice = createSlice({
   initialState: getSetFromLocalStorage(),
   reducers: {
     addTimeIntervalState: (state, action: PayloadAction<TimeIntervalState>) => {
-      const newState = action.payload
+      const newState = action.payload;
       // Check if there is any room with a selected interval
 
       // Check if this (day, week) combo already exists
       const existingEntry = state.sets.find(
         //find instead of some to find existing
         (entry) => entry.day === newState.day && entry.week === newState.week
-      )
+      );
 
       if (!existingEntry) {
-        state.sets.push(newState) // ✅ Only push if (day, week) is unique
+        state.sets.push(newState); // ✅ Only push if (day, week) is unique
       }
       //  const hasSelectedIntervals = Object.values(newState.rooms).some(
       //    (room) => room.selectedInterval.length > 0
@@ -72,29 +72,49 @@ const timeIntervalSlice = createSlice({
         // ✅ Merge selected intervals instead of adding a duplicate entry
         Object.keys(newState.rooms).forEach((roomId) => {
           if (!existingEntry.rooms[roomId]) {
-            existingEntry.rooms[roomId] = { selectedInterval: [] }
+            existingEntry.rooms[roomId] = { selectedInterval: [] };
           }
           existingEntry.rooms[roomId].selectedInterval = Array.from(
             new Set([
               ...existingEntry.rooms[roomId].selectedInterval,
               ...newState.rooms[roomId].selectedInterval,
             ])
-          )
+          );
 
-        })
+        });
         
-          state.timeInTotal += newState.totalHours
+        state.timeInTotal += newState.totalHours;
       }
 
-      localStorage.setItem('setOfbatches', JSON.stringify(state))
+      localStorage.setItem('setOfbatches', JSON.stringify(state));
     },
     removeLastTimeIntervall: () => {
-      localStorage.setItem('setOfbatches', JSON.stringify(defaultState))
+      localStorage.setItem('setOfbatches', JSON.stringify(defaultState));
     },
+    filterBookingsForRoomId: (state, action: PayloadAction<string>) => {
+      const roomId = action.payload;
+      
+      state.sets = state.sets.map((set) => {
+         console.log(JSON.stringify( set.rooms , null, 2) , 'set.rooms')
+
+    const updatedRooms = Object.keys(set.rooms).reduce((newRooms, room) => {
+      if (room !== roomId) {
+        newRooms[room] = set.rooms[room]; // Keep the rooms that don't match roomId
+      }
+      return newRooms;
+    }, {} as Record<string, any>);
+
+    console.log('updatedRooms after delete:', JSON.stringify(updatedRooms, null, 2));
+
+    // Return the updated set with the new rooms object
+    return { ...set, rooms: updatedRooms };
+      });
+      localStorage.setItem('setOfbatches', JSON.stringify(state));
   },
+  }
 })
 
-export const { addTimeIntervalState, removeLastTimeIntervall } =
+export const { addTimeIntervalState, removeLastTimeIntervall,filterBookingsForRoomId } =
   timeIntervalSlice.actions
 
 export default timeIntervalSlice.reducer
@@ -119,3 +139,43 @@ interface ClearPayload {
   day: string
   week: string
 }
+
+// state.sets.forEach((set) => { //room on particular day
+      //   Object.keys(set.rooms).forEach((room) => {
+      //     console.log(room, 'room')
+      //     if (room !== roomId) {
+      //       delete set.rooms[room]
+      //     }
+      //   })
+      // })
+      // state.sets.forEach((set) => {
+      //   // Check if the rooms object exists within the set
+      //   if (set.rooms) {
+      //     // Create a new rooms object by filtering out the room that matches roomId
+      //     const updatedRooms = Object.keys(set.rooms).reduce((newRooms, room) => {
+      //       console.log(newRooms, 'newRooms')
+      //       if (room !== roomId) {
+      //         newRooms[room] = set.rooms[room]; // Keep the rooms that don't match roomId
+      //       }
+      //       return newRooms;
+      //     }, {} as Record<string, { selectedInterval: SyncronizedDisplayContainerRecord[] }>);; // Starting with an empty object for the new rooms
+
+      //     // Update the set's rooms with the updatedRooms
+      //     set.rooms = updatedRooms;
+      //   }
+// })
+      
+//in states.map
+  //        const updatedRooms = Object.keys(set.rooms).reduce((newRooms, room) => {
+  //          console.log(newRooms, 'newRooms')
+  //          console.log(room, roomId)
+  //     if (room !== roomId) {
+  //       newRooms[room] = set.rooms[room]; // Keep the rooms that don't match roomId
+  //     }
+      
+  //     return newRooms;
+  //        }, {} as Record<string, any>);
+  //        console.log(updatedRooms, 'updatedRooms')
+
+        //   return { ...set, rooms: updatedRooms };
+        // Make a shallow copy of rooms and filter out the room with roomId
