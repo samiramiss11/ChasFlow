@@ -7,12 +7,12 @@ import { Button } from '@/components/ui/button'
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
+import MemoTableRow from './MemoTableRow'
 import { ROOMS } from '@/features/transaction/rooms/roomSlice'
 import { onlineRooms } from '@/features/transaction/rooms/roomSlice'
 const OrdersList = () => {
@@ -22,7 +22,7 @@ const OrdersList = () => {
   )
   //const { day, week, rooms } = allbooking || {}
 
-  const dayOfWeek = ['Måndag', 'Tisdag', 'Onsdag', 'Torsdag', 'Fredag']
+
 
   return (
     <div>
@@ -49,7 +49,7 @@ const OrdersList = () => {
                     //     '-',
                     //     ''
                     //   ) || ''
-                    const times: string[][] = (selectedInterval ?? [].filter(Boolean)).map((interval: string) =>
+                    const times: string[][] = (selectedInterval.selectedTimeSlots ?? [].filter(Boolean)).map((interval: string) =>
   interval.split('-')
 ); // Extract start & end times
 
@@ -74,48 +74,17 @@ console.log("End Time:", greatestTime);
                     const endTime = greatestTime?.slice(
                       Math.ceil(greatestTime.length / 2)
                     )
+                   const roomTitle =  flattenedRooms.find((r) => r.id === room)?.title || (onlineRooms.id === room ? 'Online' : 'Rum saknas')
                     return (
-                      <TableRow key={`${index}-${room}`}>
-                        <TableCell className='p-3'>
-                          <p>
-                            {' '}
-                            <b className='font-extrabold text-muted-foreground'>
-                              {entry.day + '/' + entry.week}
-                            </b>
-                            {' ' + dayOfWeek[entry.day - 1]}
-                          </p>
-                        </TableCell>
-                        <TableCell className='p-3'>
-                          <p>
-                            kl{' '}
-                            <b className='text-muted-foreground'>
-                                {startTime + '-' + endTime}
-                            </b>
-                          </p>
-                        </TableCell>
-                        <TableCell className='p-3'>
-                          {' '}
-                          <p>
-                            i rum {room}{' '}
-                            <b className='font-extrabold text-muted-foreground'>
-                              {' '}
-                              {flattenedRooms.find((r) => r.id === room)?.title || (onlineRooms.id === room ? 'Online' : 'Rum saknas')}
-                            </b>
-                          </p>
-                        </TableCell>
-                        <TableCell className='p-3'>
-                          <div className='flex items-center justify-between '>
-                            {' '}
-                            <Button
-                              size='sm'
-                              variant='outline'
-                              className='self-end mb-2 rounded-full bg-viewBookingButton 
-] '>
-                              <span className='p-3'> Ta bort</span>
-                            </Button>
-                          </div>
-                        </TableCell>
-                      </TableRow>
+                       <MemoTableRow
+                          key={index}
+                          day={entry.day}
+                          week={entry.week}
+                          startTime={startTime}
+                          endTime={endTime}
+                          room={room}
+                          roomTitle={roomTitle}
+        />
                     )
                   }
                 )

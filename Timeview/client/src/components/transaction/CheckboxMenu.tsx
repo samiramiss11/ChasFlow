@@ -67,7 +67,7 @@ const CheckboxMenu = ({ roomId }: { roomId: string }) => {
       const bookingIds = timeSlotsArray.map((slot) => slot.timeSlotID)
       
       const timeStrings = timeSlotsArray.map((slot) => `${slot.startTime}-${slot.endTime}`); 
-      dispatch(setInterval({ roomId, interval: timeStrings }))
+      dispatch(setInterval({ roomId, interval: timeStrings ,selectedTimeSlots:bookingIds})) 
       
       // dispatch(setInterval({ roomId, interval: onlyCheckedTimeIntervals }))
 
