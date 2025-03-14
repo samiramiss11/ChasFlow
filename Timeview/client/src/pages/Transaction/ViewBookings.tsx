@@ -28,16 +28,86 @@ export const clientLoader =
     return { allbooking, relatedUser: relatedUser }
   }
 import OrdersList from '@/components/transaction/OrdersList'
-import { useLoaderData } from 'react-router-dom'
+import { ActionFunction, useLoaderData } from 'react-router-dom'
 import CheckoutDialog from '@/components/transaction/CheckoutDialog';
+import { Form } from 'react-router-dom'
 /**
  * IS centered in a TransactionCard with a list of:
  * 1. items
  * 2. display the selected user with totalTime booked for the current session
  * @returns 
  */
+
+import { saveBookings } from '@/services/api'
+export const clientAction =
+  (store: ReduxStore): ActionFunction =>
+  async ({ request }): Promise<Response | null> => {
+    const formData = await request.formData()
+    const requestData = Object.fromEntries(formData)
+    console.log(requestData)
+
+    const allbooking = store.getState().allBookingState
+    const dayStrings = ['Måndag', 'Tisdag', 'Onsdag', 'Torsdag', 'Fredag']
+
+    try {
+      allbooking.sets.forEach((set) => {
+        console.log(`Day: ${set.day}, Week: ${set.week}`)
+
+        Object.entries(set.rooms).forEach(([roomId, roomData]) => {
+          console.log(`  Room ${roomId}:`)
+
+          // Extract selected time slots
+//           const bookingIds = roomData.selectedInterval.map((interval) => {
+//   console.log(interval.selectedTimeSlots); // Debugging
+//   return interval.selectedTimeSlots; // Ensure return
+          // });
+          const nrOfId = roomData.selectedInterval.map((interval) => (interval.selectedTimeSlots)).length
+//           console.log(nrOfId, 'nrOfId')
+//           const bookingIds = roomData.selectedInterval.flatMap(interval => 
+//   interval.selectedTimeSlots.split(', ').map(Number) // Split & Convert to Numbers
+// );
+//           console.log(bookingIds, 'bookingIds')
+          const bookingIds = [ ...new Set(roomData.selectedInterval.flatMap(interval => 
+      interval.selectedTimeSlots.split(', ').map(String) // Convert to string
+    )
+  )
+];
+
+          const dayString = dayStrings[set.day - 1]
+          const week = store.getState().bookingState.week
+          const consultantID = store.getState().konsultantState.selectedUser?.id
+          const courseID = store.getState().konsultantState.selectedCourseCode
+
+          // Prepare data for API call
+          const bookingData = {
+            consultantID,
+            courseID,
+            selectedWeek: set.week,
+            selectedDay: dayString,
+            selectedRoom: roomId,
+            selectedTimeSlots: bookingIds, // Use array instead of undefined variable
+          }
+
+          console.log(bookingData, 'data')
+
+          // Send booking to API
+          saveBookings(bookingData)
+        })
+      })
+    } catch (error) {
+      console.error('Error in clientAction:', error)
+    }
+
+    return null
+  }
+  
+
 const ViewBookings = () => {
   const { allbooking, relatedUser } = useLoaderData() as OwnedBatch
+
+
+      // window.location.reload()
+
   return (
     <div>
       <TransactionCard>
@@ -53,7 +123,10 @@ const ViewBookings = () => {
           </div>
 
           <div className=''>
-            <Confirm > <div><CheckoutDialog /></div></Confirm>
+            <Confirm >   <Form
+                    method='POST'
+                   
+                  ><CheckoutDialog /></Form></Confirm>
           </div>
         </div>
       </TransactionCard>

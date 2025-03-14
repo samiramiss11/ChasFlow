@@ -83,7 +83,7 @@ export const clientAction =
         }
         console.log(data, 'data')
       
-        saveBookings(data)
+        //saveBookings(data)
         console.log(selectedTimeslots)
 
         // await saveSelectedTimeslotsToDB(roomId, selectedTimeslots)

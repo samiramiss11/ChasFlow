@@ -14,6 +14,7 @@ const CheckoutDialog = () => {
     <Dialog modal={false}>
       <DialogTrigger asChild>
         <Button
+          type='submit'
           size='sm'
           variant='default'
           className='self-start mb-2 rounded-full chasBlue ml-[100px]'>
@@ -29,11 +30,10 @@ const CheckoutDialog = () => {
             </p>
           </DialogTitle>
           <DialogDescription>
-            {' '}
-            <p>
+         
               Tack för att du bokade i ChasPass. Din bokning har nu registrerats
               och du kan se informationen i systemet.
-            </p>
+           
           </DialogDescription>
         </DialogHeader>
         <div className='flex  justify-end'>

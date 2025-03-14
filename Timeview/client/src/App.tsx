@@ -59,6 +59,7 @@ import { clientLoader as populateLoader } from './pages/useJourney/Landing'
 import { clientAction as LoginAction } from './pages/useJourney/RoleTaskOnboarding'
 import { clientLoader as viewBatchLoader } from './pages/Transaction/Checkout'
 import { clientAction as userBatch } from './pages/useJourney/ConsernedUserSetting'
+import { clientAction as verifyCheckout } from './pages/Transaction/ViewBookings'
 import {
   AdminIndex,
   AdminLayout,
@@ -127,6 +128,7 @@ const transactionPrefix = {
       path: JOURNY_LINSK_CONSTANTS.TRANSACTION_STEP2,
       element: <ViewBookings />,
       loader: combineBatch(store),
+      action: verifyCheckout(store),
     },
     {
       path: JOURNY_LINSK_CONSTANTS.TRANSACTION_STEP3,
