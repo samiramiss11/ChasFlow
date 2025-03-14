@@ -8,15 +8,14 @@ import { Button } from '@/components/ui/button'
 interface MemoTableRowProps {
   day: number;
   week: number;
-  startTime: string;
-  endTime: string;
+  timesBetween: string;
   room: string;
   roomTitle: string;
 }
 import { AppDispatch } from '@/lib/store';
 import { useAppDispatch } from '@/lib/hooks';
 import { filterBookingsForRoomId } from '@/features/transaction/booking/setBookings';
-const MemoTableRow = React.memo(({ day, week, startTime, endTime, room, roomTitle }: MemoTableRowProps) => {
+const MemoTableRow = React.memo(({ day, week, timesBetween, room, roomTitle }: MemoTableRowProps) => {
   const dayOfWeek = ['Måndag', 'Tisdag', 'Onsdag', 'Torsdag', 'Fredag'];
     console.log()
     const dispatch = useAppDispatch()
@@ -39,7 +38,7 @@ const MemoTableRow = React.memo(({ day, week, startTime, endTime, room, roomTitl
         <p>
           kl{' '}
           <b className="text-muted-foreground">
-            {startTime + '-' + endTime}
+                      {timesBetween}
           </b>
         </p>
       </TableCell>

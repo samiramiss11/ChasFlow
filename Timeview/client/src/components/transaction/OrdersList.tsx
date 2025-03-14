@@ -40,30 +40,29 @@ const OrdersList = () => {
             </TableHeader>
             <TableBody>
               {allbookingRooms.sets.map((entry, index) =>
-                Object.entries(entry.rooms).map(
-                  ([room, details]: [string, any]) => {
-                    const { selectedInterval } = details
-                    const times: string[][] = getTimes(selectedInterval.selectedTimeSlots);
-                    const smallestTime = getSmallestTime(times); // Get earliest start time
-                    const greatestTime = getGreatestTime(times); // Get latest end time
-                    const startTime = getFormattedTime(smallestTime, true); // Get formatted start time
-                    const endTime = getFormattedTime(greatestTime, false); // Get formatted end time
 
 
-                   const roomTitle =  flattenedRooms.find((r) => r.id === room)?.title || (onlineRooms.id === room ? 'Online' : 'Rum saknas')
-                    return (
-                       <MemoTableRow
-                          key={`${index}-${room}`}
-                          day={entry.day}
-                          week={entry.week}
-                          startTime={startTime}
-                          endTime={endTime}
-                          room={room}
-                          roomTitle={roomTitle}
-        />
-                    )
-                  }
-                )
+     (
+      Object.entries(entry.rooms).map(([room, details]) => {
+        const { selectedInterval,timeBounds } = details;
+        console.log(selectedInterval, timeBounds,details,room);
+
+        
+        const roomTitle = flattenedRooms.find((r) => r.id === room)?.title || (onlineRooms.id === room ? 'Online' : 'Rum saknas');
+
+        return (
+          <MemoTableRow
+            key={`${index}-${room}`}
+            day={entry.day}
+            week={entry.week}
+            timesBetween={timeBounds}
+            room={room}
+            roomTitle={roomTitle}
+          />
+        );
+      })
+    )
+  
               )}
             </TableBody>
           </Table>

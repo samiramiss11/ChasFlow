@@ -46,17 +46,18 @@ const Confirm = ({children}:{children?:ReactNode }) => {
           {children ? (
             children
           ) : (
-            <Link
-              to={finalLink}
-              className='text-decoration-none'>
-              <Button
+           
+                <Button
+                  type='submit'
                 size='sm'
                 variant='default'
                 className='self-end mb-2 rounded-full '
                 asChild>
-                <span>{nextPageInfo.buttons[0].text}</span>
+                 <button type="submit">
+                  <span>{nextPageInfo.buttons[0].text}</span>
+                  </button>
               </Button>
-            </Link>
+          
           )}
         </div>
       </div>

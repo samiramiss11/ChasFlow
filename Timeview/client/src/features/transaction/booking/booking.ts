@@ -3,13 +3,15 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 export type SyncronizedDisplayContainerRecord = {
   selectedTimeSlots:string,
-  displayTemplatedTime:string,
 }
 
 export interface TimeIntervalState {
   day: number
   week: number
-  rooms: Record<string, { selectedInterval:SyncronizedDisplayContainerRecord[] }>
+  rooms: Record<string, {
+    selectedInterval: SyncronizedDisplayContainerRecord[] 
+    timeBounds: string
+  }>
   totalHours: number
 }
 
@@ -41,22 +43,37 @@ const timeIntervalSlice = createSlice({
 
     setInterval: (state, action: PayloadAction<TogglePayload>) => {
       const { roomId, interval,selectedTimeSlots } = action.payload
-      console.log('interval', interval)
-      console.log('selectedTimeSlots', selectedTimeSlots)
+      
+      const formatIntervalString = (timeSlots: string[]): string => {
+            if(timeSlots.length === 0) return '';
+  const times = timeSlots
+    .map(slot => slot.split('-')) // Split into start and end times
+    .flat(); // Flatten into a single array of times
+
+  const leastTime = times.reduce((min, time) => (time < min ? time : min)); // Find earliest time
+  const greatestTime = times.reduce((max, time) => (time > max ? time : max)); // Find latest time
+
+            
+  return `${leastTime}-${greatestTime}`;
+      };
+        const formattedInterval = formatIntervalString(interval);         
       if (!state.rooms[roomId]) {
-
-        state.rooms[roomId] = { selectedInterval: [] };
+        state.rooms[roomId] = { selectedInterval: [], timeBounds: formattedInterval||'' };
       }
+      state.rooms[roomId].timeBounds = formattedInterval
 
-      const previousLength = state.rooms[roomId].selectedInterval.length
-       selectedTimeSlots.forEach((timeSlot) => {
+      selectedTimeSlots.forEach((timeSlot) => {
+     
       // Merge all time slots into a single entry as a joined string
     state.rooms[roomId].selectedInterval.push({
     selectedTimeSlots: selectedTimeSlots.join(", "), // Combine into a single string
-    displayTemplatedTime: interval.join(", "),
   });
-  });
+      });
+      const previousLength =state.rooms[roomId].selectedInterval.length //Object.values(state.rooms).reduce((acc, room) => acc + room.selectedInterval.length, 0);
+  
+
       state.totalHours = state.totalHours - previousLength + interval.length
+       //localStorage.setItem('batch', JSON.stringify(JSON.stringify(state)))
     },
 
     clearIntervals: () => {

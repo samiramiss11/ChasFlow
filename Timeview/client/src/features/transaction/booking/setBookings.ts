@@ -72,8 +72,9 @@ const timeIntervalSlice = createSlice({
         // ✅ Merge selected intervals instead of adding a duplicate entry
         Object.keys(newState.rooms).forEach((roomId) => {
           if (!existingEntry.rooms[roomId]) {
-            existingEntry.rooms[roomId] = { selectedInterval: [] };
+            existingEntry.rooms[roomId] = { selectedInterval: [], timeBounds:'' };
           }
+           existingEntry.rooms[roomId].timeBounds = newState.rooms[roomId].timeBounds;
           existingEntry.rooms[roomId].selectedInterval = Array.from(
             new Set([
               ...existingEntry.rooms[roomId].selectedInterval,

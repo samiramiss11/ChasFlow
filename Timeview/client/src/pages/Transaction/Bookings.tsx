@@ -1,6 +1,6 @@
 import BookingControlContainer from '@/components/Calendar/BookingControlContainer'
 import Confirm from '../../components/transaction/Confirm'
-import { useLoaderData, type ActionFunction } from 'react-router'
+import { redirect, useLoaderData, type ActionFunction } from 'react-router'
 import GroupedBookings from '@/components/transaction/GroupedBookings'
 /**
  *
@@ -26,7 +26,7 @@ import {
 } from '@/features/transaction/booking/booking'
 import { addTimeIntervalState } from '@/features/transaction/booking/setBookings'
 import { setTimeSlots } from '@/features/transaction/booking/checkBoxSlice'
-import { fetchAvailableTimeSlots ,saveBookings} from '@/services/api'
+import { fetchAvailableTimeSlots, saveBookings } from '@/services/api'
 export const clientAction =
   (store: ReduxStore): ActionFunction =>
   async ({ request }): Promise<Response | null> => {
@@ -118,23 +118,27 @@ export const clientAction =
     /**
      * default behavior
      */
+    console.log('formType', formType)
     if (formType === 'confirm') 
           {
     const currentDay_On_WeedBooking = store.getState().bookingState
     //console.log(currentDay_On_WeedBooking)
     console.log(currentDay_On_WeedBooking)
-    const currentState = store.getState().bookingState // ✅ Store before clearing
+      const currentState = store.getState().bookingState; // ✅ Store before clearing
+      console.log(currentState, 'current state')
     if (Object.keys(currentState.rooms).length > 0) {
       // ✅ Ensure rooms exist
       store.dispatch(addTimeIntervalState(currentState)) // ✅ Store first
     }
-    store.dispatch(clearIntervals())
+      store.dispatch(clearIntervals())
+      return redirect('/boka/bokningar')
       //console.log('all bookings', store.getState().allBookingState)
       }
     return null
   }
 import OnlineBooking from '@/components/transaction/OnlineBooking'
 import { Form } from 'react-router-dom'
+
 /**
  * on this page popovers are displayed to construct objects from 2 form requests.
  * one type of formRequest come from either GroupedBookings or OnlineBooking that map the room id to toggle checkbox values
