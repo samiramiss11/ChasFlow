@@ -67,11 +67,11 @@ export const clientAction =
 //   interval.selectedTimeSlots.split(', ').map(Number) // Split & Convert to Numbers
 // );
 //           console.log(bookingIds, 'bookingIds')
-          const bookingIds = [ ...new Set(roomData.selectedInterval.flatMap(interval => 
-      interval.selectedTimeSlots.split(', ').map(String) // Convert to string
-    )
+          const bookingIds = Array.from(new Set(
+  roomData.selectedInterval.flatMap(interval => 
+    interval.selectedTimeSlots.split(', ').map(String) // Convert to string
   )
-];
+))
 
           const dayString = dayStrings[set.day - 1]
           const week = store.getState().bookingState.week
