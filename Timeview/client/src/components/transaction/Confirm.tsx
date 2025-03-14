@@ -37,7 +37,7 @@ const Confirm = ({children}:{children?:ReactNode }) => {
     ? startLinkInAnotherGroup
     : nextPageForIndexedGroupedUrl + nextPageInfo.linkDestination
   return (
-    <div className='flex flex-row-reverse justify-between  mb-4 '>
+    <div className='flex flex-row-reverse md:justify-between  mb-4 '>
       <div className='col-auto'>
         <div className='flex gap-2 justify-end'>
           {/**

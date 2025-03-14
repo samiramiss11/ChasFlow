@@ -28,14 +28,16 @@ const OrdersList = () => {
 
   return (
     <div>
-      <ScrollArea className='h-[350px]'>
+      <ScrollArea className='h-[350px] px-12 ml-4'>
         <div className='p-3.7'>
-          <Table className=' max-hight-[345px]'>
+          <Table className=' max-hight-[345px] '>
             <TableHeader>
               <TableRow>
-                <TableHead>Datum</TableHead>
-                <TableHead>Tid</TableHead>
-                <TableHead>Rum</TableHead>
+                 <TableHead className=" py-4 lg:min-w-[130px] text-left">Datum</TableHead>
+      <TableHead className="py-4 lg:min-w-[130px] text-left">Tid</TableHead>
+                <TableHead className=" py-4 lg:min-w-[130px] text-left">Rum</TableHead>
+                      <TableHead className="md:px-6 py-4 min-w-[120px] text-left"></TableHead>
+
               </TableRow>
             </TableHeader>
             <TableBody>

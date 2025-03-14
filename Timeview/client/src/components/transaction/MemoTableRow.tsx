@@ -42,13 +42,13 @@ const MemoTableRow = React.memo(({ day, week, timesBetween, room, roomTitle }: M
           </b>
         </p>
       </TableCell>
-      <TableCell className="p-3">
+      <TableCell className="p-3 w-full">
         <p>
           i rum {room}{' '}
           <b className="font-extrabold text-muted-foreground">{roomTitle}</b>
         </p>
       </TableCell>
-      <TableCell className="p-3">
+      <TableCell className="px-8 ">
         <div className="flex items-center justify-between" onClick={() => handleDelete()}>
           <Button size="sm" variant="outline" className="self-end mb-2 rounded-full bg-viewBookingButton">
             <span className="p-3">Ta bort</span>

@@ -114,7 +114,7 @@ const ViewBookings = () => {
         <div className=' bg-slate-200 py-12 px-12 flex flex-col justify-center'>
           <div className='max-width-[535px] mx-auto flex flex-col justify-stretch'>
             <OrdersList />
-            <div className='p-8'>
+            <div className='p-8 flex justify-center'>
               <p>
                 Du önska boka <b>{`${allbooking.timeInTotal || 0} timmar`}</b>{' '}
                 för <b>{`${relatedUser?.selectedUser?.name}`}</b>
@@ -122,7 +122,7 @@ const ViewBookings = () => {
             </div>
           </div>
 
-          <div className=''>
+          <div className= ' '>
             <Confirm >   <Form
                     method='POST'
                    
