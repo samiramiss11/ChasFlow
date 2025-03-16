@@ -12,6 +12,7 @@ import {
 } from '@/features/transaction/rooms/roomSlice'
 export const clientLoader =
   (store: ReduxStore) => async (): Promise<GroupedRoomResponse> => {
+
     console.log('clientLoader')
     return { contextWithStaticData: ROOMS }
   }
@@ -46,7 +47,7 @@ export const clientAction =
         console.log(dayString, week)
         // Fetch available timeslots
         try {
-          const currentDropDownState = store.getState().checkboxContextState.slots
+         // const currentDropDownState = store.getState().checkboxContextState.slots
     //        if (stoatebookingState.timeslots[roomId]?.[week]?.[dayString]) {
     // return;
   

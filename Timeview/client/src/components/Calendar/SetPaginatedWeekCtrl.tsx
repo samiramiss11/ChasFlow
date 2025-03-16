@@ -17,17 +17,26 @@ import { useLocation } from 'react-router'
  * @returns
  */
 import { ChevronLeft, ChevronRight, MoreHorizontal } from 'lucide-react'
-import { useState } from 'react'
+import { useState,useRef } from 'react'
 import { cn } from '@/lib/utils'
+import { useAppSelector } from '@/lib/hooks'
 const SetPaginatedWeekCtrl = () => {
   const { search, pathname } = useLocation()
   //const numOfPages = 20 / usually from backend page offset pagination
   const numOfWeeksDisplayed = 10
   const numOfWeeks = 52
   const pages = Array.from({ length: numOfWeeks }, (_, index) => index + 1)
+
+  const { day, week } = useAppSelector((state: RootState) => state.bookingState)
+  const weekTest = 52
   //const page = 1 , page offset pagination usually give this.
-  const [currentPage, setCurrentPage] = useState<number>(1)
-  const [pageOffset, setPageOffset] = useState<number>(0)
+  const [currentPage, setCurrentPage] = useState<number>(week)
+  const relativepageOffset = Math.max(
+  0, // ensure the offset doesn't go below 0
+  week - Math.floor(numOfWeeksDisplayed) // calculate offset to center the week
+);
+  const [pageOffset, setPageOffset] = useState<number>(relativepageOffset)
+   const pageInputRef = useRef<HTMLInputElement | null>(null);
 
   if (numOfWeeks < 2) return null
 
@@ -91,8 +100,10 @@ const SetPaginatedWeekCtrl = () => {
       setPageOffset((prevOffset) => {
         const newOffset = Math.min(prevOffset + numOfWeeksDisplayed, maxOffset)
         setCurrentPage(newOffset + 1) // Set current page to first item in new range
-        return newOffset
+        return newOffset;
+        
       })
+      
     }
   }
   // console.log(pageOffset, 'page-offset')
@@ -101,10 +112,11 @@ const SetPaginatedWeekCtrl = () => {
       setPageOffset((prevOffset) => {
         const newOffset = Math.max(prevOffset - numOfWeeksDisplayed, 0)
         setCurrentPage(newOffset + 1) // Update current page to first item in range
-        return newOffset
+        return newOffset;
       })
     }
   }
+  
   return (
     <>
       <input
@@ -165,6 +177,7 @@ export default SetPaginatedWeekCtrl
 
 
 import { useEffect } from 'react'
+import { RootState } from '@/lib/store';
 
 // const getCurrentWeek = (): number => {
 //   const today = new Date();
