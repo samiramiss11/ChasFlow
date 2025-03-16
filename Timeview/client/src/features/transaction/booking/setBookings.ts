@@ -71,7 +71,7 @@ const timeIntervalSlice = createSlice({
       if (!existingEntry) {
         state.sets.push(newState); // ✅ Only push if (day, week) is unique
        console.log( JSON.stringify( state.timeInTotal , null, 2))
-        state.timeInTotal = newState.totalHours
+        state.timeInTotal += newState.totalHours
         console.log(JSON.stringify(state.timeInTotal, null, 2))
       }
       else {
