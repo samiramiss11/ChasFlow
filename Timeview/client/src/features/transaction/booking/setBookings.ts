@@ -86,7 +86,11 @@ console.log("newState.totalHours:", newState.totalHours);
               console.log("After update:");
   console.log("state.timeInTotal:", state.timeInTotal);
   console.log("existingEntry.totalHours:", existingEntry.totalHours);
-}
+          }
+          else if(  previousLength == 0 && existingEntry.rooms &&
+            existingEntry.rooms[roomId]) {
+             state.timeInTotal += newState.totalHours
+  }
 
         });
        
