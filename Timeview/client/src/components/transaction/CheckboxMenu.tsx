@@ -25,8 +25,8 @@ const CheckboxMenu = ({ roomId }: { roomId: string }) => {
   const [open, setOpen] = useState<boolean>(false)
   const [selectedTimeSlots, setSelectedTimeSlots] = useState<
     Record<string, { timeSlotID: string; startTime: string; endTime: string }[]>
-  >({})
- // console.log('selectedTimes', selectedTimeSlots)
+    >({});
+  // console.log('selectedTimes', selectedTimeSlots)
   //const dispatch = useAppDispatch()
   const fetcher = useFetcher()
   //const isFirstRender = useRef(true);

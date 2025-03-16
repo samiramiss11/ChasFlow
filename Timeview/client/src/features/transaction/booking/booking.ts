@@ -9,12 +9,13 @@ export interface TimeIntervalState {
   day: number
   week: number
   rooms: Record<string, {
-    selectedInterval: SyncronizedDisplayContainerRecord[] 
+    // selectedInterval: SyncronizedDisplayContainerRecord[] 
+    previousLength?:number
     timeBounds: string
   }>
   totalHours: number
 }
-
+import { formatIntervalString } from '@/utils/transaction/date'
 const calculateDayAndWeek = () => {
   const today = new Date();
 
@@ -61,37 +62,29 @@ const timeIntervalSlice = createSlice({
 
     setInterval: (state, action: PayloadAction<TogglePayload>) => {
       const { roomId, interval,selectedTimeSlots } = action.payload
-      
-      const formatIntervalString = (timeSlots: string[]): string => {
-            if(timeSlots.length === 0) return '';
-  const times = timeSlots
-    .map(slot => slot.split('-')) // Split into start and end times
-    .flat(); // Flatten into a single array of times
-
-  const leastTime = times.reduce((min, time) => (time < min ? time : min)); // Find earliest time
-  const greatestTime = times.reduce((max, time) => (time > max ? time : max)); // Find latest time
-
-            
-  return `${leastTime}-${greatestTime}`;
-      };
+        
         const formattedInterval = formatIntervalString(interval);         
       if (!state.rooms[roomId]) {
-        state.rooms[roomId] = { selectedInterval: [], timeBounds: formattedInterval||'' };
+        state.rooms[roomId] = {previousLength:0,  timeBounds: formattedInterval||'' };
       }
       state.rooms[roomId].timeBounds = formattedInterval
 
-      selectedTimeSlots.forEach((timeSlot) => {
-     
-      // Merge all time slots into a single entry as a joined string
-    state.rooms[roomId].selectedInterval.push({
-    selectedTimeSlots: selectedTimeSlots.join(", "), // Combine into a single string
-  });
-      });
-      const previousLength =state.rooms[roomId].selectedInterval.length //Object.values(state.rooms).reduce((acc, room) => acc + room.selectedInterval.length, 0);
-  
 
-      state.totalHours = state.totalHours - previousLength + interval.length
-       //localStorage.setItem('batch', JSON.stringify(JSON.stringify(state)))
+       // Calculate the previous length and new length
+  const previousLength = state.rooms[roomId].previousLength || 0;
+  const newLength = selectedTimeSlots?.length || 0;
+state.rooms[roomId].previousLength = newLength
+  // Log the values for debugging purposes  
+  console.log('Total hours:', state.totalHours);
+  console.log('Previous Length:', previousLength);
+  console.log('New Length:', newLength);
+
+  // Update total hours based on previous and new length
+  state.totalHours = Number(state.totalHours) - previousLength + newLength;
+
+      console.log('Updated Total Hours:', state.totalHours);
+      
+      localStorage.setItem('batch', JSON.stringify(JSON.stringify(state)))
     },
 
     clearIntervals: () => {

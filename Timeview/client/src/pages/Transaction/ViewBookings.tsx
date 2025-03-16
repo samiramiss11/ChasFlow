@@ -61,17 +61,17 @@ export const clientAction =
 //   console.log(interval.selectedTimeSlots); // Debugging
 //   return interval.selectedTimeSlots; // Ensure return
           // });
-          const nrOfId = roomData.selectedInterval.map((interval) => (interval.selectedTimeSlots)).length
-//           console.log(nrOfId, 'nrOfId')
-//           const bookingIds = roomData.selectedInterval.flatMap(interval => 
-//   interval.selectedTimeSlots.split(', ').map(Number) // Split & Convert to Numbers
-// );
-//           console.log(bookingIds, 'bookingIds')
-          const bookingIds = Array.from(new Set(
-  roomData.selectedInterval.flatMap(interval => 
-    interval.selectedTimeSlots.split(', ').map(String) // Convert to string
-  )
-))
+//           const nrOfId = roomData.selectedInterval.map((interval) => (interval.selectedTimeSlots)).length
+// //           console.log(nrOfId, 'nrOfId')
+// //           const bookingIds = roomData.selectedInterval.flatMap(interval => 
+// //   interval.selectedTimeSlots.split(', ').map(Number) // Split & Convert to Numbers
+// // );
+// //           console.log(bookingIds, 'bookingIds')
+//           const bookingIds = Array.from(new Set(
+//   roomData.selectedInterval.flatMap(interval => 
+//     interval.selectedTimeSlots.split(', ').map(String) // Convert to string
+//   )
+// ))
 
           const dayString = dayStrings[set.day - 1]
           const week = store.getState().bookingState.week
@@ -85,7 +85,7 @@ export const clientAction =
             selectedWeek: set.week,
             selectedDay: dayString,
             selectedRoom: roomId,
-            selectedTimeSlots: bookingIds, // Use array instead of undefined variable
+       
           }
 
           console.log(bookingData, 'data')
@@ -111,7 +111,7 @@ const ViewBookings = () => {
   return (
     <div>
       <TransactionCard>
-        <div className=' bg-slate-200 py-12 px-12 flex flex-col justify-center md:min-w-[1000px]'>
+        <div className=' bg-slate-200 py-12 px-12 flex flex-col justify-center '>
           <div className='max-width-[535px] mx-auto flex flex-col justify-stretch'>
             <OrdersList />
             <div className='p-8 flex justify-center'>
