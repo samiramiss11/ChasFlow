@@ -78,6 +78,36 @@ export const clientAction =
           const consultantID = store.getState().konsultantState.selectedUser?.id
           const courseID = store.getState().konsultantState.selectedCourseCode
 
+    //       const getAllSelectedTimeSlots =
+    // Object.values(set.rooms).flatMap(room =>
+    //   room.selectedInterval.map(interval => interval.selectedTimeSlots)
+    //         )
+  //         const getAllSelectedTimeSlots = Object.values(set.rooms)
+  // .flatMap(room =>
+  //   room.selectedInterval.flatMap(interval => 
+  //     interval.selectedTimeSlots.split(', ').map(slot => slot.trim()) // Ensure correct splitting
+  //   )
+  // );
+  //           const bookingIds = [ ...new Set(roomData.selectedInterval.flatMap(interval => 
+  //     interval.selectedTimeSlots.split(', ').map(String) // Convert to string
+  //   )
+  // )
+  
+  //         ];
+          const bookingIds = Array.from(
+  new Set(
+    roomData.selectedInterval.flatMap(interval => 
+      interval.selectedTimeSlots.split(', ').map(String) // Ensure all are strings
+    )
+  )
+);
+          console.log(bookingIds, 'ids')
+  
+          if (bookingIds == null || bookingIds.length == 0) {
+            console.log('mb some feedback?')
+            return null
+          }
+
           // Prepare data for API call
           const bookingData = {
             consultantID,
@@ -85,6 +115,7 @@ export const clientAction =
             selectedWeek: set.week,
             selectedDay: dayString,
             selectedRoom: roomId,
+            selectedTimeSlots: bookingIds,
        
           }
 

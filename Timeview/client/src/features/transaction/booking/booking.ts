@@ -9,7 +9,7 @@ export interface TimeIntervalState {
   day: number
   week: number
   rooms: Record<string, {
-    // selectedInterval: SyncronizedDisplayContainerRecord[] 
+     selectedInterval: SyncronizedDisplayContainerRecord[] 
     previousLength?:number
     timeBounds: string
   }>
@@ -50,16 +50,28 @@ const timeIntervalSlice = createSlice({
         
         const formattedInterval = formatIntervalString(interval);         
       if (!state.rooms[roomId]) {
-        state.rooms[roomId] = {previousLength:0,  timeBounds: formattedInterval||'' };
+        state.rooms[roomId] = {selectedInterval:[], previousLength:0,  timeBounds: formattedInterval||'' };
       }
       state.rooms[roomId].timeBounds = formattedInterval
 
+      selectedTimeSlots.forEach((timeSlot) => {
+         const exists = state.rooms[roomId].selectedInterval.some(
+    (interval) => interval.selectedTimeSlots === timeSlot
+  );
 
+  // If it doesn't exist, push it
+  if (!exists) {
+    state.rooms[roomId].selectedInterval.push({
+      selectedTimeSlots: timeSlot, // Store the individual time slot as a string
+    });
+  }
+      })
        // Calculate the previous length and new length
       const previousLength = state.rooms[roomId].previousLength || 0;
       
   const newLength = selectedTimeSlots?.length || 0;
 state.rooms[roomId].previousLength = newLength
+
   // Log the values for debugging purposes  
   console.log('Total hours:', state.totalHours);
   console.log('Previous Length:', previousLength);
@@ -70,7 +82,7 @@ state.rooms[roomId].previousLength = newLength
   state.totalHours = Number(state.totalHours) - previousLength + newLength;
 
       console.log('Updated Total Hours:', state.totalHours);
-      
+        console.log('state:',  JSON.stringify(state, null, 2))
       localStorage.setItem('batch', JSON.stringify(JSON.stringify(state)))
     },
 

@@ -72,15 +72,17 @@ const timeIntervalSlice = createSlice({
         state.sets.push(newState); // ✅ Only push if (day, week) is unique
        console.log( JSON.stringify( state.timeInTotal , null, 2))
         state.timeInTotal = newState.totalHours
-        console.log(JSON.stringify( state.timeInTotal , null, 2))
+        console.log(JSON.stringify(state.timeInTotal, null, 2))
       }
       else {
         // Check if the last stored state is identical to the new one
         // ✅ Merge selected intervals instead of adding a duplicate entry
         Object.keys(newState.rooms).forEach((roomId,index) => {
           if (!existingEntry.rooms[roomId]) {
-            existingEntry.rooms[roomId] = {previousLength:0,  timeBounds:'' };
+            existingEntry.rooms[roomId] = {selectedInterval:[], previousLength:0,  timeBounds:'' };
           }
+         existingEntry.rooms[roomId].selectedInterval = newState.rooms[roomId].selectedInterval
+
           const previousLength = existingEntry.rooms[roomId].previousLength ?? 0;
           //const newLength = newState.rooms[roomId].timeBounds.length || 0;
 
