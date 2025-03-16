@@ -17,7 +17,7 @@ import { useAppDispatch } from '@/lib/hooks';
 import { filterBookingsForRoomId } from '@/features/transaction/booking/setBookings';
 const MemoTableRow = React.memo(({ day, week, timesBetween, room, roomTitle }: MemoTableRowProps) => {
   const dayOfWeek = ['Måndag', 'Tisdag', 'Onsdag', 'Torsdag', 'Fredag'];
-    console.log()
+   
     const dispatch = useAppDispatch()
     
      const handleDelete = () => {

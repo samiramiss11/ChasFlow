@@ -1,7 +1,7 @@
 import React from 'react'
 import TransactionCard from '../../components/transaction/TransactionCard'
 import Confirm from '../../components/transaction/Confirm'
-import { ReduxStore } from '@/lib/store'
+import { ReduxStore, RootState } from '@/lib/store'
 import { OwnedBatch } from '@/features/transaction/booking/setBookings'
 import { addTimeIntervalState } from '@/features/transaction/booking/setBookings'
 import { clearIntervals } from '@/features/transaction/booking/booking'
@@ -101,11 +101,11 @@ export const clientAction =
     return null
   }
   
-
+import { useAppSelector } from '@/lib/hooks'
 const ViewBookings = () => {
-  const { allbooking, relatedUser } = useLoaderData() as OwnedBatch
+  const {  relatedUser } = useLoaderData() as OwnedBatch
 
-
+  const allbooking = useAppSelector((state:RootState)=>state.allBookingState)
       // window.location.reload()
 
   return (

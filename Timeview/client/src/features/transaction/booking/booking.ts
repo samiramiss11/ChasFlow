@@ -71,7 +71,8 @@ const timeIntervalSlice = createSlice({
 
 
        // Calculate the previous length and new length
-  const previousLength = state.rooms[roomId].previousLength || 0;
+      const previousLength = state.rooms[roomId].previousLength || 0;
+      
   const newLength = selectedTimeSlots?.length || 0;
 state.rooms[roomId].previousLength = newLength
   // Log the values for debugging purposes  
@@ -79,7 +80,8 @@ state.rooms[roomId].previousLength = newLength
   console.log('Previous Length:', previousLength);
   console.log('New Length:', newLength);
 
-  // Update total hours based on previous and new length
+      // Update total hours based on previous and new length
+      
   state.totalHours = Number(state.totalHours) - previousLength + newLength;
 
       console.log('Updated Total Hours:', state.totalHours);

@@ -44,49 +44,55 @@ const timeIntervalSlice = createSlice({
     addTimeIntervalState: (state, action: PayloadAction<TimeIntervalState>) => {
       const newState = action.payload;
       // Check if there is any room with a selected interval
-
+      console.log(newState, 'addTimeIntervalstate')
       // Check if this (day, week) combo already exists
       const existingEntry = state.sets.find(
         //find instead of some to find existing
         (entry) => entry.day === newState.day && entry.week === newState.week
       );
-
+      console.log("there exist an entry of day",JSON.stringify(existingEntry,null,2))
       if (!existingEntry) {
         state.sets.push(newState); // ✅ Only push if (day, week) is unique
+       console.log( JSON.stringify( state.timeInTotal , null, 2))
+        state.timeInTotal = newState.totalHours
+        console.log(JSON.stringify( state.timeInTotal , null, 2))
       }
-      //  const hasSelectedIntervals = Object.values(newState.rooms).some(
-      //    (room) => room.selectedInterval.length > 0
-      //  )
-      //  if (!hasSelectedIntervals) return
-
-      // const lastState = state.sets[state.sets.length - 1]
-
-      // if (
-      //   !lastState ||
-      //   JSON.stringify(lastState) !== JSON.stringify(newState)
-      // ) {
-      //   state.sets.push(newState) // Only push if different
-      // }
       else {
         // Check if the last stored state is identical to the new one
         // ✅ Merge selected intervals instead of adding a duplicate entry
-        Object.keys(newState.rooms).forEach((roomId) => {
+        Object.keys(newState.rooms).forEach((roomId,index) => {
           if (!existingEntry.rooms[roomId]) {
-            existingEntry.rooms[roomId] = {  timeBounds:'' };
+            existingEntry.rooms[roomId] = {previousLength:0,  timeBounds:'' };
           }
-           existingEntry.rooms[roomId].timeBounds = newState.rooms[roomId].timeBounds;
-          // existingEntry.rooms[roomId].selectedInterval = Array.from(
-          //   new Set([
-          //     ...existingEntry.rooms[roomId].selectedInterval,
-          //     ...newState.rooms[roomId].selectedInterval,
-          //   ])
-          // );
+          const previousLength = existingEntry.rooms[roomId].previousLength ?? 0;
+          //const newLength = newState.rooms[roomId].timeBounds.length || 0;
+
+          existingEntry.rooms[roomId].timeBounds = newState.rooms[roomId].timeBounds;
+          existingEntry.rooms[roomId].previousLength = newState.rooms[roomId].previousLength
+          console.log(roomId,index,  existingEntry.rooms[roomId] == newState.rooms[roomId])
+          if (
+  previousLength !== 0 &&
+  existingEntry.rooms &&
+  existingEntry.rooms[roomId] &&
+true
+          ) {
+            console.log("Before update:");
+console.log("state.timeInTotal:", state.timeInTotal);
+console.log("existingEntry.rooms[roomId]?.previousLength:", existingEntry.rooms[roomId]?.previousLength ?? 0);
+console.log("newState.totalHours:", newState.totalHours);
+ state.timeInTotal += newState.totalHours - previousLength;
+
+    existingEntry.totalHours = newState.totalHours;
+              console.log("After update:");
+  console.log("state.timeInTotal:", state.timeInTotal);
+  console.log("existingEntry.totalHours:", existingEntry.totalHours);
+}
 
         });
-        
-        state.timeInTotal += newState.totalHours;
+       
+    
       }
-
+     
       localStorage.setItem('setOfbatches', JSON.stringify(state));
     },
     removeLastTimeIntervall: () => {
@@ -101,8 +107,14 @@ const timeIntervalSlice = createSlice({
 
     const updatedRooms = Object.keys(set.rooms).reduce((newRooms, room) => {
       if (room !== roomId) {
-        newRooms[room] = set.rooms[room]; // Keep the rooms that don't match roomId
+        newRooms[room] = set.rooms[room]; // Keep the rooms that don't match roomId 
       }
+      else {
+        console.log('dd')
+        const previousLength = set.rooms[room]?.previousLength ?? 0
+        console.log(previousLength)
+          state.timeInTotal -= previousLength;
+}
       return newRooms;
     }, {} as Record<string, any>);
 
@@ -181,4 +193,24 @@ interface ClearPayload {
   //        console.log(updatedRooms, 'updatedRooms')
 
         //   return { ...set, rooms: updatedRooms };
-        // Make a shallow copy of rooms and filter out the room with roomId
+// Make a shallow copy of rooms and filter out the room with roomId
+        
+   // existingEntry.rooms[roomId].selectedInterval = Array.from(
+          //   new Set([
+          //     ...existingEntry.rooms[roomId].selectedInterval,
+          //     ...newState.rooms[roomId].selectedInterval,
+          //   ])
+// );
+          
+   // Calculate the difference in time
+      // const previousLength = existingEntry.rooms[roomId].previousLength ?? 0;
+      // const newLength = newState.rooms[roomId].timeBounds.length || 0;
+
+      // // Update room properties
+      // existingEntry.rooms[roomId].timeBounds = newState.rooms[roomId].timeBounds;
+      // existingEntry.rooms[roomId].previousLength = newLength;
+
+      //     // Correctly adjust `timeInTotal`
+      //     if(previousLength !=0)
+      // state.timeInTotal += newLength //- previousLength;
+      //   });

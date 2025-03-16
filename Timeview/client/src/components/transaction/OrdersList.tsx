@@ -47,12 +47,9 @@ const OrdersList = () => {
 
      (
       Object.entries(entry.rooms).map(([room, details]) => {
-        const { selectedInterval,timeBounds } = details;
-        console.log(selectedInterval, timeBounds,details,room);
-
-        
+        const { timeBounds } = details;        
         const roomTitle = flattenedRooms.find((r) => r.id === room)?.title || (onlineRooms.id === room ? 'Online' : 'Rum saknas');
-
+        console.log(entry.day)
         return (
           <MemoTableRow
             key={`${index}-${room}`}
