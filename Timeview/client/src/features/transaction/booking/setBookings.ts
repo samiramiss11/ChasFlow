@@ -43,6 +43,23 @@ const timeIntervalSlice = createSlice({
   reducers: {
     addTimeIntervalState: (state, action: PayloadAction<TimeIntervalState>) => {
       const newState = action.payload;
+     
+      //  Object.keys(newState.rooms).forEach((roomId) => {
+      //   if (newState.rooms[roomId].timeBounds.trim() === "") {
+      //     delete newState.rooms[roomId];
+      //   }
+      // });
+
+      // // If all rooms were removed, do not add this entry
+      // if (Object.keys(newState.rooms).length === 0) return;
+
+        const filteredRooms = Object.fromEntries(
+    Object.entries(newState.rooms).filter(([_, room]) => room.timeBounds.trim() !== "")
+  );
+
+  // If all rooms are empty, do not update the state
+  if (Object.keys(filteredRooms).length === 0) return state;
+     
       // Check if there is any room with a selected interval
       console.log(newState, 'addTimeIntervalstate')
       // Check if this (day, week) combo already exists
