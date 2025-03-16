@@ -12,6 +12,7 @@ import {
 } from '@/features/transaction/rooms/roomSlice'
 export const clientLoader =
   (store: ReduxStore) => async (): Promise<GroupedRoomResponse> => {
+    console.log('clientLoader')
     return { contextWithStaticData: ROOMS }
   }
 
@@ -44,8 +45,24 @@ export const clientAction =
         const week = store.getState().bookingState.week
         console.log(dayString, week)
         // Fetch available timeslots
-        const timeslots = await fetchAvailableTimeSlots(week, dayString, roomId)
-        store.dispatch(setTimeSlots(timeslots))
+        try {
+          const currentDropDownState = store.getState().checkboxContextState.slots
+    //        if (stoatebookingState.timeslots[roomId]?.[week]?.[dayString]) {
+    // return;
+  
+          const timeslots = await fetchAvailableTimeSlots(week, dayString, roomId);
+          store.dispatch(setTimeSlots(timeslots))
+   
+          return null
+         // const stringifiedTimeslots = JSON.stringify(staticTimeslots)
+  //         return new Response(JSON.stringify({ success: true, timeslots: stringifiedTimeslots }), {
+  //   status: 200,
+  //   headers: { "Content-Type": "application/json" },
+  // });
+        }catch (error) {
+      console.error("Failed to fetch time slots:", error);
+      return error as any
+    }
         // return json({ timeslots })
 
         console.log('opeen')
