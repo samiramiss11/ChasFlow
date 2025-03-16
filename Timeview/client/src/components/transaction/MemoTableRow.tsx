@@ -42,7 +42,7 @@ const MemoTableRow = React.memo(({ day, week, timesBetween, room, roomTitle }: M
           </b>
         </p>
       </TableCell>
-      <TableCell className="p-3 w-full">
+      <TableCell className="p-3 w-full md:min-w-[180px]">
         <p>
           i rum {room}{' '}
           <b className="font-extrabold text-muted-foreground">{roomTitle}</b>

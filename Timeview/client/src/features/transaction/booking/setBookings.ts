@@ -91,6 +91,7 @@ const timeIntervalSlice = createSlice({
     },
     removeLastTimeIntervall: () => {
       localStorage.setItem('setOfbatches', JSON.stringify(defaultState));
+       return defaultState;
     },
     filterBookingsForRoomId: (state, action: PayloadAction<string>) => {
       const roomId = action.payload;
@@ -111,6 +112,7 @@ const timeIntervalSlice = createSlice({
     return { ...set, rooms: updatedRooms };
       });
       localStorage.setItem('setOfbatches', JSON.stringify(state));
+       return state;
   },
   }
 })

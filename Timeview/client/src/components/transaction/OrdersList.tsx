@@ -24,13 +24,13 @@ const OrdersList = () => {
 
   const allbookingRooms = useAppSelector((state) => state.allBookingState)
   //const { day, week, rooms } = allbooking || {}
-
+  const noRooms = allbookingRooms.sets.every((set) => Object.keys(set.rooms).length === 0);
 
   return (
     <div>
       <ScrollArea className='h-[350px] px-12 ml-4'>
         <div className='p-3.7'>
-          <Table className=' max-hight-[345px] '>
+          <Table className=' max-hight-[345px]'>
             <TableHeader>
               <TableRow>
                  <TableHead className=" py-4 lg:min-w-[130px] text-left">Datum</TableHead>
@@ -40,9 +40,10 @@ const OrdersList = () => {
 
               </TableRow>
             </TableHeader>
-            <TableBody>
-              {allbookingRooms.sets.map((entry, index) =>
-
+            
+            <TableBody className=''>
+              {!noRooms ? (
+              allbookingRooms.sets.map((entry, index) => 
 
      (
       Object.entries(entry.rooms).map(([room, details]) => {
@@ -63,9 +64,33 @@ const OrdersList = () => {
           />
         );
       })
-    )
+    ))
+            ) : (
+              <TableRow className="h-[50px]">
+                <TableCell  className="text-center text-gray-500">
+                
+                    </TableCell>
+                    <TableCell  className="text-center text-gray-500">
+               
+                    </TableCell>
+                    
+                    <TableCell  className="text-center text-gray-500">
+                  
+                    </TableCell>
+                    <TableCell className="p-3 w-full md:min-w-[160px]">
+        <p>
+      
+          <b className="font-extrabold text-muted-foreground "></b>
+        </p>
+      </TableCell>
+      <TableCell className="px-8 ">
+        <div className="flex items-center justify-between ">
+        
+        </div>
+      </TableCell>
+              </TableRow>
+            )}
   
-              )}
             </TableBody>
           </Table>
         </div>

@@ -111,7 +111,7 @@ const ViewBookings = () => {
   return (
     <div>
       <TransactionCard>
-        <div className=' bg-slate-200 py-12 px-12 flex flex-col justify-center'>
+        <div className=' bg-slate-200 py-12 px-12 flex flex-col justify-center md:min-w-[1000px]'>
           <div className='max-width-[535px] mx-auto flex flex-col justify-stretch'>
             <OrdersList />
             <div className='p-8 flex justify-center'>
