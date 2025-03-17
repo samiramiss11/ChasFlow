@@ -14,8 +14,8 @@ import {
   HeroLayout,
   RoundedHeroWrapper,
   RoundedBallSlicePositionWrapper,
-  CenteralizedBanner,
 } from '../../components/Shared'
+import CentralizedBanner from '../../components/Shared/CenteralizedBanner'
 import { useLocation } from 'react-router'
 import {} from '../../components/Shared'
 import ConfirmDialog from '../../components/Shared/ConfirmDialog'
@@ -75,9 +75,17 @@ const TransactionLayout = () => {
       </div>
     )
   }
+   const heroContent = {
+    hero: 'ChasPass',
+    subheader: '-Effektivitet med stil',
+    paragraph:
+      'Här skapar du enkelt ditt schema, hanterar bokningar och fakturering - allt i ett smidigt och fraftfullt verktyg. ChasPass för det enkelt att hålla koll på dina arbetstider och hålla verksamheten igång utan krångel',
+  }
+
   return (
     <div>
-      <div className='bg-banner'>
+      <div className=''>
+        <CentralizedBanner heroContent={heroContent} cutBottom={true}>
         <RoundedBallSlicePositionWrapper>
           <RoundedHeroWrapper>
             <HeroLayout>
@@ -88,7 +96,8 @@ const TransactionLayout = () => {
               </div>
             </HeroLayout>
           </RoundedHeroWrapper>
-        </RoundedBallSlicePositionWrapper>
+          </RoundedBallSlicePositionWrapper>
+          </CentralizedBanner>
       </div>
 
       <Outlet />
