@@ -59,7 +59,7 @@ const ConfirmDialog = ({
           <DialogClose asChild>
             <Button
               size='sm'
-              variant='default'
+              variant='destructive'
               className=' mb-2 rounded-full chasBlue w-40 px-6 text-center whitespace-nowrap'>
               {/* <Link to={'../' + JOURNY_LINSK_CONSTANTS.ONBOARDING_STEP1}> */}
               Avbryt

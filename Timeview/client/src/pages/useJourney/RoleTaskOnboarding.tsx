@@ -146,7 +146,7 @@ const RoleTaskOnboarding = () => {
         }>
         <Button
           size='sm'
-          variant='outline'
+          variant='default'
           className='mb-2 rounded-full chasBlue w-40 text-center whitespace-nowrap'>
           SKICKA MEJL
         </Button>
