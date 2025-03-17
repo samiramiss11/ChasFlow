@@ -40,10 +40,10 @@ export const calculateDayAndWeek = () => {
 
   // Get current day of the week (0 = Sunday, 1 = Monday, etc.)
   let dayOfWeek = today.getDay(); // Sunday is 0, Monday is 1, etc.
-
   // Get current week number (ISO 8601 week date system)
   const startDate = new Date(today.getFullYear(), 0, 1); // Get the first day of the year
   const days = Math.floor((today.getTime() - startDate.getTime()) / (24 * 60 * 60 * 1000)); // Calculate the number of days since the start of the year
+
   let weekOfYear = Math.ceil((days + 1) / 7); // Week is based on the number of days passed, rounded up
 
     // If it's Saturday (6) or Sunday (0), set it to Monday (1)
@@ -54,6 +54,6 @@ export const calculateDayAndWeek = () => {
 
   return {
     dayOfWeek: dayOfWeek,// === 0 ? 7 : dayOfWeek, // Return 7 for Sunday, otherwise return dayOfWeek
-    weekOfYear: weekOfYear,
+    weekOfYear: weekOfYear+1, //start from week 1?
   };
 };
