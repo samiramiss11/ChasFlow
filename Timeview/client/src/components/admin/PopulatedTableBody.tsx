@@ -64,7 +64,7 @@ const PopulatedTableBody = ({ openRows, order }: TriggeredDataLoad) => {
         {Array.from({ length: 2 }).map((_, rowIndex) => (
           <TableRow
             key={rowIndex}
-            className='even:bg-gray-100'>
+            className='even:bg-chasLightGray'>
             {Array.from({ length: 5 }).map((_, index) => (
               <TableCell
                 key={index}

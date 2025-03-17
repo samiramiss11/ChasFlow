@@ -169,7 +169,7 @@ const Bookings = () => {
 
   //can scroll section into view with id
   return (
-    <section id='section'>
+    <section id='section' className='bg-chasLightGray'>
       <BookingControlContainer />
 
       <GroupedBookings contextWithStaticData={contextWithStaticData} />

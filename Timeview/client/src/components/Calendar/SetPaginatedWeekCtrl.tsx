@@ -70,7 +70,7 @@ const SetPaginatedWeekCtrl = () => {
     return (
       <PaginationItem
         key={pageNumber}
-        className='text-white'>
+        className='text-white '>
         <PaginationButtonLink
           size={'sm'}
           isActive={isActive}
@@ -130,7 +130,7 @@ const SetPaginatedWeekCtrl = () => {
         value={currentPage}
       />
       <Pagination className='mt-16'>
-        <PaginationContent className='bg-black rounded-full'>
+        <PaginationContent className='bg-chasGray rounded-full'>
           <button
             type='button'
             onClick={handlePrev}

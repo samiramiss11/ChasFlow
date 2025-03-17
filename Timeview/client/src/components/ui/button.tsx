@@ -17,12 +17,12 @@ const buttonVariants = cva(
         destructive:
           'bg-destructive text-destructive-foreground hover:bg-destructive/90 border border-negative hover:bg-negative hover:text-white min-h-[41px] uppercase',
         outline:
-          'border-chasBlue hover:bg-chasBlueHover  border border-input bg-background hover:bg-chasBlue  hover:border-chasBlue hover:whiteforeground min-h-[41px] uppercase',
+          'bg-chasLightGray border-chasBlue hover:bg-chasBlueHover  border border-input bg-background hover:bg-chasBlue  hover:border-chasBlue hover:whiteforeground min-h-[41px] uppercase',
         secondary:
           'bg-secondary text-secondary-foreground hover:bg-secondary/80',
         ghost:
           'min-w-[102px]  uppercase ',// hover:bg-white hover:text-black hover:underline-offset-2 hover:underline //linksDropdown in header
-        link: 'bg-black text-white  underline-offset-2 underline',//hover:bg-white hover:text-black pagination button
+        link: 'bg-chasGrey text-white  underline-offset-2 underline',//hover:bg-white hover:text-black pagination button
       },
       size: {
         default: 'h-10 px-4 py-2',

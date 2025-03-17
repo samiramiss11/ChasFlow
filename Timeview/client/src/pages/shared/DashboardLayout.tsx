@@ -45,7 +45,7 @@ const DashboardLayout = () => {
   return (
     <DashboardContext.Provider value={{}}>
       <div className='overflow-x-hidden min-h-screen'>
-        <main className='dashboard max-w-full '>
+        <main className='dashboard max-w-full bg-[#FAFAFA}] '>
           {/* Sidebar (Visible on large screens) */}
 
           {/* Main Content */}

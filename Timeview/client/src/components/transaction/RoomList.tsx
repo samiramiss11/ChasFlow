@@ -14,7 +14,7 @@ const RoomList = ({ rooms }: { rooms: RoomType[] }) => {
 
   return (
     <>
-      <div className='flex-wrap justify-around lex flex-col gap-4'>
+      <div className=' justify-around lex gap-4'>
         {rooms.map((room, index) => (
           <Room
             key={index}

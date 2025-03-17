@@ -30,10 +30,11 @@ export default {
         grayChas: '#F8F8F8',
         
         postive: '#A3C856',
-        negative:'#FF9FB6'
+        negative: '#FF9FB6',
+        neutral:'#2B2F2F',
       },
       fontFamily: {
-         sans: ['Poppins', 'sans-serif'], // Body text font
+         sans: ['Roboto','PlayFair Display', 'sans-serif'], // Body text font
         heading: ['Playpen Sans', 'sans-serif'],
         caveat: ['Caveat', 'sans-serif'],
       },
@@ -66,6 +67,11 @@ export default {
         'xl': '1280px',
         '2xl': '1536px',
       },
+      daisyui: {
+        themes: [
+          {}
+        ]
+      }
     },
   },
   plugins: [

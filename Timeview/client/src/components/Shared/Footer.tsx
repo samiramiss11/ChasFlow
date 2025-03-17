@@ -18,7 +18,7 @@ const clientLoader = async () => {
  */
 const Footer = () => {
   return (
-    <footer className=' bg-neutral py-2 text-neutral-content  min-h-[463px] flex flex-col justify-between vertical-align pt-9'>
+    <footer className=' bg-chasGray py-2 text-neutral-content  min-h-[463px] flex flex-col justify-between vertical-align pt-9'>
       {/*colums*/}
 
       <div className='flex flex-col sm:flex-row  pt-12'>
