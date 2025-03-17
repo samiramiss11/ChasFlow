@@ -19,7 +19,7 @@ const BookingControlContainer = () => {
     // window.location.reload()
   }
   return (
-    <div className='-mt-12'>
+    <div className='pt-7'>
       <fetcher.Form
         method='POST'
         onSubmit={handleSubmit}

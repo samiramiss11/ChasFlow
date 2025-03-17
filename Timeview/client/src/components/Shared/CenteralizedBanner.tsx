@@ -7,14 +7,12 @@ interface BannerProps {
     subheader: String
     paragraph: String
   }
-  cutBottom:boolean
 }
 import { useLocation } from 'react-router'
 import { JOURNY_LINSK_CONSTANTS } from '../../utils/links'
 const CenteralizedBanner: React.FC<BannerProps> = ({
   children,
   heroContent,
-  cutBottom
 }) => {
   const location = useLocation()
 
@@ -23,9 +21,9 @@ const CenteralizedBanner: React.FC<BannerProps> = ({
     `/${JOURNY_LINSK_CONSTANTS.ONBOARDING_STEP1}/${JOURNY_LINSK_CONSTANTS.ONBOARDING_STEP2}`
 
   return (
-    <div className={`relative z-[30]   bg-bannerShade ${ cutBottom? 'h-[calc(100vh-129px)]':'h-screen'} w-full `}>
+    <div className='relative z-[30]   bg-bannerShade h-screen w-full '>
       {/* Banner Content - Centered at 5/7 of the screen height */}
-      <div className='pl-12 absolute top-[45%] transform -translate-y-1/2  h-[71vh] flex flex-col md:flex-row items-center bg-banner shadow-lg rounded-lg px-10  z-10 w-full '>
+      <div className='pl-12 absolute top-[45%] transform -translate-y-1/2  h-[71vh] flex flex-col md:flex-row items-center bg-banner shadow-lg rounded-lg px-10 py-8 z-10 w-full '>
         {/* Left Side - Children */}
         <div className='md:w-1/2 flex justify-center items-center '>
           {children}
