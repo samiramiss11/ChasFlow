@@ -72,7 +72,7 @@ const Confirm = ({children}:{children?:ReactNode }) => {
               <Button
                 size='sm'
                 variant='outline'
-                className='self start mb-2 rounded-full'>
+                className='self start mb-2 rounded-full text-chasBlue hover:text-white'>
                 {nextPageInfo.buttons[1].text}
               </Button>
             </NavLink>

@@ -72,7 +72,7 @@ const Educators = () => {
                   <TableCell className='text-center'>{email}</TableCell>
                  <TableCell className='col-span-2 pl-9'>
           <Button  size='sm'
-                variant='outline'  className='self start mb-2 rounded-full'> INAKTIVERA UTBILDARE FRÅN LISTA</Button>
+                variant='outline'  className='self start mb-2 rounded-full text-chasBlue hover:text-white'> INAKTIVERA UTBILDARE FRÅN LISTA</Button>
         </TableCell>
                 </TableRow>
               )

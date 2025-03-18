@@ -28,7 +28,7 @@ export default {
         input: '#156079',
         viewBookingButton: '#7693A340',
         grayChas: '#F8F8F8',
-        
+        policy: '#D3DBE0',
         postive: '#A3C856',
         negative: '#FF9FB6',
         neutral:'#2B2F2F',
