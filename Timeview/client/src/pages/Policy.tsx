@@ -1,6 +1,7 @@
 import React from "react";
 import FeatureItem from "@/components/Shared/FeatureItem";
 import { Button } from "@/components/ui/button";
+import { Link,  useNavigate } from 'react-router-dom'
 const Policy = () => {
 
   const features = [
@@ -65,18 +66,24 @@ const Policy = () => {
       title: "Användning av färg", description: "Färg används inte som den enda metoden för att förmedla viktig information, till exempel vid statusindikationer eller felmeddelanden. Text och symboler används som komplement för att säkerställa att information når alla användare, inklusive de med färgblindhet."
     }
   ]
+  const navigate = useNavigate()
   return (
     <div className="">
      
    
      <section className="p-6 bg-policy min-h-[669px] relative">
   {/* Fixed button at the top */}
-  <Button
-    size="sm"
-    variant="default"
-    className=" rounded-full chasBlue w-32 text-center whitespace-nowrap absolute top-4 left-24 transform -translate-x-1/2">
-    Tillbaka
-  </Button>
+      
+        <Button
+  onClick={() => navigate(-1)}
+  size="sm"
+  variant="default"
+  className="rounded-full chasBlue w-32 text-center whitespace-nowrap absolute top-4 left-24 transform -translate-x-1/2"
+>
+  Tillbaka
+</Button>
+
+     
   <div className="flex flex-col md:flex-row items-center justify-around gap-6 md:gap-12 mt-14 md:pl-32">
     <div className="max-w-[51ch]">
       <h1 className="text-text-mark font-playfair text-4xl font-bold leading-h1">Tillgänglighetsredogörelse</h1>
