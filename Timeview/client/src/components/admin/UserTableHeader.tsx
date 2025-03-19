@@ -36,8 +36,8 @@ const UserTableHeader = ({ openRows, order }: tableHeaderProps) => {
               <ChevronUp
                 className={` ${
                   openRows.includes(order.id)
-                    ? 'rotate-180 text-gray-800'
-                    : 'text-gray-600'
+                    ? 'rotate-180 text-black'
+                    : 'text-black'
                 } transition-all`}
               />
               {content}

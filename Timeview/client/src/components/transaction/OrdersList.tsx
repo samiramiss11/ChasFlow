@@ -33,9 +33,9 @@ const OrdersList = () => {
           <Table className=' max-hight-[345px]'>
             <TableHeader>
               <TableRow>
-                 <TableHead className=" py-4 lg:min-w-[130px] text-left">Datum</TableHead>
-      <TableHead className="py-4 lg:min-w-[130px] text-left">Tid</TableHead>
-                <TableHead className=" py-4 lg:min-w-[130px] text-left">Rum</TableHead>
+                 <TableHead className=" py-4 lg:min-w-[130px] text-left text-black">Datum</TableHead>
+      <TableHead className="py-4 lg:min-w-[130px] text-lef text-blackt">Tid</TableHead>
+                <TableHead className=" py-4 lg:min-w-[130px] text-left text-black">Rum</TableHead>
                       <TableHead className="md:px-6 py-4 min-w-[120px] text-left"></TableHead>
 
               </TableRow>

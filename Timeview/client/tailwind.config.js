@@ -13,6 +13,7 @@ export default {
       //   // Other color definitions...
       // },
       colors: {
+         black: "var(--Black, #2B2F2F)",
         primary: {
           400: '#1D4ED8', // This is a custom blue shade (you can choose any color)
         },

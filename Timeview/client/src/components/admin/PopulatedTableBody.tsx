@@ -56,15 +56,18 @@ const PopulatedTableBody = ({ openRows, order }: TriggeredDataLoad) => {
     rum: [],
     sammanlagda_timmar: [],
   }).map((key) => (
-    <TableHead key={key} className="p-1 px-3">
-      <p className="font-bold">{key}</p>
+    <TableHead key={key}
+        className=' p-1 px-3 text-black'>
+                      {' '}
+                      {/* ✅ Use <TableHead> (th) for headers */}
+                      <p className='font-bold'>{key}</p>
     </TableHead>
   ))}
 </TableRow>
         {Array.from({ length: 2 }).map((_, rowIndex) => (
           <TableRow
             key={rowIndex}
-            className='even:bg-chasLightGray'>
+            className='even:bg-red-50'>
             {Array.from({ length: 5 }).map((_, index) => (
               <TableCell
                 key={index}
@@ -107,7 +110,7 @@ const PopulatedTableBody = ({ openRows, order }: TriggeredDataLoad) => {
                   {attributeEntries.map(([key]) => (
                     <TableHead
                       key={String(key)}
-                      className=' p-1 px-3 '>
+                      className=' p-1 px-3 text-black'>
                       {' '}
                       {/* ✅ Use <TableHead> (th) for headers */}
                       <p className='font-bold'>{key}</p>
@@ -119,7 +122,7 @@ const PopulatedTableBody = ({ openRows, order }: TriggeredDataLoad) => {
                 {Array.from({ length: maxRows }).map((_, rowIndex) => (
                   <TableRow
                     key={rowIndex}
-                    className='even:bg-gray-100'>
+                    className='even:bg-red-50'>
                     {attributeEntries.map(([key, value]) => (
                       <TableCell
                         key={`${value}-${rowIndex}`}

@@ -28,7 +28,7 @@ const MemoTableRow = React.memo(({ day, week, timesBetween, room, roomTitle }: M
     <TableRow>
       <TableCell className="p-3">
         <p>
-          <b className="font-extrabold text-muted-foreground">
+          <b className="font-extrabold text-black">
             {day + '/' + week}
           </b>
           {' ' + dayOfWeek[day - 1]}
@@ -37,7 +37,7 @@ const MemoTableRow = React.memo(({ day, week, timesBetween, room, roomTitle }: M
       <TableCell className="p-3">
         <p>
           kl{' '}
-          <b className="text-muted-foreground">
+          <b className="text-black">
                       {timesBetween}
           </b>
         </p>
@@ -45,12 +45,12 @@ const MemoTableRow = React.memo(({ day, week, timesBetween, room, roomTitle }: M
       <TableCell className="p-3 w-full md:min-w-[180px]">
         <p>
           i rum {room}{' '}
-          <b className="font-extrabold text-muted-foreground">{roomTitle}</b>
+          <b className="font-extrabold text-black">{roomTitle}</b>
         </p>
       </TableCell>
       <TableCell className="px-8 ">
         <div className="flex items-center justify-between" onClick={() => handleDelete()}>
-          <Button size="sm" variant="outline" className="self-end mb-2 rounded-full bg-viewBookingButton">
+          <Button size="sm" variant="outline" className="self-end mb-2 rounded-full bg-viewBookingButton  hover:bg-viewBookingButton hover:text-inherit ">
             <span className="p-3">Ta bort</span>
           </Button>
         </div>
