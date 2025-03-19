@@ -47,7 +47,7 @@ const Educators = () => {
     },
   ]
   return (
-    <div className='m-4 bg-white h-[699px] p-5 flex justify-center '>
+    <div className='m-4 bg-white -min-h-[699px] p-5 flex justify-center '>
     
         <Table className='w-full'>
           <TableHeader>

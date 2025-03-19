@@ -75,7 +75,7 @@ const TimeReports = () => {
   }))
   const data = { tableHeaders: tableHeaders, orders: transformedOrders }
   return (
-    <div className=' h-[539px] flex justify-center p-3 pt-5 w-full'>
+    <div className=' -min-h-[539px] flex justify-center p-3 pt-5 w-full'>
       {false ? (
         <TableInTableAccordion propDrilling={data} />
       ) : (

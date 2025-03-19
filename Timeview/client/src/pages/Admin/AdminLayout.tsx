@@ -25,8 +25,8 @@ const AdminLayout = () => {
           <BigSidebar />
         </div>
         {/* Main Content bg-[#EFF4FA] */}
-        <div className='flex-1 bg-slate-300 '>
-          <div className='w-full mx-auto'>
+        <div className='flex-1 bg-white '>
+          <div className='w-full mx-auto shadow-md rounded-3xl'>
             <Outlet />
           </div>
           <div className='-mt-32'>
