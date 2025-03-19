@@ -34,6 +34,7 @@ export default {
         neutral:'#2B2F2F',
       },
       fontFamily: {
+        playfair: ['Playfair Display', 'serif'],
          sans: ['Roboto','PlayFair Display', 'sans-serif'], // Body text font
         heading: ['Playpen Sans', 'sans-serif'],
         caveat: ['Caveat', 'sans-serif'],
@@ -43,6 +44,8 @@ export default {
       },
       fontWeight: {
         light: '300', // Poppins Light
+        
+        
       },
        lineHeight: {
         h1: '45px',

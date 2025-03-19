@@ -56,29 +56,39 @@ const Policy = () => {
     description:
       'Vi genomför tester med användare som har olika funktionsvariationer för att få insikter och identifiera förbättringsmöjligheter.',
   },
-]
+  ]
+  
+  const fixedFeaturesSub = [
+    { title: "Formulär och felmeddelanden", description: "Alla formulärfält är korrekt märkta med tydliga etiketter och har rätt ARIA-attribut. Felmeddelanden är visuellt tydliga och kan även uppfattas av skärmläsare." },
+  
+    {
+      title: "Användning av färg", description: "Färg används inte som den enda metoden för att förmedla viktig information, till exempel vid statusindikationer eller felmeddelanden. Text och symboler används som komplement för att säkerställa att information når alla användare, inklusive de med färgblindhet."
+    }
+  ]
   return (
     <div className="">
      
    
-      <section className="flex justify-between gap-6 md:gap-12 p-6 bg-policy " >
-           <Button
-               size='sm'
-               variant='default'
-               className='mb-2 rounded-full chasBlue w-40 text-center whitespace-nowrap'>
-               Tillbaka
-             </Button>
-  <div className="md:w-1/2">
-    <h1 className="text-2xl font-bold">Tillgänglighetsredogörelse</h1>
-    <p className="mt-2 text-gray-700">
-      På Chas strävar vi efter att göra vår webbplats tillgänglig för alla användare, inklusive personer med olika typer av funktionsvariation. Denna redogörelse beskriver de åtgärder vi har vidtagit för att uppfylla tillgänglighetskraven enligt WCAG 2.2 och för att erbjuda en god användarupplevelse för alla besökare.
-    </p>
+     <section className="p-6 bg-policy min-h-[669px] relative">
+  {/* Fixed button at the top */}
+  <Button
+    size="sm"
+    variant="default"
+    className=" rounded-full chasBlue w-32 text-center whitespace-nowrap absolute top-4 left-24 transform -translate-x-1/2">
+    Tillbaka
+  </Button>
+  <div className="flex flex-col md:flex-row items-center justify-around gap-6 md:gap-12 mt-14 md:pl-32">
+    <div className="max-w-[51ch]">
+      <h1 className="text-text-mark font-playfair text-4xl font-bold leading-h1">Tillgänglighetsredogörelse</h1>
+      <p className="mt-2 text-gray-700 py-12">
+        På Chas strävar vi efter att göra vår webbplats tillgänglig för alla användare, inklusive personer med olika typer av funktionsvariation. Denna redogörelse beskriver de åtgärder vi har vidtagit för att uppfylla tillgänglighetskraven enligt WCAG 2.2 och för att erbjuda en god användarupplevelse för alla besökare.
+      </p>
 
-    <h1 className="text-2xl font-bold mt-6">Tillgänglighetsstandarder</h1>
-    <p className="mt-2 text-gray-700">
-      Vår webbplats är byggd för att uppfylla WCAG 2.2-riktlinjerna på AA-nivå. Vi arbetar kontinuerligt med att förbättra tillgängligheten och följer bästa praxis för webbtillgänglighet.
-    </p>
-  </div>
+      <h1 className="text-2xl font-bold mt-6">Tillgänglighetsstandarder</h1>
+      <p className="mt-2 text-gray-700 py-12">
+        Vår webbplats är byggd för att uppfylla WCAG 2.2-riktlinjerna på AA-nivå. Vi arbetar kontinuerligt med att förbättra tillgängligheten och följer bästa praxis för webbtillgänglighet.
+      </p>
+    </div>
 
        <div className="md:w-1/2 flex justify-center">
   <svg 
@@ -103,22 +113,23 @@ const Policy = () => {
       preserveAspectRatio="xMidYMid meet"
     />
           </svg>
-          
         </div>
+ </div>
         
 </section>
 
-    <section className="flex flex-col md:flex-row items-start justify-between gap-6 md:gap-12 p-6 bg-chasGray text-white">
-  {/* Left Column */}
-  <div className="md:w-1/2">
-    <h1 className="text-2xl font-bold">Viktiga funktioner</h1>
-    <p className="mt-2 text-white">
+    <section className=" min-h-[865px] bg-chasGray flex items-center justify-center">
+        <div className="flex flex-col md:flex-row items-start justify-between gap-6 md:gap-12 p-12  text-white ">
+           {/* Left Column */}
+  <div className="md:w-1/2 w-[456px] h-[588px]">
+    <h1 className="text-2xl font-bold font-heading">Viktiga funktioner</h1>
+    <p className="mt-2 text-white py-4">
       För att säkerställa tillgänglighet för alla användare har vi implementerat följande funktioner:
     </p>
 
     {/* Features List */}
    {/* Features List */}
-  <ul className="list-disc pl-6 mt-2 text-white space-y-2">
+  <ul className="list-disc pl-6 mt-2 text-white space-y-6">
     {features.map(({ title, description }, index) => (
       <FeatureItem key={index} title={title} description={description} />
     ))}
@@ -130,7 +141,7 @@ const Policy = () => {
   <div className="md:w-1/2 flex flex-col items-center ">
     {/* Image */}
    
-       <div className="md:w-1/2 flex justify-center">
+       <div className="flex justify-center">
  <svg xmlns="http://www.w3.org/2000/svg" width="384" height="304" viewBox="0 0 384 304" fill="none">
     {/* Background Shape */}
    <path d="M383.908 209.814C383.908 294.255 211.191 303.814 95.4076 303.814C20.6324 292.087 -6.49976 104.5 2.49935 56.5C14.2716 -6.29142 176.518 3.81673 200.908 0.814622C272.367 -7.98118 383.908 53.9767 383.908 209.814Z" fill="white"/>
@@ -145,21 +156,24 @@ const Policy = () => {
       preserveAspectRatio="xMidYMid meet"
     />
   </svg>
-</div>
-    {/* Additional Information */}
-    <p className="mt-4 text-white">
-      <b>Formulär och felmeddelanden:</b> Alla formulärfält är korrekt märkta med tydliga etiketter och har rätt ARIA-attribut. Felmeddelanden är visuellt tydliga och kan även uppfattas av skärmläsare.
-    </p>
-
-    <p className="mt-2 text-white">
-      <b>Användning av färg:</b> Färg används inte som den enda metoden för att förmedla viktig information. Text och symboler används som komplement för att säkerställa att information når alla användare, inklusive de med färgblindhet.
-    </p>
+          </div>
+         
+    {/* Additional Information------------------------------------------------ */}
+          <div className="space-y-6 w-[456px] pt-12">
+             <ul className="list-disc pl-6 mt-2 text-white space-y-6">
+                 {fixedFeaturesSub.map(({ title, description }, index) => (
+      <FeatureItem key={index} title={title} description={description} />
+                 ))}
+              </ul>
+          </div>
   </div>
+ </div>
 </section>
 
- <section className="flex flex-col md:flex-row items-start justify-between gap-6 md:gap-12 p-6 bg-policy">
+ <section className="p-6 bg-policy min-h-[796px] flex justify-center items-center">
   {/* Left Column */}
-  <div className="md:w-1/2 flex flex-col items-center">
+        <div className="flex flex-col md:flex-row justify-between align-middle py-12  md:w-[90%]">
+          <div className="md:w-1/2 flex flex-col items-center">
           {/* Image */}
         
    <svg xmlns="http://www.w3.org/2000/svg" width="461" height="390" viewBox="0 0 461 390" fill="none">
@@ -179,36 +193,41 @@ const Policy = () => {
  
 
     {/* Accessibility Issues */}
-    <h1 className="text-2xl font-bold mt-4">Eventuella tillgänglighetsproblem</h1>
+            <div className="max-w-[51ch]">
+              <h1 className="text-2xl font-bold mt-4 py-8">Eventuella tillgänglighetsproblem</h1>
     <p className="mt-2 text-gray-700">
       Trots våra ansträngningar kan vissa delar av webbplatsen fortfarande behöva förbättras för att helt uppfylla WCAG 2.2. 
       Vi arbetar kontinuerligt med att identifiera och åtgärda dessa brister.
     </p>
+    </div>
   </div>
 
   {/* Right Column */}
-  <div className="md:w-1/2">
+  <div className="md:w-[40%]">
     <h1 className="text-2xl font-bold">Åtgärder vi har vidtagit</h1>
-    <p className="mt-2 text-gray-700">För att uppnå dessa mål har vi genomfört följande åtgärder:</p>
+    <p className="mt-2 text-gray-700 py-4">För att uppnå dessa mål har vi genomfört följande åtgärder:</p>
 
     {/* Fixed List */}
-    <ul className="list-disc pl-6 mt-2 text-gray-700 space-y-2">
+    <ul className="list-disc pl-6 mt-2 text-gray-700 space-y-6 max-w-[52ch]">
       {fixedFeatures.map(({ title, description }, index) => (
       <FeatureItem key={index} title={title} description={description} />
     ))}
     </ul>
   </div>
+  </div>
 </section>
 
           
-      <section className="flex flex-col md:flex-row items-start justify-between gap-6 md:gap-12 p-9 bg-chasGray">
+      <section className="bg-chasGray min-h-[576px] flex justify-center ">
   {/* Left Column */}
-  <div className="md:w-1/2">
+  <div className="flex flex-col md:flex-row p-9 ">
+          <div className="flex flex-col md:flex-row p-9 ">
+              <div className="md:w-1/2">
     <h1 className="text-2xl font-bold text-white">Hur vi testar tillgänglighet</h1>
-    <p className="mt-2 text-white">Vi säkerställer tillgängligheten genom följande metoder:</p>
+    <p className="mt-2 text-white py-6">Vi säkerställer tillgängligheten genom följande metoder:</p>
 
     {/* Fixed List */}
-    <ul className="list-disc pl-6 mt-2 text-white space-y-2">
+    <ul className="list-disc pl-6 mt-2 text-white space-y-6">
       {how.map(({ title, description }, index) => (
       <FeatureItem key={index} title={title} description={description} />
     ))}
@@ -233,9 +252,12 @@ const Policy = () => {
   </svg>
   
   </div>
+        </div>
+  </div>
 </section>
-<section className="flex flex-col md:flex-row items-start justify-between gap-6 md:gap-12 p-6 bg-policy">
-  {/* Left Column */}
+<section className="flex justify-center items-center bg-policy ">
+  <div className="flex flex-col md:flex-row items-center justify-between gap-6 md:gap-12 p-6 min-h-[296px]">
+           {/* Left Column */}
   <div className="md:w-1/2">
     <h1 className="text-2xl font-bold">Kontakt</h1>
     <p className="mt-2 text-gray-700">
@@ -257,6 +279,7 @@ const Policy = () => {
       Denna redogörelse uppdaterades senast: <b>17/2 - 2025</b>
     </p>
   </div>
+ </div>
 </section>
 
     </div>

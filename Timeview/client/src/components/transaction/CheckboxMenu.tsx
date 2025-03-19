@@ -89,7 +89,7 @@ const CheckboxMenu = ({ roomId }: { roomId: string }) => {
       onOpenChange={setOpen}>
       <DropdownMenuTrigger
         asChild
-        className=' rounded-full select-none  px-4 text-2xl bg-white text-chasBlue border-2 border-chasBlue hover:bg-chasB hover:text-white focus-visible:outline-none data-[state=open]:bg-chasBlue data-[state=open]:text-white'>
+        className=' rounded-full select-none  px-4 text-2xl bg-white text-chasBlue border-2 border-chasBlue hover:bg-chasB  focus-visible:outline-none data-[state=open]:bg-chasBlue data-[state=open]:text-white'>
         <Button className='flex gap-2 text-base'>
           {' '}
           <span>Se lediga tider</span>

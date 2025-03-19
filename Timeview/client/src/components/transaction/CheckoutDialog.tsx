@@ -48,7 +48,7 @@ const CheckoutDialog = () => {
             <Button
               size='sm'
               variant='default'
-              className='self-end mb-2 rounded-full chasBlue ml-[100px]'>
+              className='self-end mb-2 rounded-full chasBlue ml-[100px] hover:text-white'>
               TILLBAKA TILL VÄLJ UTBILDARE
             </Button>
           </Link>
