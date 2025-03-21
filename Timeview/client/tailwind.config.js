@@ -32,7 +32,9 @@ export default {
         policy: '#D3DBE0',
         postive: '#A3C856',
         negative: '#FF9FB6',
-        neutral:'#2B2F2F',
+        neutral: '#2B2F2F',
+        tableGrey: ' #ECE9E9',
+        adminGrey: '#EFF4FA'
       },
       fontFamily: {
         playfair: ['Playfair Display', 'serif'],

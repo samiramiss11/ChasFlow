@@ -69,7 +69,7 @@ const Settings = () => {
     </div>
   }
   return (
-    <div className="m-4 bg-white rounded-lg p-8 flex flex-col -min-h-[490px]">
+    <div className="m-4 bg-white p-8 flex flex-col -min-h-[490px] shadow-md rounded-3xl">
   <h4>Skapa nytt lösenord</h4>
 
   {/** ✅ Grid takes up remaining space */}
