@@ -26,11 +26,12 @@ import { ReduxStore } from '@/lib/store'
 
 export const clientLoader = (store: ReduxStore) => async () => {
   store.getState().userState.user
-  return null
+  return 'nulls'
 }
 
 const TimeReports = () => {
   const users = useLoaderData()
+  console.log(users)
   const orders = [
     {
       id: 1,

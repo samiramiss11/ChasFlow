@@ -20,8 +20,8 @@ const MemoTableRow = React.memo(({ day, week, timesBetween, room, roomTitle }: M
    
     const dispatch = useAppDispatch()
     
-     const handleDelete = () => {
-         dispatch(filterBookingsForRoomId(room)); // Dispatch the delete action to the store
+     const handleDelete = ({day, week}:{day:string, week:string}) => {
+         dispatch(filterBookingsForRoomId({roomId:room,day,week })); // Dispatch the delete action to the store
          console.log('delete')
   };
   return (
@@ -49,7 +49,7 @@ const MemoTableRow = React.memo(({ day, week, timesBetween, room, roomTitle }: M
         </p>
       </TableCell>
       <TableCell className="px-8 ">
-        <div className="flex items-center justify-between py-1.4" onClick={() => handleDelete()}>
+        <div className="flex items-center justify-between py-1.4" onClick={() => handleDelete({day, week})}>
           <Button size="sm" variant="outline" className="self-end mb-2 rounded-full bg-viewBookingButton  hover:bg-viewBookingButton hover:text-inherit ">
             <span className="p-3">Ta bort</span>
           </Button>

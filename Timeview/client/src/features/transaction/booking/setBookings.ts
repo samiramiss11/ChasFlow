@@ -122,14 +122,20 @@ console.log("newState.totalHours:", newState.totalHours);
       localStorage.setItem('setOfbatches', JSON.stringify(defaultState));
        return defaultState;
     },
-    filterBookingsForRoomId: (state, action: PayloadAction<string>) => {
-      const roomId = action.payload;
-      
+    filterBookingsForRoomId: (state, action: PayloadAction<{ roomId: string, day: number, week: number }>) => {
+  const { roomId, day, week } = action.payload;  
       state.sets = state.sets.map((set) => {
          console.log(JSON.stringify( set.rooms , null, 2) , 'set.rooms')
+//  const dayStrings = ['Måndag', 'Tisdag', 'Onsdag', 'Torsdag', 'Fredag']
+        //const ObjectdayString = dayStrings[set.day - 1]
+        const roomForSpecificDay = set.day !== day
+        const roomForSpecificWeek = set.week !== week
+        if (!roomForSpecificDay&& !roomForSpecificWeek) {
+            console.log(set)
+        } 
 
     const updatedRooms = Object.keys(set.rooms).reduce((newRooms, room) => {
-      if (room !== roomId) {
+      if (room !== roomId && roomForSpecificDay&&roomForSpecificWeek ) {
         newRooms[room] = set.rooms[room]; // Keep the rooms that don't match roomId 
       }
       else {

@@ -11,6 +11,21 @@ export const getFirstDateOfISOWeek = ({ year, week }:DateType) => {
   return monday;
 };
 
+
+export const formatMultiIntervalString = (timeSlots: string[]): string => {
+  if (timeSlots.length === 0) return ''; // Return empty if no slots are present
+
+  const times = timeSlots
+    .map(slot => slot.split('-'))  // Split into start and end times
+    .flat();  // Flatten into a single array of times
+  console.log(times)
+  const leastTime = times.reduce((min, time) => (time < min ? time : min)); // Find the earliest time
+  const greatestTime = times.reduce((max, time) => (time > max ? time : max)); // Find the latest time
+
+  return `${leastTime}-${greatestTime}`; // Return the formatted interval string
+};
+
+
 export const formatIntervalString = (timeSlots: string[]): string => {
   if (timeSlots.length === 0) return ''; // Return empty if no slots are present
 
