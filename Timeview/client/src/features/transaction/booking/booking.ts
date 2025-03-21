@@ -15,7 +15,7 @@ export interface TimeIntervalState {
   }>
   totalHours: number
 }
-import { formatIntervalString,calculateDayAndWeek } from '@/utils/transaction/date'
+import { formatIntervalString,calculateDayAndWeek,formatMultIntervalString} from '@/utils/transaction/date'
 
 
 const { dayOfWeek, weekOfYear } = calculateDayAndWeek();
@@ -47,12 +47,16 @@ const timeIntervalSlice = createSlice({
 
     setInterval: (state, action: PayloadAction<TogglePayload>) => {
       const { roomId, interval,selectedTimeSlots } = action.payload
-        
-        const formattedInterval = formatIntervalString(interval);         
+        console.log(selectedTimeSlots, 'selected',interval)
+      const formattedInterval = formatIntervalString(interval);     
+      const formattedIntervals = formatMultIntervalString(interval)
+      console.log('multiple intervalls', formattedIntervals)
+            console.log('single intervalls',formattedInterval)
+
       if (!state.rooms[roomId]) {
-        state.rooms[roomId] = {selectedInterval:[], previousLength:0,  timeBounds: formattedInterval||'' };
+        state.rooms[roomId] = {selectedInterval:[], previousLength:0,  timeBounds: formattedIntervals||'' };
       }
-      state.rooms[roomId].timeBounds = formattedInterval
+      state.rooms[roomId].timeBounds = formattedIntervals
 
       selectedTimeSlots.forEach((timeSlot) => {
          const exists = state.rooms[roomId].selectedInterval.some(
