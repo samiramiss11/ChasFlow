@@ -68,7 +68,7 @@ const AccordionTable = ({ propDrilling }: AccordionResponse) => {
                 {tableHeaders.map((header, index) => (
                   <TableHead
                     key={index}
-                    className={`justify-self-start  xl:justify-self-center text-left w-1/5 text-black 
+                    className={`justify-self-start  xl:justify-self-center text-left w-1/5  
     ${index === tableHeaders.length - 1 ? 'col-span-2' : 'col-span-1'}
   `}>
                     {header}

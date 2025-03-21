@@ -1,12 +1,17 @@
 import React from 'react'
-
-const clientAction = () => async () => {}
+import { useLoaderData } from 'react-router-dom'
 import { ReduxStore } from '@/lib/store'
 
 export const clientLoader = (store: ReduxStore) => async () => {
   store.getState().userState.user
   return null
 }
+
+export const clientAction = (store: ReduxStore) => async () => {
+  
+  return null
+}
+
 import { Button } from '@/components/ui/button'
 import FormInput from '@/components/FormInput'
 
@@ -15,6 +20,7 @@ import FormInput from '@/components/FormInput'
  * @returns 
  */
 const Settings = () => {
+  
   const name = 'Förnamn';
   const efternamn = 'Efternamn';
   const email = 'E-post';

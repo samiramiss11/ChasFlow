@@ -41,7 +41,7 @@ export const clientLoader =
     let courseCode = []
     try {
       const [consultantsRemote, courseCodeRemote] = await Promise.all([
-        fetchConsultants(),
+        fetchConsultants({}),
         fetchCourses(),
       ])
      // const consultants = consultantsRemote

@@ -81,6 +81,10 @@ import Policy from './pages/Policy'
  * hero: informative in the transaction prefix
  * section:
  */
+import { clientAction as passwordAction } from './pages/Admin/Settings'
+import {clientLoader as timeReportLoader} from '@/pages/Admin/TimeReports'
+import {clientAction as deleteEducator} from  '@/pages/Admin/DeleteEducator'
+import {clientLoader as educatorLoader} from '@/pages/Admin/Educators'
 const onboardingPrefix = {
   path: JOURNY_LINSK_CONSTANTS.ONBOARDING_STEP1,
   element: <UserJourneyLayout />,
@@ -155,16 +159,24 @@ const adminPrefix = {
     {
       path: JOURNY_LINSK_CONSTANTS.ADMIN_STEP2,
       element: <Settings />,
+      action: passwordAction(store)
     },
     {
       path: JOURNY_LINSK_CONSTANTS.ADMIN_STEP3,
       element: <TimeReports />,
+      loader: timeReportLoader(store)
     },
     {
       path: JOURNY_LINSK_CONSTANTS.ADMIN_STEP4,
       element: <Educators />,
-      loader: ConsernedUserLoader(store, queryClient),
+      loader: educatorLoader(store),
+      action:deleteEducator
+      
     },
+     {
+    path: `${JOURNY_LINSK_CONSTANTS.ADMIN_STEP4}/:id`,
+    action: deleteEducator,
+  },
   ],
 }
 const router = createBrowserRouter(

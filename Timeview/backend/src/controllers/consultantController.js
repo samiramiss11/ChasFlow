@@ -6,7 +6,7 @@ exports.getAllConsultants = async (req, res) => {
       console.log("Fetching active consultants...");
       const consultants = await Consultant.findAll({
         where: { status: 'active' },  // Ensure we only get active consultants
-        attributes: ['consultantID', 'username'], // Ensure 'consultantID' and 'username' are being returned
+        attributes: ['consultantID', 'username','lastName','firstName','email'], // Ensure 'consultantID' and 'username' are being returned
       });
       console.log('Consultants fetched:', consultants);
       res.json(consultants);
@@ -54,9 +54,9 @@ exports.updateConsultant = async (req, res) => {
 };
 
 exports.deactivateConsultant = async (req, res) => {
-    const { consultantID } = req.params;
+    const { id } = req.params;
     try {
-        const consultant = await Consultant.findByPk(consultantID);
+        const consultant = await Consultant.findByPk(id);
         if (consultant) {
             consultant.status = 'inactive';
             await consultant.save();

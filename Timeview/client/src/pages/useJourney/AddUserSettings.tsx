@@ -8,6 +8,7 @@ import { Label } from '@/components/ui/label'
 import { ReduxStore } from '@/lib/store'
 
 import { JOURNY_LINSK_CONSTANTS } from '../../utils/links'
+import { addConsultant } from '@/services/api'
 export const clientLoader = (store: ReduxStore) => async () => {
   const tokenUser = store.getState().userState.user
   console.log('token-user', tokenUser)
@@ -23,6 +24,7 @@ export const clientAction =
   async ({ request }): Promise<Response | null> => {
     const formData = await request.formData()
     const data = Object.fromEntries(formData)
+    const response = await addConsultant(data)
     console.log(data)
     try {
       //store.dispatch(addKonsult(data))

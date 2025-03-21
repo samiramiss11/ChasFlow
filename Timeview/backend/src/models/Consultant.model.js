@@ -17,6 +17,7 @@ Consultant.init({
     sequelize,
     modelName: 'Consultant',
     tableName: 'consultants',
+      timestamps: false, 
 });
 
 module.exports = Consultant;

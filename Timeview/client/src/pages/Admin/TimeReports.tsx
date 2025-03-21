@@ -20,7 +20,17 @@ export type AccordionResponse = {
 }
 import TableInTableAccordion from '@/components/admin/TableInTableAccordion'
 import AccordionTable from '@/components/admin/AccordionTable'
+
+import { useLoaderData } from 'react-router-dom'
+import { ReduxStore } from '@/lib/store'
+
+export const clientLoader = (store: ReduxStore) => async () => {
+  store.getState().userState.user
+  return null
+}
+
 const TimeReports = () => {
+  const users = useLoaderData()
   const orders = [
     {
       id: 1,

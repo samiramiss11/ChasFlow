@@ -93,11 +93,36 @@ export const loginUser = async ({
     // )
   }
 }
-export const fetchConsultants = async () => {
+
+export const addConsultant = async (data:any) => {
+   await api.post('/consultant',data)
+  return null
+}
+
+export const deleteConsultant = async ({id}:any) => {
+  try {
+      const response = await api.delete(`/consultants/${id}`)
+  } catch {
+    return null
+  }
+  return null
+}
+
+export const fetchConsultants = async ({isEducatorConvertion}:{isEducatorConvertion?:boolean}) => {
   try {
     const response = await api.get('/consultants')
     const data = response.data // Return the consultants data
-    //console.log(data)
+
+    if (isEducatorConvertion)
+    {
+      return  data.map((obj: any) => ({
+      id: obj.consultantID, // Use obj instead of consultants
+        firstName: obj.username,
+        lastName: obj.lastName,
+      email:obj.email,
+      role: USER_ROLE.Employee,
+    }))
+    }
     const frontendTypeConvertedConsultants = data.map((obj: any) => ({
       id: obj.consultantID, // Use obj instead of consultants
       name: obj.username,
