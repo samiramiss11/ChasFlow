@@ -24,12 +24,14 @@ export const clientAction =
   async ({ request }): Promise<Response | null> => {
     const formData = await request.formData()
     const data = Object.fromEntries(formData)
+    console.log('act')
+        try {
     const response = await addConsultant(data)
     console.log(data)
-    try {
+
       //store.dispatch(addKonsult(data))
-    } catch (error) {}
-    return null
+    } catch (error) {return new Response('Failed to add consultant', { status: 500 });}
+    return redirect(`/${JOURNY_LINSK_CONSTANTS.ONBOARDING_STEP1}/${JOURNY_LINSK_CONSTANTS.ONBOARDING_ALTERNATIV_STEP2}`)
   }
 import { AiOutlineStop } from 'react-icons/ai'
 /**
@@ -41,44 +43,47 @@ const AddUserSettings = () => {
   return (
     <RoundedHeroWrapper>
       <HeroLayout>
+         <Form
+            method='POST'
+            action={`/${JOURNY_LINSK_CONSTANTS.ONBOARDING_STEP1}/${JOURNY_LINSK_CONSTANTS.ONBOARDING_ALTERNATIV_STEP2}`} 
+
+          >
         <div className='flex align-items justify-center'>
-          <Form
-            className='w-full max-w-lg'
-            action='POST'>
+         
             <div className='grid grid-cols-2 gap-4'>
               {/** Namn */}
               <div className='flex flex-col'>
-                <Label htmlFor='namn'>Namn</Label>
+                <Label htmlFor='firstName'>Namn</Label>
                 <Input
                   id='konsult'
-                  name='name'
+                  name='firstName'
                   type='text'
                 />
               </div>
 
               {/** Lösenord */}
               <div className='flex flex-col'>
-                <Label htmlFor='lösenord'>Lösenord</Label>
+                <Label htmlFor='lastName'>Efternamn</Label>
                 <Input
                   id='search'
-                  name='password'
+                  name='lastName'
                   type='text'
                 />
               </div>
 
               {/** Lösenord (Duplicate Field, Consider Removing or Changing Name) */}
               <div className='flex flex-col'>
-                <Label htmlFor='lösenord2'>Lösenord</Label>
+                <Label htmlFor='mobile'>telefonnummber</Label>
                 <Input
                   id='search2'
-                  name='password2'
+                  name='mobile'
                   type='text'
                 />
               </div>
 
               {/** Mejl */}
               <div className='flex flex-col'>
-                <Label htmlFor='mejl'>Mejl</Label>
+                <Label htmlFor='email'>Mejl</Label>
                 <Input
                   id='mejl'
                   name='email'
@@ -88,15 +93,15 @@ const AddUserSettings = () => {
 
               {/** Företag */}
               <div className='flex flex-col'>
-                <Label htmlFor='företag'>Företag</Label>
+                <Label htmlFor='companyName'>Företag</Label>
                 <Input
                   id='företag'
-                  name='company'
+                  name='companyName'
                   type='text'
                 />
               </div>
             </div>
-          </Form>
+        
         </div>
         <div className='flex justify-between p-8'>
           <Button
@@ -111,16 +116,17 @@ const AddUserSettings = () => {
             Avbryt
           </Button>
           <Button
-            type='button'
-            onClick={() => {
-              return null
-            }}
+            type='submit'
+            // onClick={() => {
+            //   return null
+            // }}
             size='sm'
             variant='default'
             className=' mr-6 mb-2 rounded-full'>
             LÄGG TILL KONSULT
           </Button>
         </div>
+          </Form>
       </HeroLayout>
     </RoundedHeroWrapper>
   )

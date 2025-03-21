@@ -94,8 +94,10 @@ export const loginUser = async ({
   }
 }
 
-export const addConsultant = async (data:any) => {
-   await api.post('/consultant',data)
+export const addConsultant = async (data: any) => {
+  console.log(data)
+
+   await api.post('/consultants/',{...data, username:data.firstName+data.lastName})
   return null
 }
 
