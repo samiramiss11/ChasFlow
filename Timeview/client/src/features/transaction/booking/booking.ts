@@ -5,14 +5,16 @@ export type SyncronizedDisplayContainerRecord = {
   selectedTimeSlots:string,
 }
 
+export interface Room {
+  selectedInterval: SyncronizedDisplayContainerRecord[];
+  previousLength?: number;
+  timeBounds: string;
+}
+
 export interface TimeIntervalState {
   day: number
   week: number
-  rooms: Record<string, {
-     selectedInterval: SyncronizedDisplayContainerRecord[] 
-    previousLength?:number
-    timeBounds: string
-  }>
+  rooms: Record<string, Room>
   totalHours: number
 }
 import { formatIntervalString,calculateDayAndWeek,formatMultIntervalString} from '@/utils/transaction/date'

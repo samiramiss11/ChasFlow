@@ -70,41 +70,57 @@ const timeIntervalSlice = createSlice({
       );
       console.log("there exist an entry of day",JSON.stringify(existingEntry,null,2))
       if (!existingEntry) {
+        Object.keys(newState.rooms).reduce((roomid, room) => { 
+          console.log('prevlength initial',  newState.rooms[roomid], room) //correct previous names
+          
+            return roomid + room; 
+        })
         state.sets.push(newState); // ✅ Only push if (day, week) is unique
-       console.log( JSON.stringify( state.timeInTotal , null, 2))
+       console.log( JSON.stringify( "time in total",state.timeInTotal , null, 2))
         state.timeInTotal += newState.totalHours
-        console.log(JSON.stringify(state.timeInTotal, null, 2))
+        console.log(JSON.stringify("timeintotal",state.timeInTotal, null, 2))
       }
       else {
-        // Check if the last stored state is identical to the new one
-        // ✅ Merge selected intervals instead of adding a duplicate entry
-        console.log('newstate',JSON.stringify(newState.rooms,null))
+        console.log("before case reducer", newState, JSON.stringify(existingEntry))
+        timeIntervalSlice.caseReducers.mutatedRoomSelection(state,{ 
+  type: 'mutatedRoomSelection',  // Add the type property
+  payload: { 
+    newState, 
+    existingEntry 
+  } 
+});       
+    
+      }
+     
+      localStorage.setItem('setOfbatches', JSON.stringify(state));
+    },
+
+    mutatedRoomSelection: (state, action: PayloadAction<{ newState: TimeIntervalState; existingEntry: TimeIntervalState; }>) => {
+      const { newState, existingEntry } = action.payload;
+
+       // ✅ Merge selected intervals instead of adding a duplicate entry
+      //  console.log('newstate',JSON.stringify(newState.rooms,null))
         Object.keys(newState.rooms).forEach((roomId,index) => {
           if (!existingEntry.rooms[roomId]) {
             existingEntry.rooms[roomId] = {selectedInterval:[], previousLength:0,  timeBounds:'' };
           }
-         existingEntry.rooms[roomId].selectedInterval = newState.rooms[roomId].selectedInterval
-
-          const previousLength = existingEntry.rooms[roomId].previousLength ?? 0;
-          console.log(previousLength)
-          //const newLength = newState.rooms[roomId].timeBounds.length || 0;
-
-              // Subtract previous length if room was already there
-            // if (previousLength > 0) {
-            //     state.timeInTotal -= previousLength;
-            // }
-          existingEntry.rooms[roomId].timeBounds = newState.rooms[roomId].timeBounds;
-          existingEntry.rooms[roomId].previousLength = newState.rooms[roomId].previousLength
-          console.log(roomId,index,  existingEntry.rooms[roomId] == newState.rooms[roomId])
-          if (
-  previousLength !== 0 &&
+          const newSetDataSyncronizableIds = newState.rooms[roomId].selectedInterval
+            const previousLength = existingEntry.rooms[roomId].previousLength ?? 0;
+          const newDisplayedTimeIntervals = newState.rooms[roomId].timeBounds;
+              const roomToMutate =   previousLength !== 0 &&
   existingEntry.rooms &&
-  existingEntry.rooms[roomId] &&
-true
+  existingEntry.rooms[roomId]
+          //
+         existingEntry.rooms[roomId].selectedInterval = newSetDataSyncronizableIds
+          existingEntry.rooms[roomId].timeBounds = newDisplayedTimeIntervals
+          existingEntry.rooms[roomId].previousLength = newState.rooms[roomId].previousLength
+          console.log(roomId, index, existingEntry.rooms[roomId] == newState.rooms[roomId])   
+          if (
+roomToMutate
           ) {
             console.log("Before update:");
 console.log("state.timeInTotal:", state.timeInTotal);
-console.log("existingEntry.rooms[roomId]?.previousLength:", existingEntry.rooms[roomId]?.previousLength ?? 0);
+console.log("existingEntry.rooms[roomId]?.previousLength:", previousLength);
 console.log("newState.totalHours:", newState.totalHours);
  state.timeInTotal += newState.totalHours - previousLength;
 
@@ -113,17 +129,15 @@ console.log("newState.totalHours:", newState.totalHours);
   console.log("state.timeInTotal:", state.timeInTotal);
   console.log("existingEntry.totalHours:", existingEntry.totalHours);
           }
-          else if(  previousLength == 0 && existingEntry.rooms &&
+          else if (previousLength == 0 && existingEntry.rooms &&
+         
             existingEntry.rooms[roomId]) {
+               console.log('hit')
              state.timeInTotal += newState.totalHours
   }
 
         });
        
-    
-      }
-     
-      localStorage.setItem('setOfbatches', JSON.stringify(state));
     },
     removeLastTimeIntervall: () => {
       localStorage.setItem('setOfbatches', JSON.stringify(defaultState));
