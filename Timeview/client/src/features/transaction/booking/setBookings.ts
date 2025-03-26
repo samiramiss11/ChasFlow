@@ -105,7 +105,8 @@ const timeIntervalSlice = createSlice({
             existingEntry.rooms[roomId] = {selectedInterval:[], previousLength:0,  timeBounds:'' };
           }
           const newSetDataSyncronizableIds = newState.rooms[roomId].selectedInterval
-            const previousLength = existingEntry.rooms[roomId].previousLength ?? 0;
+          const previousLength = existingEntry.rooms[roomId].previousLength ?? 0;
+          const newLengthParticularRoom = newState.rooms[roomId].previousLength ??0
           const newDisplayedTimeIntervals = newState.rooms[roomId].timeBounds;
               const roomToMutate =   previousLength !== 0 &&
   existingEntry.rooms &&
@@ -113,7 +114,7 @@ const timeIntervalSlice = createSlice({
           //
          existingEntry.rooms[roomId].selectedInterval = newSetDataSyncronizableIds
           existingEntry.rooms[roomId].timeBounds = newDisplayedTimeIntervals
-          existingEntry.rooms[roomId].previousLength = newState.rooms[roomId].previousLength
+          
           console.log(roomId, index, existingEntry.rooms[roomId] == newState.rooms[roomId])   
           if (
 roomToMutate
@@ -122,7 +123,7 @@ roomToMutate
 console.log("state.timeInTotal:", state.timeInTotal);
 console.log("existingEntry.rooms[roomId]?.previousLength:", previousLength);
 console.log("newState.totalHours:", newState.totalHours);
- state.timeInTotal += newState.totalHours - previousLength;
+ state.timeInTotal += newLengthParticularRoom - previousLength;
 
     existingEntry.totalHours = newState.totalHours;
               console.log("After update:");
@@ -133,10 +134,11 @@ console.log("newState.totalHours:", newState.totalHours);
          
             existingEntry.rooms[roomId]) {
                console.log('hit')
-             state.timeInTotal += newState.totalHours
+             state.timeInTotal += newState.totalHours + previousLength
   }
-
+existingEntry.rooms[roomId].previousLength = newState.rooms[roomId].previousLength
         });
+      
        
     },
     removeLastTimeIntervall: () => {
