@@ -55,7 +55,8 @@ const timeIntervalSlice = createSlice({
 
         const filteredRooms = Object.fromEntries(
     Object.entries(newState.rooms).filter(([_, room]) => room.timeBounds.trim() !== "")
-  );
+      );
+      console.log('filtered', filteredRooms)
 
   // If all rooms are empty, do not update the state
   if (Object.keys(filteredRooms).length === 0) return state;
@@ -77,6 +78,7 @@ const timeIntervalSlice = createSlice({
       else {
         // Check if the last stored state is identical to the new one
         // ✅ Merge selected intervals instead of adding a duplicate entry
+        console.log('newstate',JSON.stringify(newState.rooms,null))
         Object.keys(newState.rooms).forEach((roomId,index) => {
           if (!existingEntry.rooms[roomId]) {
             existingEntry.rooms[roomId] = {selectedInterval:[], previousLength:0,  timeBounds:'' };
@@ -84,8 +86,13 @@ const timeIntervalSlice = createSlice({
          existingEntry.rooms[roomId].selectedInterval = newState.rooms[roomId].selectedInterval
 
           const previousLength = existingEntry.rooms[roomId].previousLength ?? 0;
+          console.log(previousLength)
           //const newLength = newState.rooms[roomId].timeBounds.length || 0;
 
+              // Subtract previous length if room was already there
+            // if (previousLength > 0) {
+            //     state.timeInTotal -= previousLength;
+            // }
           existingEntry.rooms[roomId].timeBounds = newState.rooms[roomId].timeBounds;
           existingEntry.rooms[roomId].previousLength = newState.rooms[roomId].previousLength
           console.log(roomId,index,  existingEntry.rooms[roomId] == newState.rooms[roomId])
@@ -128,6 +135,7 @@ console.log("newState.totalHours:", newState.totalHours);
          console.log(JSON.stringify( set.rooms , null, 2) , 'set.rooms')
 //  const dayStrings = ['Måndag', 'Tisdag', 'Onsdag', 'Torsdag', 'Fredag']
         //const ObjectdayString = dayStrings[set.day - 1]
+        console.log('ffilter,set',JSON.stringify(set))
         const roomForSpecificDay = set.day !== day
         const roomForSpecificWeek = set.week !== week
         if (!roomForSpecificDay&& !roomForSpecificWeek) {
@@ -135,7 +143,7 @@ console.log("newState.totalHours:", newState.totalHours);
         } 
 
     const updatedRooms = Object.keys(set.rooms).reduce((newRooms, room) => {
-      if (room !== roomId && roomForSpecificDay&&roomForSpecificWeek ) {
+      if (room !== roomId  ) {// && roomForSpecificDay&&roomForSpecificWeek
         newRooms[room] = set.rooms[room]; // Keep the rooms that don't match roomId 
       }
       else {
