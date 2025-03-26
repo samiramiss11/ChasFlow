@@ -1,11 +1,17 @@
 import React from 'react'
-import { Outlet } from 'react-router-dom'
-
+import { Outlet ,redirect} from 'react-router-dom'
+import { JOURNY_LINSK_CONSTANTS } from '@/utils/links'
 const clientAction = () => async () => {}
 import { ReduxStore } from '@/lib/store'
 
 export const clientLoader = (store: ReduxStore) => async () => {
-  store.getState().userState.user
+  const tokenUser = store.getState().userState.user
+ console.log(tokenUser,'load')
+  if (!tokenUser) {
+   return redirect('../../' + JOURNY_LINSK_CONSTANTS.ONBOARDING_STEP1+'/'+JOURNY_LINSK_CONSTANTS.ONBOARDING_STEP2)
+  }
+
+
   return null
 }
 import ChassStamp from '../../components/Shared/ChassStamp'

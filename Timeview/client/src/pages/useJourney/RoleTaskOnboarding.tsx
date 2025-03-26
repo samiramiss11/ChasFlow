@@ -80,7 +80,6 @@ const RoleTaskOnboarding = () => {
             id='pass'
             name='email'
             type='text'
-            defaultValue={'erik.jonsson@chasacademy.se'}
           />
         </div>
 
@@ -180,7 +179,7 @@ const RoleTaskOnboarding = () => {
                   id='search'
                   name='password'
                   type='text'
-                  defaultValue={'Chas@2025timeedit'}
+                 
                 />
               </div>
             </div>

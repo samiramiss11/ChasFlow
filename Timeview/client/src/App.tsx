@@ -84,7 +84,9 @@ import Policy from './pages/Policy'
 import { clientAction as passwordAction } from './pages/Admin/Settings'
 import {clientLoader as timeReportLoader} from '@/pages/Admin/TimeReports'
 import {clientAction as deleteEducator} from  '@/pages/Admin/DeleteEducator'
-import {clientLoader as educatorLoader} from '@/pages/Admin/Educators'
+import { clientLoader as educatorLoader } from '@/pages/Admin/Educators'
+import {clientLoader as adminPrivilagedLoader} from '@/pages/Admin/AdminLayout'
+
 const onboardingPrefix = {
   path: JOURNY_LINSK_CONSTANTS.ONBOARDING_STEP1,
   element: <UserJourneyLayout />,
@@ -145,6 +147,7 @@ const transactionPrefix = {
 const adminPrefix = {
   path: JOURNY_LINSK_CONSTANTS.ADMIN_STEP0,
   element: <AdminLayout />,
+  loader: adminPrivilagedLoader(store),
   children: [
     {
       index: true,

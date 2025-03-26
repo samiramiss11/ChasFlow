@@ -90,8 +90,8 @@ Just a recommendation based on what worked for this developer:
 For staging builds:
 
 - Domain: 
-- Username:
-- password:
+- Username: erik.jonsson@chasacademy.se
+- password: Chas@2025timeedit
 
 For production builds
 
