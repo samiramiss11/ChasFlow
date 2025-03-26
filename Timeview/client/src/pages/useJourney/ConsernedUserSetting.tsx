@@ -175,7 +175,7 @@ const ConsernedUserSetting = () => {
                 </div>
 
                 {/* col 2 */}
-                <div className='ml-10 flex flex-col max-w-[200px] gap-2'>
+                <div className='flex flex-col max-w-[200px] gap-2'>
                   <FormSelect
                     labelText='Skriv in kurskoden'
                     name='kurskod'

@@ -30,7 +30,7 @@ export const clientLoader =
     // Perform any meta or auth check
 
     if (!user) {
-      return redirect('/login') // Redirect if user is not found
+      return redirect('/user-journey/user-onboarding') // Redirect if user is not found
     }
 console.log('redirect user')
     switch (user.role) {
