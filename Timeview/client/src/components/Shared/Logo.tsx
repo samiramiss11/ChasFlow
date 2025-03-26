@@ -19,7 +19,7 @@ const Logo = ({ isTextBased, ...props }: any) => {
             className='img'
           />
         ) : (
-          <h4 className='text-black'>ChassPass</h4>
+          <h4 className='text-black'>ChasPass</h4>
         )}
       </Link>
     </div>

@@ -48,7 +48,7 @@ export const links = [
   {
     id: nanoid(),
     text: 'CHAS ACADEMY',
-    path: '/',
+    path: 'https://chasacademy.se/',
     icon: <LiaMapMarkedAltSolid />,
   },
 
