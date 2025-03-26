@@ -134,7 +134,7 @@ console.log("newState.totalHours:", newState.totalHours);
          
             existingEntry.rooms[roomId]) {
                console.log('hit')
-             state.timeInTotal += newState.totalHours + previousLength
+             state.timeInTotal += newLengthParticularRoom + previousLength
   }
 existingEntry.rooms[roomId].previousLength = newState.rooms[roomId].previousLength
         });
