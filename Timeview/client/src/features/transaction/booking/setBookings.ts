@@ -76,9 +76,9 @@ const timeIntervalSlice = createSlice({
             return roomid + room; 
         })
         state.sets.push(newState); // ✅ Only push if (day, week) is unique
-       console.log( JSON.stringify( "time in total",state.timeInTotal , null, 2))
+       console.log( JSON.stringify( "time in total" +state.timeInTotal , null, 2))
         state.timeInTotal += newState.totalHours
-        console.log(JSON.stringify("timeintotal",state.timeInTotal, null, 2))
+        console.log(JSON.stringify("timeintotal"+state.timeInTotal, null, 2))
       }
       else {
         console.log("before case reducer", newState, JSON.stringify(existingEntry))
@@ -145,25 +145,37 @@ existingEntry.rooms[roomId].previousLength = newState.rooms[roomId].previousLeng
       localStorage.setItem('setOfbatches', JSON.stringify(defaultState));
        return defaultState;
     },
-    filterBookingsForRoomId: (state, action: PayloadAction<{ roomId: string, day: number, week: number }>) => {
-  const { roomId, day, week } = action.payload;  
-      state.sets = state.sets.map((set) => {
+    filterBookingsForRoomId: (state, action: PayloadAction<{ roomId: string, localId:number}>) => {
+  const { roomId, localId } = action.payload;  
+      state.sets = state.sets.map((set,setIndex) => {
          console.log(JSON.stringify( set.rooms , null, 2) , 'set.rooms')
 //  const dayStrings = ['Måndag', 'Tisdag', 'Onsdag', 'Torsdag', 'Fredag']
         //const ObjectdayString = dayStrings[set.day - 1]
         console.log('ffilter,set',JSON.stringify(set))
-        const roomForSpecificDay = set.day !== day
-        const roomForSpecificWeek = set.week !== week
-        if (!roomForSpecificDay&& !roomForSpecificWeek) {
-            console.log(set)
-        } 
+        // const roomForSpecificDay = set.day !== day
+        // const roomForSpecificWeek = set.week !== week
+        // if (!roomForSpecificDay&& !roomForSpecificWeek) {
+        //     console.log(set)
+        // } 
 
+          const indexInSet = localId
+        if (indexInSet !== undefined && indexInSet !== setIndex ) {
+         return set
+       }
+
+    //        Object.keys(alsoIgnore).forEach((ignoreRoomId) => {
+    //   console.log(`Processing roomId: ${roomId}, Record Index: ${ignoreRoomId}`);
+    //         if (String(ignoreRoomId) !== String(recorIndex)) {
+    //         console.log("Keeping", ignoreRoomId);
+    //       }
+    // });
     const updatedRooms = Object.keys(set.rooms).reduce((newRooms, room) => {
       if (room !== roomId  ) {// && roomForSpecificDay&&roomForSpecificWeek
         newRooms[room] = set.rooms[room]; // Keep the rooms that don't match roomId 
       }
       else {
-        console.log('dd')
+      
+      
         const previousLength = set.rooms[room]?.previousLength ?? 0
         console.log(previousLength)
           state.timeInTotal -= previousLength;

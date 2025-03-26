@@ -26,6 +26,7 @@ const OrdersList = () => {
   //const { day, week, rooms } = allbooking || {}
   const noRooms = allbookingRooms.sets.every((set) => Object.keys(set.rooms).length === 0);
 
+  console.log(allbookingRooms)
   return (
     <div>
       <ScrollArea className='h-[350px] px-12 ml-4'>
@@ -43,21 +44,22 @@ const OrdersList = () => {
             
             <TableBody className=''>
               {!noRooms ? (
-              allbookingRooms.sets.map((entry, index) => 
+              allbookingRooms.sets.map((entry, setIndex) => 
 
      (
-      Object.entries(entry.rooms).map(([room, details]) => {
-        const { timeBounds } = details;        
+      Object.entries(entry.rooms).map(([room, details],entryIndex) => {
+        const { timeBounds } = details || {timeBounds:'?'};        
         const roomTitle = flattenedRooms.find((r) => r.id === room)?.title || (onlineRooms.id === room ? 'Online' : 'Rum saknas');
         console.log(entry.day)
         return (
           <MemoTableRow
-            key={`${index}-${room}`}
+            key={`${entryIndex}-${room}`}
             day={entry.day}
             week={entry.week}
             timesBetween={timeBounds}
             room={room}
             roomTitle={roomTitle}
+            localId={setIndex}
           />
         );
       })
