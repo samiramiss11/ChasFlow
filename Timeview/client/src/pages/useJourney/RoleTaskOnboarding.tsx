@@ -178,7 +178,7 @@ const RoleTaskOnboarding = () => {
                 <Input
                   id='search'
                   name='password'
-                  type='text'
+                  type='password'
                  
                 />
               </div>

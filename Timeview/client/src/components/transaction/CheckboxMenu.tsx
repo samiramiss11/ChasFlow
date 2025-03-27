@@ -86,17 +86,18 @@ const CheckboxMenu = ({ roomId }: { roomId: string }) => {
     <DropdownMenu
       modal={false}
       open={open}
-      onOpenChange={setOpen}>
+      onOpenChange={setOpen}
+    >
       <DropdownMenuTrigger
         asChild
         className=' rounded-full select-none  px-4 text-2xl bg-white text-chasBlue border-2 border-chasBlue hover:bg-chasB  focus-visible:outline-none data-[state=open]:bg-chasBlue data-[state=open]:text-white'>
         <Button className='flex gap-2 text-base'>
           {' '}
-          <span>Se lediga tider</span>
+          <span>Se lediga timmar</span>
           <FaChevronDown />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className='mt-1 overflow-hidden rounded bg-[#ECE9E9] p-2 text-left shadow '>
+      <DropdownMenuContent className='mt-1 overflow-hidden rounded bg-[#ECE9E9]  p-2 text-left shadow' sideOffset={-1}>
         <CheckboxWaterFall
           setSelectedTimeSlots={setSelectedTimeSlots}
           selectedTimeSlots={selectedTimeSlots}
