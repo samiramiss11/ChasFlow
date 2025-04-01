@@ -7,17 +7,19 @@ export {}; // Ensures this file is treated as a module
 // Declare custom Cypress commands and properties for Cypress global scope.
 declare namespace Cypress {
   // Extending the Chainable interface for custom commands
-  interface Chainable<Subject> {
-    /**
-     * Custom command to create a transaction.
-     * @param payload The transaction details.
-     */
-    createTransaction(payload: TogglePayload): Chainable<void>;
+//   interface Chainable<Subject> {
+//     /**
+//      * Custom command to create a transaction.
+//      * @param payload The transaction details.
+//      */
+//     createTransaction(payload: TogglePayload): Chainable<void>;
 
-    // Other custom commands can go here.
-    getByData(dataTestAttribute: string): Chainable<JQuery<HTMLElement>>;
-  }
-
+//     // Other custom commands can go here.
+//     getByData(dataTestAttribute: string): Chainable<JQuery<HTMLElement>>;
+//   }
+  interface Chainable {
+      createTransaction(payload: TogglePayload): void;
+    }
   // Extending the AUTWindow interface to include createTransactionService
   interface AUTWindow {
     createTransactionService: {

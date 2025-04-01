@@ -17,6 +17,6 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src/**/*", "vite-env.d.ts","./cypress/support/**/*"],
+  "include": ["src/**/*", "vite-env.d.ts","./cypress/support/**/*.ts", "cypress/**/*.d.ts"],
   "exclude": ["node_modules", "dist"]
 }

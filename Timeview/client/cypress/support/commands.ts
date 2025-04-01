@@ -1,5 +1,6 @@
 /// <reference types="cypress" />
 import 'cypress-file-upload';
+// Removed unnecessary import of Cypress
 //import { TogglePayload } from '@/features/transaction/booking/booking';
 
 interface TogglePayload {
@@ -18,7 +19,10 @@ declare global {
   }
 
 }
-Cypress.Commands.add("createTransaction", (payload:TogglePayload) => {
+import "cypress";
+
+Cypress.Commands.add("createTransaction", (payload: TogglePayload) => {
+
   const log = Cypress.log({
     name: "createTransaction",
     displayName: "CREATE TRANSACTION",
@@ -28,7 +32,7 @@ Cypress.Commands.add("createTransaction", (payload:TogglePayload) => {
   });
 
   return cy.window({ log: false }).then((win) => {
-    const service = (win as Cypress.AUTWindow).createTransactionService;
+    const service = (win as Window).createTransactionService;
     if (!service) {
       throw new Error("createTransactionService is not available on window");
     }

@@ -45,6 +45,7 @@
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.2",
     "@testing-library/react": "^16.0.1",
+    "@types/cypress": "^0.1.6",
     "@types/jquery": "^3.5.32",
     "@types/node": "^22.13.5",
     "@types/react": "^18.3.5",
