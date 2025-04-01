@@ -102,7 +102,7 @@ state.rooms[roomId].previousLength = newLength
 export const { toggleInterval, setInterval, clearIntervals, setGlobalProp } = timeIntervalSlice.actions
 export default timeIntervalSlice.reducer
 
-interface TogglePayload {
+export interface TogglePayload {
   roomId: string
   interval: string[]
   selectedTimeSlots: string[]

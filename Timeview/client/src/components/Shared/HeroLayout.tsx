@@ -32,7 +32,7 @@ const HeroLayout = ({ children, confirm_success }: HeroLayoutProps) => {
     <div className='px-8'>
       <ResponsiveForm nrFr={1}>
         <div className=''>
-          <h3 className='text-start py-4  max-w-[65ch] mx-auto break-words '>
+          <h3 data-testid='hero-heading' className='text-start py-4  max-w-[65ch] mx-auto break-words '>
             {PageSectionToRender.header}
           </h3>
           <div className=' text-start flex  flex-col gap-4  max-w-[50ch] break-words '>

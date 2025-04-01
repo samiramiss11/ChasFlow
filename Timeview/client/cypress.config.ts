@@ -1,10 +1,20 @@
 import { defineConfig } from 'cypress'
-
+import fs from 'fs'
 export default defineConfig({
   e2e: {
+    baseUrl: 'http://localhost:5173/',
+    supportFile: 'cypress/support/e2e.ts',
     setupNodeEvents(on, config) {
-      // implement node event listeners here
+      on('task', {
+        readFileMaybe(filename) {
+          if (fs.existsSync(filename)) {
+            return fs.readFileSync(filename, 'utf8');
+          }
+
+          return null;
+        },
+      });
+          
     },
-    baseUrl: 'http://localhost:5173',
-  },
+  }
 })
