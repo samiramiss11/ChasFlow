@@ -78,6 +78,10 @@ Just a recommendation based on what worked for this developer:
 
 #### Read more
 
+- npx cypress cache clear
+- npx cypress install --save-dev
+- npx cypress open
+
 ## Environment
 
 

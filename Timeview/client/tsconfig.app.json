@@ -1,5 +1,9 @@
 {
+   "extends": "./tsconfig.json",
   "compilerOptions": {
+     "module": "esnext",
+   
+     "moduleDetection": "force",  // 👈 Force ESM mode
     "types": ["vitest/globals", "@testing-library/jest-dom",  "cypress", "@types/jquery",
       "./support/**"]
   }
