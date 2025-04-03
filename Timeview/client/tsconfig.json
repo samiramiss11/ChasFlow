@@ -1,21 +1,29 @@
 {
   "compilerOptions": {
-    "target": "esnext",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "target": "ESNext",
+    "lib": ["dom", "dom.iterable", "ESNext"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "baseUrl": "./",
-    "paths": { "@/*": ["src/*"] },
+    "paths": { "@/*": ["src/*", "support/api/*"] },
     "forceConsistentCasingInFileNames": true,
      "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "module": "ESNext" ,
   },
-  "include": ["src/**/*", "vite-env.d.ts","./cypress/support/**/*.ts", "cypress/**/*.d.ts"],
-  "exclude": ["node_modules", "dist"]
+  "include": [
+    "src/**/*",
+    "vite-env.d.ts",
+    "cypress/**/*.ts",
+    "cypress/**/*.d.ts",
+    "cypress/support/**/*.ts"
+  ],
+  "exclude": ["node_modules", "dist",
+  "./cypress.config.ts",  "cypress",]
 }

@@ -18,3 +18,6 @@ import './commands'
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
+
+Cypress.config('baseUrl', 'http://localhost:5173');
+Cypress.config('defaultCommandTimeout', 10000); 

@@ -96,7 +96,7 @@ const onboardingPrefix = {
       index: true,
       element: (
         <div>
-          {/**the component is old and opsolete */}
+          {/**the component is old  */}
           <FeatureHome />
         </div>
       ),
@@ -222,17 +222,17 @@ const router = createBrowserRouter(
       element: <NoMatch />,
     },
   ],
-  {
-    future: {
-      v7_relativeSplatPath: true,
-      //v7_startTransition: true,
-      v7_fetcherPersist: true,
-      v7_normalizeFormMethod: true,
-    },
-  }
+  // {
+  //   future: {
+  //     v7_relativeSplatPath: true,
+  //     v7_startTransition: true,
+  //     v7_fetcherPersist: true,
+  //     v7_normalizeFormMethod: true,
+  //   },
+  // }
 )
 
-const App = (): JSX.Element => {
+const App = (): React.JSX.Element => {
   // const { isAuthenticated, login, logout } = useAuth()
   /* <AuthProvider>
       <Provider store={store}>

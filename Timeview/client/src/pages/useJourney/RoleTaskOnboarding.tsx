@@ -1,3 +1,4 @@
+/// <reference types="react" />
 import React, { useState,useEffect } from 'react'
 import {
   HeroLayout,
@@ -105,7 +106,7 @@ const RoleTaskOnboarding = () => {
       </div>
     )
   }
-  const forgotPassword = ({ linkChild }: { linkChild: JSX.Element }) => {
+  const forgotPassword = ({ linkChild }: { linkChild: React.JSX.Element }) => {
     const textValues = {
       trigger: (
         <button className='text-inherit'>
