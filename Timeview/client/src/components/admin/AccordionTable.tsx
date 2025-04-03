@@ -58,7 +58,7 @@ const AccordionTable = ({ propDrilling }: AccordionResponse) => {
   }
 
   return (
-    <div className=' flex justify-center  rounded-3xl bg-white p-2 w-full shadow-md rounded-3xl'>
+    <div className=' flex justify-centerbg-white p-2 w-full shadow-md rounded-3xl'>
       {/**previously a table in a table (mapped rows) */}
       <div className=' p-0 mb-2 w-full'>
         <div className=''>

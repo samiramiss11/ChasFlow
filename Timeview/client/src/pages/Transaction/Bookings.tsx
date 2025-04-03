@@ -152,7 +152,7 @@ export const clientAction =
       return redirect('/boka/bokningar')
       //console.log('all bookings', store.getState().allBookingState)
       }
-    return null
+    return null //formType// json({ success: true, formType, formType });
   }
 import OnlineBooking from '@/components/transaction/OnlineBooking'
 import { Form } from 'react-router-dom'

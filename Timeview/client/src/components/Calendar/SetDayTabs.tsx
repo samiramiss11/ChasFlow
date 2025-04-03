@@ -77,7 +77,7 @@ const SetDayTabs = () => {
               className={`flex-1 min-w-[20%]  h-[56px] flex-grow tab  ${
                 index === currentItem
                   ? 'bg-white'
-                  : 'tab-active text-primary text-white bg-chasGray [--tab-bg:#2B2F2F] [--tab-border-color:white]'
+                  : 'tab-active text-primary text-white hover:text-white bg-chasGray [--tab-bg:#2B2F2F] [--tab-border-color:white]'
               }`}>
               {item}
             </button>
