@@ -3,25 +3,25 @@ import 'cypress-file-upload';
 // Removed unnecessary import of Cypress
 //import { TogglePayload } from '@/features/transaction/booking/booking';
 
-interface TogglePayload {
-  amount: number;
-  description: string;
-  transactionType: string;
-  sender: { id: string };
-  receiver: { id: string };
-}
+// interface TogglePayload {
+//   amount: number;
+//   description: string;
+//   transactionType: string;
+//   sender: { id: string };
+//   receiver: { id: string };
+// }
 
-declare global {
-  namespace Cypress {
-    interface Chainable {
-      createTransaction(payload: TogglePayload): void;
-    }
-  }
+// declare global {
+//   namespace Cypress {
+//     interface Chainable {
+//       createTransaction(payload: TogglePayload): void;
+//     }
+//   }
 
-}
+// }
 import "cypress";
 
-Cypress.Commands.add("createTransaction", (payload: TogglePayload) => {
+Cypress.Commands.add("createTransaction", (payload) => {
 
   const log = Cypress.log({
     name: "createTransaction",
@@ -32,7 +32,7 @@ Cypress.Commands.add("createTransaction", (payload: TogglePayload) => {
   });
 
   return cy.window({ log: false }).then((win) => {
-    const service = (win as Window).createTransactionService;
+    const service = (win ).createTransactionService;//as Window
     if (!service) {
       throw new Error("createTransactionService is not available on window");
     }

@@ -68,7 +68,7 @@ const CheckboxWaterFall = ({
         updatedRooms[roomID] = [] // Keep the current slot if it's the only one
       }
     }
-
+    //cause flush sync
     setSelectedTimeSlots(updatedRooms) // Directly passing the updated value
   }
 
